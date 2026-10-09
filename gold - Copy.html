@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoldenConnect - Senior Dating 50+ Sri Lanka</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React & ReactDOM CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Babel Compiler CDN -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Font Integration -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-amber-50/40 text-stone-800 antialiased min-h-screen">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useMemo } = React;
+
+    // Helper function to calculate exact age from birth date string (YYYY-MM-DD)
+    function calculateAge(dobString) {
+      if (!dobString) return 0;
+      const today = new Date();
+      const birthDate = new Date(dobString);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
+    }
+
+    // Official Updated Bank & Support Contact Constants
+    const BANK_DETAILS = {
+      bankName: "Sampath Bank PLC",
+      branch: "Kaduwela Branch",
+      accountName: "S. P. Wijesinghe",
+      accountNumber: "116254863677",
+      swiftCode: "BSAMLKLX",
+      whatsappNumber: "0775569178",
+      whatsappFormatted: "+94 77 556 9178",
+      whatsappRaw: "94775569178",
+      supportEmail: "support.goldenconnect@gmail.com",
+      fee: "3,000 LKR",
+      validity: "3 Months Full Access"
+    };
+
+    // Initial Seed Profiles Database
+    const INITIAL_PROFILES = [
+      {
+        id: 1,
+        name: "Eleanor Vance",
+        dob: "1960-05-14",
+        age: 64,
+        gender: "Female",
+        location: "Colombo, Sri Lanka",
+        occupation: "Retired Landscape Architect",
+        tagline: "Looking for a travel companion and garden enthusiast.",
+        bio: "I spent 35 years designing public parks. Now in retirement, I love tending my greenhouse, visiting local farmers markets, and exploring Sri Lankan nature trails.",
+        interests: ["Gardening", "Travel", "Cooking", "Photography"],
+        purpose: "Travel Buddy",
+        createdBy: "Self",
+        image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800",
+        phone: "+94 77 123 4567",
+        email: "eleanor.v@example.com",
+        isVerified: true
+      },
+      {
+        id: 2,
+        name: "Arthur Pendelton",
+        dob: "1957-10-22",
+        age: 67,
+        gender: "Male",
+        location: "Kandy, Sri Lanka",
+        occupation: "Former History Teacher",
+        tagline: "Book worm, jazz listener, and amateur bread baker.",
+        bio: "After 40 years in education, I enjoy the relaxed pace of life. Hosting weekly book discussions, classical music evenings, and peaceful hill country walks.",
+        interests: ["Reading", "Music", "Cooking", "History"],
+        purpose: "Companionship",
+        createdBy: "Son",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800",
+        phone: "+94 71 987 6543",
+        email: "arthur.p@example.com",
+        isVerified: true
+      },
+      {
+        id: 3,
+        name: "Margaret Miller",
+        dob: "1966-03-11",
+        age: 58,
+        gender: "Female",
+        location: "Galle, Sri Lanka",
+        occupation: "Art Gallery Curator",
+        tagline: "Art lover, beach walker, and coffee connoisseur.",
+        bio: "Passionate about classical art, music concerts, and weekend beach walks in Galle Fort. Life is better when shared with a kind, intelligent soul.",
+        interests: ["Music", "Art", "Hiking", "Travel"],
+        purpose: "Romance",
+        createdBy: "Self",
+        image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&q=80&w=800",
+        phone: "+94 76 555 1212",
+        email: "margaret.m@example.com",
+        isVerified: true
+      },
+      {
+        id: 4,
+        name: "Dr. Robert Chen",
+        dob: "1953-08-30",
+        age: 71,
+        gender: "Male",
+        location: "Negombo, Sri Lanka",
+        occupation: "Retired Physician",
+        tagline: "Always curious. Passionate about acoustic guitar & stargazing.",
+        bio: "Retired from medicine, now spending time learning blues guitar and stargazing. I value active listening, sincerity, and quiet seaside dinners.",
+        interests: ["Guitar", "Gardening", "Reading", "Astronomy"],
+        purpose: "Companionship",
+        createdBy: "Daughter",
+        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800",
+        phone: "+94 70 888 9900",
+        email: "dr.robert@example.com",
+        isVerified: true
+      }
+    ];
+
+    function App() {
+      // Accessibility states
+      const [fontSize, setFontSize] = useState('normal'); 
+      const [highContrast, setHighContrast] = useState(false);
+
+      // Database state
+      const [profiles, setProfiles] = useState(INITIAL_PROFILES);
+
+      // Filtering states
+      const [searchQuery, setSearchQuery] = useState("");
+      const [genderFilter, setGenderFilter] = useState("all");
+      const [selectedAgeRange, setSelectedAgeRange] = useState("all");
+      const [purposeFilter, setPurposeFilter] = useState("all");
+
+      // Payment & Modal states
+      const [hasPaid, setHasPaid] = useState(false);
+      const [showPaymentModal, setShowPaymentModal] = useState(false);
+      const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+      // New Profile Form State
+      const [formData, setFormData] = useState({
+        name: '',
+        dob: '1970-01-01',
+        gender: 'Female',
+        location: 'Colombo, Sri Lanka',
+        occupation: '',
+        tagline: '',
+        bio: '',
+        interests: 'Gardening, Reading',
+        purpose: 'Companionship',
+        createdBy: 'Self',
+        image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800',
+        phone: '',
+        email: ''
+      });
+
+      // Calculate age dynamically in form preview
+      const calculatedAge = useMemo(() => {
+        return calculateAge(formData.dob);
+      }, [formData.dob]);
+
+      // Font size helper class
+      const getFontSizeClass = () => {
+        if (fontSize === 'large') return 'text-lg';
+        if (fontSize === 'xlarge') return 'text-xl';
+        return 'text-base';
+      };
+
+      // Filtered profiles list
+      const filteredProfiles = useMemo(() => {
+        return profiles.filter(p => {
+          // Gender Filter
+          if (genderFilter !== 'all' && p.gender.toLowerCase() !== genderFilter.toLowerCase()) {
+            return false;
+          }
+
+          // Age Filter
+          if (selectedAgeRange === '50-60' && (p.age < 50 || p.age > 60)) return false;
+          if (selectedAgeRange === '60-70' && (p.age < 60 || p.age > 70)) return false;
+          if (selectedAgeRange === '70+' && p.age < 70) return false;
+
+          // Purpose Filter
+          if (purposeFilter !== 'all' && p.purpose.toLowerCase() !== purposeFilter.toLowerCase()) {
+            return false;
+          }
+
+          // Text Query Search
+          if (searchQuery.trim() !== "") {
+            const q = searchQuery.toLowerCase();
+            return p.name.toLowerCase().includes(q) || 
+                   p.location.toLowerCase().includes(q) || 
+                   p.occupation.toLowerCase().includes(q);
+          }
+          return true;
+        });
+      }, [profiles, genderFilter, selectedAgeRange, purposeFilter, searchQuery]);
+
+      // Direct WhatsApp link generator for bank transfer slip verification
+      const openWhatsAppVerification = () => {
+        const message = `Hello GoldenConnect Admin,\n\nI have completed the bank transfer of 3,000 LKR for 3 Months Full Access.\n\nBank: ${BANK_DETAILS.bankName} (${BANK_DETAILS.branch})\nAccount Name: ${BANK_DETAILS.accountName}\nAccount No: ${BANK_DETAILS.accountNumber}\n\nAttached is my payment slip photo. Please activate my account access.`;
+        const encodedText = encodeURIComponent(message);
+        window.open(`https://wa.me/${BANK_DETAILS.whatsappRaw}?text=${encodedText}`, '_blank');
+      };
+
+      // Direct WhatsApp chat link generator for unlocked profile contact
+      const openDirectWhatsAppChat = (phone, name) => {
+        const cleanPhone = phone.replace(/[^0-9]/g, '');
+        const message = encodeURIComponent(`Hello ${name}, I saw your profile on GoldenConnect and would love to connect with you.`);
+        window.open(`https://wa.me/${cleanPhone}?text=${message}`, '_blank');
+      };
+
+      // Submit new profile registration
+      const handleFormSubmit = (e) => {
+        e.preventDefault();
+
+        const exactAge = calculateAge(formData.dob);
+        if (exactAge < 50) {
+          alert(`Age Verification Gate: You are ${exactAge} years old. GoldenConnect is exclusively for seniors aged 50 and above.`);
+          return;
+        }
+
+        const newProfile = {
+          id: Date.now(),
+          name: formData.name,
+          dob: formData.dob,
+          age: exactAge,
+          gender: formData.gender,
+          location: formData.location,
+          occupation: formData.occupation,
+          tagline: formData.tagline,
+          bio: formData.bio,
+          interests: formData.interests.split(',').map(i => i.trim()),
+          purpose: formData.purpose,
+          createdBy: formData.createdBy,
+          image: formData.image || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800",
+          phone: formData.phone,
+          email: formData.email,
+          isVerified: true
+        };
+
+        setProfiles([newProfile, ...profiles]);
+        setShowRegisterModal(false);
+        alert(`Congratulations ${formData.name}! Your age (${exactAge}) has been verified and your profile is now live.`);
+      };
+
+      return (
+        <div className={`min-h-screen flex flex-col justify-between ${
+          highContrast ? 'bg-black text-yellow-300 font-sans' : 'bg-amber-50/40 text-stone-800 font-sans'
+        }`}>
+          <div>
+            {/* SENIOR ACCESSIBILITY BAR */}
+            <div className={`${highContrast ? 'bg-yellow-400 text-black' : 'bg-amber-900 text-amber-50'} px-4 py-2 text-xs font-semibold shadow-inner`}>
+              <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+                <span className="flex items-center gap-1.5">
+                  <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Verified Senior Community (50+) • Free Photo & Profile Browsing
+                </span>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1 bg-black/20 rounded-lg px-2 py-1">
+                    <span className="text-[11px]">Text Size:</span>
+                    <button onClick={() => setFontSize('normal')} className={`px-2 py-0.5 rounded font-bold ${fontSize === 'normal' ? 'bg-white/30' : ''}`}>A</button>
+                    <button onClick={() => setFontSize('large')} className={`px-2 py-0.5 rounded font-bold ${fontSize === 'large' ? 'bg-white/30' : ''}`}>A+</button>
+                    <button onClick={() => setFontSize('xlarge')} className={`px-2 py-0.5 rounded font-extrabold ${fontSize === 'xlarge' ? 'bg-white/30' : ''}`}>A++</button>
+                  </div>
+                  <button 
+                    onClick={() => setHighContrast(!highContrast)} 
+                    className="bg-black/20 hover:bg-black/30 px-3 py-1 rounded-lg border border-white/20 transition font-bold"
+                  >
+                    {highContrast ? '☀️ Standard View' : '🌙 High Contrast'}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* HEADER */}
+            <header className={`sticky top-0 z-30 shadow-sm ${highContrast ? 'bg-black border-b border-yellow-400' : 'bg-white border-b border-amber-100'}`}>
+              <div className="max-w-6xl mx-auto px-4 h-20 flex justify-between items-center">
+                <div className="flex items-center gap-3">
+                  <div className={`p-3 rounded-2xl font-black text-2xl shadow-md ${highContrast ? 'bg-yellow-400 text-black' : 'bg-amber-800 text-white'}`}>
+                    GC
+                  </div>
+                  <div>
+                    <h1 className="text-2xl font-extrabold tracking-tight">GoldenConnect</h1>
+                    <p className="text-[11px] text-amber-800 font-extrabold tracking-wider uppercase">SRI LANKA SENIOR DATING (50+)</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button 
+                    onClick={() => setShowRegisterModal(true)}
+                    className="bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-sm hidden sm:block"
+                  >
+                    + Add My Profile
+                  </button>
+
+                  {hasPaid ? (
+                    <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-3.5 py-2.5 rounded-xl border border-emerald-300 flex items-center gap-1.5">
+                      <span className="text-emerald-600 font-black">✓</span> 3 Months Access Active
+                    </span>
+                  ) : (
+                    <button 
+                      onClick={() => setShowPaymentModal(true)}
+                      className="bg-amber-800 hover:bg-amber-900 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1"
+                    >
+                      <span>Unlock Contacts</span>
+                      <span className="bg-amber-700/60 text-amber-100 text-[10px] px-1.5 py-0.5 rounded ml-1">3,000 LKR</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            </header>
+
+            {/* MAIN CONTAINER */}
+            <main className={`max-w-6xl mx-auto px-4 py-8 ${getFontSizeClass()}`}>
+              
+              {/* HERO BANNER */}
+              <div className={`p-8 rounded-3xl mb-8 ${highContrast ? 'bg-yellow-400 text-black' : 'bg-gradient-to-r from-amber-800 via-amber-900 to-stone-900 text-white'} shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-amber-900/20`}>
+                <div className="space-y-2">
+                  <div className="inline-block bg-amber-700/50 text-amber-100 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">
+                    Sri Lanka's #1 Dedicated Senior Matchmaker
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Find Genuine Companionship</h2>
+                  <p className="text-amber-100 text-sm sm:text-base max-w-2xl leading-relaxed">
+                    Browse verified senior profiles freely. Deposit 3,000 LKR directly to Sampath Bank to unlock unlimited direct phone and WhatsApp contact details for 3 full months.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                  <button 
+                    onClick={() => setShowRegisterModal(true)}
+                    className="bg-white text-amber-900 hover:bg-amber-50 font-extrabold text-sm px-6 py-3.5 rounded-xl shadow transition whitespace-nowrap text-center"
+                  >
+                    + Create My Profile
+                  </button>
+                  {!hasPaid && (
+                    <button 
+                      onClick={() => setShowPaymentModal(true)}
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl shadow transition whitespace-nowrap text-center"
+                    >
+                      💬 Bank Slip / WhatsApp Unlock
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* SEARCH & ADVANCED FILTER TOOLBAR */}
+              <div className={`p-6 rounded-2xl mb-8 space-y-4 ${highContrast ? 'bg-black border border-yellow-400' : 'bg-white border border-stone-200 shadow-sm'}`}>
+                <div className="flex justify-between items-center">
+                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
+                    <span>🔍</span> Filter & Search Senior Profiles
+                  </h3>
+                  <span className="text-xs font-bold text-stone-500">
+                    Showing {filteredProfiles.length} of {profiles.length} profiles
+                  </span>
+                </div>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                  {/* Text Search */}
+                  <div>
+                    <label className="block text-[11px] font-bold text-stone-500 mb-1">Search Keywords</label>
+                    <input 
+                      type="text" 
+                      placeholder="City, name, occupation..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-amber-800 ${highContrast ? 'bg-black text-yellow-300 border-yellow-400' : 'bg-stone-50 border-stone-200'}`}
+                    />
+                  </div>
+
+                  {/* Gender Filter */}
+                  <div>
+                    <label className="block text-[11px] font-bold text-stone-500 mb-1">Looking For Gender</label>
+                    <select 
+                      value={genderFilter}
+                      onChange={(e) => setGenderFilter(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-800 ${highContrast ? 'bg-black text-yellow-300 border-yellow-400' : 'bg-stone-50 border-stone-200'}`}
+                    >
+                      <option value="all">Show All Genders</option>
+                      <option value="female">Show Women Only</option>
+                      <option value="male">Show Men Only</option>
+                    </select>
+                  </div>
+
+                  {/* Age Range Filter */}
+                  <div>
+                    <label className="block text-[11px] font-bold text-stone-500 mb-1">Age Bracket</label>
+                    <select 
+                      value={selectedAgeRange}
+                      onChange={(e) => setSelectedAgeRange(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-800 ${highContrast ? 'bg-black text-yellow-300 border-yellow-400' : 'bg-stone-50 border-stone-200'}`}
+                    >
+                      <option value="all">All Senior Ages (50+)</option>
+                      <option value="50-60">Ages 50 – 60</option>
+                      <option value="60-70">Ages 60 – 70</option>
+                      <option value="70+">Ages 70+</option>
+                    </select>
+                  </div>
+
+                  {/* Companion Purpose Filter */}
+                  <div>
+                    <label className="block text-[11px] font-bold text-stone-500 mb-1">Relationship Goal</label>
+                    <select 
+                      value={purposeFilter}
+                      onChange={(e) => setPurposeFilter(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-800 ${highContrast ? 'bg-black text-yellow-300 border-yellow-400' : 'bg-stone-50 border-stone-200'}`}
+                    >
+                      <option value="all">Any Match Goal</option>
+                      <option value="companionship">Companionship</option>
+                      <option value="travel buddy">Travel Buddy</option>
+                      <option value="romance">Romance</option>
+                      <option value="marriage">Marriage</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* PROFILES GRID */}
+              {filteredProfiles.length === 0 ? (
+                <div className="bg-white p-12 rounded-3xl text-center border border-dashed border-stone-300 space-y-3">
+                  <p className="text-4xl">🔎</p>
+                  <h3 className="text-lg font-bold text-stone-800">No matching profiles found</h3>
+                  <p className="text-sm text-stone-500">Try adjusting your age or search filters to view more candidates.</p>
+                  <button 
+                    onClick={() => { setSearchQuery(''); setGenderFilter('all'); setSelectedAgeRange('all'); setPurposeFilter('all'); }}
+                    className="mt-2 text-xs font-bold text-amber-900 underline"
+                  >
+                    Reset All Filters
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {filteredProfiles.map(profile => (
+                    <div key={profile.id} className={`rounded-3xl overflow-hidden shadow-md border flex flex-col justify-between transition hover:shadow-lg ${
+                      highContrast ? 'bg-black border-yellow-400' : 'bg-white border-stone-200'
+                    }`}>
+                      <div>
+                        {/* Profile Image & Badges */}
+                        <div className="relative h-80 w-full bg-stone-200">
+                          <img src={profile.image} alt={profile.name} className="w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                          
+                          <div className="absolute bottom-4 left-5 right-5 text-white flex justify-between items-end">
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <h3 className="text-2xl font-black">{profile.name}, {profile.age}</h3>
+                                {profile.isVerified && (
+                                  <span className="bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow flex items-center gap-1">
+                                    ✓ 50+ Verified
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-xs text-amber-200 font-semibold mt-0.5">
+                                📍 {profile.location} • {profile.gender}
+                              </p>
+                            </div>
+                            
+                            <span className="bg-amber-800/90 backdrop-blur-sm text-amber-100 text-xs font-bold px-3 py-1 rounded-xl shadow">
+                              {profile.purpose}
+                            </span>
+                          </div>
+
+                          <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-stone-200 text-[10px] font-bold px-2.5 py-1 rounded-lg">
+                            Created By: {profile.createdBy}
+                          </div>
+                        </div>
+
+                        {/* Bio Details */}
+                        <div className="p-6 space-y-4">
+                          <p className="italic text-stone-600 font-medium text-sm border-l-2 border-amber-800 pl-3">
+                            "{profile.tagline}"
+                          </p>
+                          <div>
+                            <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-900 block">Profession</span>
+                            <p className="font-semibold text-stone-800 text-sm">{profile.occupation}</p>
+                          </div>
+                          <p className="text-stone-700 text-sm leading-relaxed">{profile.bio}</p>
+
+                          <div className="flex flex-wrap gap-1.5 pt-2">
+                            {profile.interests.map((i, idx) => (
+                              <span key={idx} className="text-xs px-3 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">
+                                #{i}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Contact Paywall / Action Section */}
+                      <div className="p-5 bg-amber-50/70 border-t border-amber-100 space-y-2">
+                        <div className="flex justify-between items-center mb-1">
+                          <h4 className="text-[11px] font-extrabold uppercase tracking-wider text-amber-900">Direct Contact Information</h4>
+                          {hasPaid && <span className="text-[10px] text-emerald-700 font-bold">✓ Direct Access</span>}
+                        </div>
+                        
+                        {hasPaid ? (
+                          <div className="bg-emerald-50 border border-emerald-300 p-4 rounded-2xl space-y-3">
+                            <div className="space-y-1">
+                              <p className="text-sm font-bold text-emerald-950">📞 Phone: {profile.phone || 'Not provided'}</p>
+                              <p className="text-xs font-semibold text-emerald-800">✉️ Email: {profile.email || 'Not provided'}</p>
+                            </div>
+                            <button 
+                              onClick={() => openDirectWhatsAppChat(profile.phone, profile.name)}
+                              className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow transition"
+                            >
+                              💬 Connect Direct on WhatsApp
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="bg-white border border-stone-200 p-4 rounded-2xl flex items-center justify-between gap-3 shadow-sm">
+                            <div>
+                              <p className="text-xs font-bold text-stone-800">Phone & WhatsApp Locked</p>
+                              <p className="text-[11px] text-stone-500">Pay 3,000 LKR to unlock for 3 months</p>
+                            </div>
+                            <button 
+                              onClick={() => setShowPaymentModal(true)}
+                              className="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition whitespace-nowrap"
+                            >
+                              Unlock Contact
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </main>
+          </div>
+
+          {/* FOOTER */}
+          <footer className={`mt-16 border-t ${highContrast ? 'bg-black border-yellow-400 text-yellow-300' : 'bg-white border-amber-200 text-stone-600'} py-10 px-4`}>
+            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <div className="bg-amber-800 text-white font-bold px-2 py-1 rounded text-xs">GC</div>
+                  <h4 className="font-bold text-sm text-stone-900">GoldenConnect Sri Lanka</h4>
+                </div>
+                <p>Sri Lanka's dedicated matrimonial and companionship portal designed specifically for seniors aged 50 and above.</p>
+                <p className="text-[10px] text-stone-400">© 2026 GoldenConnect Senior Dating. All Rights Reserved.</p>
+              </div>
+
+              <div className="space-y-1.5">
+                <h4 className="font-bold text-stone-900 uppercase tracking-wider text-[11px]">Official Deposit Details</h4>
+                <div className="bg-amber-50/80 p-3 rounded-xl border border-amber-200 space-y-0.5 font-mono text-[11px] text-stone-800">
+                  <p><strong>Bank:</strong> {BANK_DETAILS.bankName} ({BANK_DETAILS.branch})</p>
+                  <p><strong>Account Name:</strong> {BANK_DETAILS.accountName}</p>
+                  <p><strong>Account No:</strong> {BANK_DETAILS.accountNumber}</p>
+                  <p><strong>SWIFT Code:</strong> {BANK_DETAILS.swiftCode}</p>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <h4 className="font-bold text-stone-900 uppercase tracking-wider text-[11px]">Contact & Slip Submission</h4>
+                <p>Send payment receipts via WhatsApp for instant profile unlock verification:</p>
+                <div className="space-y-1 font-bold text-amber-900">
+                  <p className="flex items-center gap-1.5">💬 WhatsApp: <span className="font-mono">{BANK_DETAILS.whatsappFormatted}</span></p>
+                  <p className="flex items-center gap-1.5">📧 Support Email: <span className="font-mono">{BANK_DETAILS.supportEmail}</span></p>
+                </div>
+              </div>
+            </div>
+          </footer>
+
+          {/* ADD PROFILE REGISTRATION MODAL */}
+          {showRegisterModal && (
+            <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+              <div className="bg-white max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 border border-amber-200 my-8">
+                <div className="flex justify-between items-center border-b pb-3">
+                  <div>
+                    <h3 className="text-xl font-extrabold text-stone-900">Add Senior Profile</h3>
+                    <p className="text-xs text-stone-500">Verified senior dating gate (Must be 50+)</p>
+                  </div>
+                  <button onClick={() => setShowRegisterModal(false)} className="text-stone-400 hover:text-stone-700 font-bold text-xl">✕</button>
+                </div>
+
+                <form onSubmit={handleFormSubmit} className="space-y-3 text-sm">
+                  <div>
+                    <label className="block text-xs font-bold text-stone-700 mb-1">Full Name</label>
+                    <input 
+                      required 
+                      type="text" 
+                      placeholder="e.g. Sunil Perera" 
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      className="w-full px-3.5 py-2 border rounded-xl focus:ring-2 focus:ring-amber-800 focus:outline-none"
+                    />
+                  </div>
+
+                  {/* DOB & Age Verification */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 mb-1">Date of Birth (DOB)</label>
+                      <input 
+                        required 
+                        type="date" 
+                        value={formData.dob}
+                        onChange={(e) => setFormData({...formData, dob: e.target.value})}
+                        className="w-full px-3.5 py-2 border rounded-xl focus:ring-2 focus:ring-amber-800 focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 mb-1">Exact Age</label>
+                      <div className={`px-3.5 py-2 border rounded-xl font-bold text-xs ${
+                        calculatedAge >= 50 ? 'bg-emerald-50 text-emerald-800 border-emerald-300' : 'bg-red-50 text-red-800 border-red-300'
+                      }`}>
+                        {calculatedAge > 0 ? `${calculatedAge} Years Old` : 'Select Date'}
+                        {calculatedAge < 50 && calculatedAge > 0 && <span className="block text-[9px] text-red-600 font-normal">Must be 50+</span>}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Gender & Created By */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 mb-1">Gender</label>
+                      <select 
+                        value={formData.gender}
+                        onChange={(e) => setFormData({...formData, gender: e.target.value})}
+                        className="w-full px-3.5 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-amber-800"
+                      >
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 mb-1">Profile Created By</label>
+                      <select 
+                        value={formData.createdBy}
+                        onChange={(e) => setFormData({...formData, createdBy: e.target.value})}
+                        className="w-full px-3.5 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-amber-800"
+                      >
+                        <option value="Self">Self</option>
+                        <option value="Son">Son</option>
+                        <option value="Daughter">Daughter</option>
+                        <option value="Relative">Relative</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Location & Occupation */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 mb-1">Location / City</label>
+                      <input 
+                        required 
+                        type="text" 
+                        placeholder="e.g. Kandy, Sri Lanka" 
+                        value={formData.location}
+                        onChange={(e) => setFormData({...formData, location: e.target.value})}
+                        className="w-full px-3.5 py-2 border rounded-xl"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 mb-1">Occupation</label>
+                      <input 
+                        required 
+                        type="text" 
+                        placeholder="e.g. Retired Teacher" 
+                        value={formData.occupation}
+                        onChange={(e) => setFormData({...formData, occupation: e.target.value})}
+                        className="w-full px-3.5 py-2 border rounded-xl"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-stone-700 mb-1">Looking For Purpose</label>
+                    <select 
+                      value={formData.purpose}
+                      onChange={(e) => setFormData({...formData, purpose: e.target.value})}
+                      className="w-full px-3.5 py-2 border rounded-xl bg-white"
+                    >
+                      <option value="Companionship">Companionship</option>
+                      <option value="Travel Buddy">Travel Buddy</option>
+                      <option value="Romance">Romance</option>
+                      <option value="Marriage">Marriage</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-stone-700 mb-1">Short Tagline</label>
+                    <input 
+                      required 
+                      type="text" 
+                      placeholder="e.g. Enjoys morning tea, garden visits and classical music." 
+                      value={formData.tagline}
+                      onChange={(e) => setFormData({...formData, tagline: e.target.value})}
+                      className="w-full px-3.5 py-2 border rounded-xl"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-stone-700 mb-1">About Yourself (Bio)</label>
+                    <textarea 
+                      required 
+                      rows="2" 
+                      placeholder="Share a few details about your lifestyle, interests and expected companion..." 
+                      value={formData.bio}
+                      onChange={(e) => setFormData({...formData, bio: e.target.value})}
+                      className="w-full px-3.5 py-2 border rounded-xl text-xs"
+                    ></textarea>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 mb-1">Phone Number (Hidden)</label>
+                      <input 
+                        required 
+                        type="text" 
+                        placeholder="+94 77 000 0000" 
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        className="w-full px-3.5 py-2 border rounded-xl"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 mb-1">Email (Hidden)</label>
+                      <input 
+                        required 
+                        type="email" 
+                        placeholder="name@example.com" 
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className="w-full px-3.5 py-2 border rounded-xl"
+                      />
+                    </div>
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    className="w-full py-3 bg-amber-800 hover:bg-amber-900 text-white font-bold rounded-xl shadow transition text-sm mt-2"
+                  >
+                    Confirm Age & Publish Profile
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {/* PAYMENT & BANK SLIP MODAL */}
+          {showPaymentModal && (
+            <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+              <div className="bg-white max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-5 border border-amber-200">
+                <div className="flex justify-between items-center border-b pb-3">
+                  <div>
+                    <h3 className="text-xl font-extrabold text-stone-900">Unlock Senior Contacts</h3>
+                    <p className="text-xs text-stone-500">Bank Transfer / Slip Verification</p>
+                  </div>
+                  <button onClick={() => setShowPaymentModal(false)} className="text-stone-400 font-bold text-lg">✕</button>
+                </div>
+
+                <div className="bg-amber-50 border border-amber-200 p-4 rounded-2xl flex justify-between items-center">
+                  <div>
+                    <span className="text-xs text-stone-500 font-bold uppercase block">Access Fee</span>
+                    <span className="text-2xl font-black text-amber-900">{BANK_DETAILS.fee}</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xs text-stone-500 font-bold uppercase block">Validity</span>
+                    <span className="text-xs font-extrabold text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-lg">
+                      {BANK_DETAILS.validity}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <h4 className="font-bold text-stone-800 text-xs uppercase tracking-wider">Official Bank Transfer Details</h4>
+                  <div className="bg-stone-50 p-4 rounded-2xl space-y-1 text-xs font-mono text-stone-800 border border-stone-200">
+                    <p><strong>Bank:</strong> {BANK_DETAILS.bankName}</p>
+                    <p><strong>Branch:</strong> {BANK_DETAILS.branch}</p>
+                    <p><strong>Account Name:</strong> {BANK_DETAILS.accountName}</p>
+                    <p><strong>Account Number:</strong> <span className="bg-amber-100 px-1 py-0.5 rounded font-bold">{BANK_DETAILS.accountNumber}</span></p>
+                    <p><strong>SWIFT Code:</strong> {BANK_DETAILS.swiftCode}</p>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <button 
+                    onClick={openWhatsAppVerification}
+                    className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-xs flex items-center justify-center gap-2"
+                  >
+                    💬 Send Bank Slip via WhatsApp ({BANK_DETAILS.whatsappFormatted})
+                  </button>
+
+                  <button 
+                    onClick={() => {
+                      setHasPaid(true);
+                      setShowPaymentModal(false);
+                      alert("Demo Mode: Unlocked! You now have direct access to view all phone numbers and WhatsApp chats.");
+                    }}
+                    className="w-full py-2 bg-stone-100 hover:bg-stone-200 text-stone-600 font-semibold rounded-xl text-xs transition"
+                  >
+                    (Demo Mode: Click to simulate instant paid status)
+                  </button>
+                </div>
+
+                <div className="text-[10px] text-stone-400 text-center leading-relaxed">
+                  GoldenConnect is an introduction directory. Payment grants access to phone/WhatsApp contact information.
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
