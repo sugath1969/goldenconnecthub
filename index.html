@@ -198,18 +198,6 @@
         });
       }, [profiles, genderFilter, selectedAgeRange, purposeFilter, searchQuery]);
 
-      // Handle image file upload conversion to preview URL
-      const handleImageUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            setFormData({...formData, image: reader.result});
-          };
-          reader.readAsDataURL(file);
-        }
-      };
-
       const openWhatsAppVerification = () => {
         const message = `Hello GoldenConnect Admin,\n\nI have completed the bank transfer of 3,000 LKR for 3 Months Full Access.\n\nBank: ${BANK_DETAILS.bankName} (${BANK_DETAILS.branch})\nAccount Name: ${BANK_DETAILS.accountName}\nAccount No: ${BANK_DETAILS.accountNumber}\n\nAttached is my payment slip photo. Please activate my account access.`;
         window.open(`https://wa.me/${BANK_DETAILS.whatsappRaw}?text=${encodeURIComponent(message)}`, '_blank');
@@ -531,7 +519,7 @@
             </div>
           </footer>
 
-          {/* REGISTER MODAL WITH PICTURE UPLOAD */}
+          {/* REGISTER MODAL */}
           {showRegisterModal && (
             <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
               <div className="bg-white max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 border border-amber-200 my-8">
@@ -547,27 +535,6 @@
                   <div>
                     <label className="block text-xs font-bold text-stone-700 mb-1">Full Name</label>
                     <input required type="text" placeholder="e.g. Sunil Perera" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full px-3 py-2 border rounded-xl" />
-                  </div>
-
-                  {/* PROFILE PICTURE UPLOAD FIELD */}
-                  <div className="bg-amber-50 p-3 rounded-2xl border border-amber-200 space-y-2">
-                    <label className="block text-xs font-bold text-amber-900">📷 Profile Picture Upload</label>
-                    <div className="flex items-center gap-3">
-                      <input 
-                        type="file" 
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="w-full text-xs text-stone-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-800 file:text-white hover:file:bg-amber-900 cursor-pointer"
-                      />
-                    </div>
-                    <p className="text-[10px] text-stone-500">Or paste image URL below:</p>
-                    <input 
-                      type="url" 
-                      placeholder="https://images.unsplash.com/..." 
-                      value={formData.image} 
-                      onChange={(e) => setFormData({...formData, image: e.target.value})} 
-                      className="w-full px-3 py-1.5 border rounded-xl text-xs bg-white" 
-                    />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
