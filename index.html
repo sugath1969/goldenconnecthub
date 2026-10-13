@@ -21,11 +21,6 @@
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- React & ReactDOM CDN -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <!-- Babel Compiler CDN -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
   <!-- Font Integration -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,431 +33,298 @@
     }
   </style>
 </head>
-<body class="bg-amber-50/40 text-stone-800 antialiased min-h-screen">
-  <div id="root"></div>
+<body class="bg-amber-50/40 text-stone-800 antialiased min-h-screen flex flex-col justify-between">
 
-  <script type="text/babel">
-    const { useState, useMemo } = React;
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-amber-900 text-amber-50 px-3 py-2 text-xs font-semibold shadow-inner">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
+      <span class="flex items-center justify-center gap-1.5">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Verified Senior Community (50+)
+      </span>
+      <span class="text-[11px] opacity-90">📞 Direct Support: +94 77 556 9178</span>
+    </div>
+  </div>
 
-    function calculateAge(dobString) {
-      if (!dobString) return 0;
-      const today = new Date();
-      const birthDate = new Date(dobString);
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      return age;
+  <!-- HEADER -->
+  <header class="sticky top-0 z-30 bg-white border-b border-amber-100 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 sm:h-20 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-2xl font-black text-xl shadow-md bg-amber-800 text-white">
+            GC
+          </div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">GoldenConnect</h1>
+            <p class="text-[10px] text-amber-800 font-extrabold tracking-wider uppercase">SRI LANKA SENIOR MATCHMAKING (50+)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+        <button onclick="toggleModal('registerModal')" class="bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm">
+          + Add Profile
+        </button>
+        <button onclick="toggleModal('paymentModal')" class="bg-amber-800 hover:bg-amber-900 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition flex items-center gap-1">
+          <span>Unlock Contacts</span>
+          <span class="bg-amber-700 text-amber-100 text-[10px] px-1 py-0.5 rounded">3k LKR</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-6xl mx-auto px-4 py-6 w-full">
+    
+    <!-- HERO BANNER -->
+    <div class="p-6 sm:p-8 rounded-3xl mb-8 bg-gradient-to-r from-amber-800 via-amber-900 to-stone-900 text-white shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-amber-900/20">
+      <div class="space-y-2">
+        <div class="inline-block bg-amber-700/50 text-amber-100 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">
+          Sri Lanka's #1 Dedicated Senior Matchmaker
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">Find Genuine Companionship</h2>
+        <p class="text-amber-100 text-xs sm:text-base max-w-2xl leading-relaxed">
+          Browse verified senior profiles freely. Deposit 3,000 LKR directly to Sampath Bank to unlock unlimited direct phone and WhatsApp contact details for 3 full months.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+        <button onclick="toggleModal('registerModal')" class="bg-white text-amber-900 hover:bg-amber-50 font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl shadow transition text-center">
+          + Create My Profile
+        </button>
+        <button onclick="toggleModal('paymentModal')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl shadow transition text-center">
+          💬 WhatsApp Slip Unlock
+        </button>
+      </div>
+    </div>
+
+    <!-- FOUNDER & CEO SECTION -->
+    <div class="my-8 p-6 sm:p-8 rounded-3xl border shadow-sm flex flex-col md:flex-row items-center gap-6 bg-white border-amber-200 text-stone-800">
+      <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden bg-stone-200 shrink-0 border-4 border-amber-800 shadow-md">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" alt="Sugath Wijesinghe - Founder" class="w-full h-full object-cover">
+      </div>
+      <div class="space-y-2 text-center md:text-left">
+        <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+          Founder & CEO Message
+        </span>
+        <h3 class="text-2xl font-black">Sugath Wijesinghe</h3>
+        <p class="text-xs font-bold text-amber-800 uppercase">Founder & Director, GoldenConnect Sri Lanka</p>
+        <p class="text-sm leading-relaxed opacity-90">
+          "GoldenConnect was built with a sincere mission: to provide a safe, respectful, and verified community where seniors across Sri Lanka can find genuine companionship, share experiences, and enjoy their golden years with peace of mind."
+        </p>
+      </div>
+    </div>
+
+    <!-- PROFILES GRID -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- PROFILE 1 -->
+      <div class="rounded-3xl overflow-hidden shadow-md border flex flex-col justify-between transition hover:shadow-lg bg-white border-stone-200">
+        <div>
+          <div class="relative h-72 sm:h-80 w-full bg-stone-200">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800" alt="Eleanor Vance" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-4 left-5 right-5 text-white flex justify-between items-end">
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-xl sm:text-2xl font-black">Eleanor Vance, 64</h3>
+                  <span class="bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow">✓ Verified</span>
+                </div>
+                <p class="text-xs text-amber-200 font-semibold mt-0.5">📍 Colombo, Sri Lanka • Female</p>
+              </div>
+              <span class="bg-amber-800/90 text-amber-100 text-xs font-bold px-2.5 py-1 rounded-xl shadow">Travel Buddy</span>
+            </div>
+            <div class="absolute top-4 left-4 flex gap-2">
+              <span class="bg-amber-500 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg shadow">⭐ Popular Match</span>
+              <span class="bg-black/50 backdrop-blur-md text-stone-200 text-[10px] font-bold px-2.5 py-1 rounded-lg">By: Self</span>
+            </div>
+          </div>
+          <div class="p-5 sm:p-6 space-y-4">
+            <p class="italic text-stone-600 font-medium text-sm border-l-2 border-amber-800 pl-3">"Looking for a travel companion and garden enthusiast."</p>
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-900 block">Profession</span>
+              <p class="font-semibold text-stone-800 text-sm">Retired Landscape Architect</p>
+            </div>
+            <p class="text-stone-700 text-sm leading-relaxed">I spent 35 years designing public parks. Now in retirement, I love tending my greenhouse, visiting local farmers markets, and exploring Sri Lankan nature trails.</p>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#Gardening</span>
+              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#Travel</span>
+              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#Cooking</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 sm:p-5 bg-amber-50/70 border-t border-amber-100 space-y-2">
+          <div class="bg-white border border-stone-200 p-3.5 rounded-2xl flex items-center justify-between gap-3 shadow-sm">
+            <div>
+              <p class="text-xs font-bold text-stone-800">Contacts Locked</p>
+              <p class="text-[11px] text-stone-500">Pay 3,000 LKR for 3 months</p>
+            </div>
+            <button onclick="toggleModal('paymentModal')" class="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow whitespace-nowrap">Unlock</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFILE 2 -->
+      <div class="rounded-3xl overflow-hidden shadow-md border flex flex-col justify-between transition hover:shadow-lg bg-white border-stone-200">
+        <div>
+          <div class="relative h-72 sm:h-80 w-full bg-stone-200">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" alt="Arthur Pendelton" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-4 left-5 right-5 text-white flex justify-between items-end">
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-xl sm:text-2xl font-black">Arthur Pendelton, 67</h3>
+                  <span class="bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow">✓ Verified</span>
+                </div>
+                <p class="text-xs text-amber-200 font-semibold mt-0.5">📍 Kandy, Sri Lanka • Male</p>
+              </div>
+              <span class="bg-amber-800/90 text-amber-100 text-xs font-bold px-2.5 py-1 rounded-xl shadow">Companionship</span>
+            </div>
+            <div class="absolute top-4 left-4 flex gap-2">
+              <span class="bg-black/50 backdrop-blur-md text-stone-200 text-[10px] font-bold px-2.5 py-1 rounded-lg">By: Son</span>
+            </div>
+          </div>
+          <div class="p-5 sm:p-6 space-y-4">
+            <p class="italic text-stone-600 font-medium text-sm border-l-2 border-amber-800 pl-3">"Book worm, jazz listener, and amateur bread baker."</p>
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-900 block">Profession</span>
+              <p class="font-semibold text-stone-800 text-sm">Former History Teacher</p>
+            </div>
+            <p class="text-stone-700 text-sm leading-relaxed">After 40 years in education, I enjoy the relaxed pace of life. Hosting weekly book discussions, classical music evenings, and peaceful hill country walks.</p>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#Reading</span>
+              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#Music</span>
+              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#History</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 sm:p-5 bg-amber-50/70 border-t border-amber-100 space-y-2">
+          <div class="bg-white border border-stone-200 p-3.5 rounded-2xl flex items-center justify-between gap-3 shadow-sm">
+            <div>
+              <p class="text-xs font-bold text-stone-800">Contacts Locked</p>
+              <p class="text-[11px] text-stone-500">Pay 3,000 LKR for 3 months</p>
+            </div>
+            <button onclick="toggleModal('paymentModal')" class="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow whitespace-nowrap">Unlock</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-16 border-t bg-white border-amber-200 text-stone-600 py-10 px-4">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2">
+          <div class="bg-amber-800 text-white font-bold px-2 py-1 rounded text-xs">GC</div>
+          <h4 class="font-bold text-sm text-stone-900">GoldenConnect Sri Lanka</h4>
+        </div>
+        <p>Sri Lanka's dedicated senior matrimonial and companionship portal (50+).</p>
+        <p class="text-[10px] text-stone-400">© 2026 GoldenConnect. All Rights Reserved.</p>
+      </div>
+
+      <div class="space-y-1.5">
+        <h4 class="font-bold text-stone-900 uppercase tracking-wider text-[11px]">Bank Deposit Details</h4>
+        <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200 space-y-0.5 font-mono text-[11px] text-stone-800">
+          <p><strong>Bank:</strong> Sampath Bank PLC (Kaduwela Branch)</p>
+          <p><strong>Name:</strong> S. P. Wijesinghe</p>
+          <p><strong>Acc No:</strong> 116254863677</p>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <h4 class="font-bold text-stone-900 uppercase tracking-wider text-[11px]">WhatsApp Verification</h4>
+        <p>Send transfer slips to activate instant access:</p>
+        <p class="font-bold text-amber-900 font-mono">💬 +94 77 556 9178</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- REGISTER MODAL -->
+  <div id="registerModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 border border-amber-200 my-8">
+      <div class="flex justify-between items-center border-b pb-3">
+        <div>
+          <h3 class="text-xl font-extrabold text-stone-900">Add Senior Profile</h3>
+          <p class="text-xs text-stone-500">Exclusive for ages 50 and above</p>
+        </div>
+        <button onclick="toggleModal('registerModal')" class="text-stone-400 font-bold text-xl">✕</button>
+      </div>
+
+      <form onsubmit="handleFormSubmit(event)" class="space-y-3 text-sm">
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Full Name</label>
+          <input required type="text" placeholder="e.g. Sunil Perera" class="w-full px-3 py-2 border rounded-xl" />
+        </div>
+
+        <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200 space-y-2">
+          <label class="block text-xs font-bold text-amber-900">📷 Profile Picture Upload</label>
+          <input type="file" accept="image/*" class="w-full text-xs text-stone-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-800 file:text-white hover:file:bg-amber-900 cursor-pointer" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Date of Birth</label>
+            <input required type="date" class="w-full px-3 py-2 border rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">City</label>
+            <input required type="text" placeholder="e.g. Kandy" class="w-full px-3 py-2 border rounded-xl" />
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-amber-800 hover:bg-amber-900 text-white font-bold rounded-xl text-sm mt-2">
+          Confirm & Publish Profile
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- PAYMENT MODAL -->
+  <div id="paymentModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 border border-amber-200">
+      <div class="flex justify-between items-center border-b pb-3">
+        <div>
+          <h3 class="text-xl font-extrabold text-stone-900">Unlock Contacts</h3>
+          <p class="text-xs text-stone-500">Sampath Bank Transfer</p>
+        </div>
+        <button onclick="toggleModal('paymentModal')" class="text-stone-400 font-bold text-lg">✕</button>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl flex justify-between items-center">
+        <div>
+          <span class="text-xs text-stone-500 font-bold uppercase block">Fee</span>
+          <span class="text-2xl font-black text-amber-900">3,000 LKR</span>
+        </div>
+        <div class="text-right">
+          <span class="text-xs text-stone-500 font-bold uppercase block">Access</span>
+          <span class="text-xs font-extrabold text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-lg">3 Months</span>
+        </div>
+      </div>
+
+      <div class="bg-stone-50 p-3.5 rounded-2xl space-y-1 text-xs font-mono text-stone-800 border border-stone-200">
+        <p><strong>Bank:</strong> Sampath Bank PLC (Kaduwela Branch)</p>
+        <p><strong>Name:</strong> S. P. Wijesinghe</p>
+        <p><strong>Acc No:</strong> 116254863677</p>
+      </div>
+
+      <button onclick="window.open('https://wa.me/94775569178', '_blank')" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow">
+        💬 Send Bank Slip via WhatsApp (+94 77 556 9178)
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function toggleModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.toggle('hidden');
     }
 
-    const BANK_DETAILS = {
-      bankName: "Sampath Bank PLC",
-      branch: "Kaduwela Branch",
-      accountName: "S. P. Wijesinghe",
-      accountNumber: "116254863677",
-      swiftCode: "BSAMLKLX",
-      whatsappNumber: "0775569178",
-      whatsappFormatted: "+94 77 556 9178",
-      whatsappRaw: "94775569178",
-      supportEmail: "support.goldenconnect@gmail.com",
-      fee: "3,000 LKR",
-      validity: "3 Months Full Access"
-    };
-
-    const INITIAL_PROFILES = [
-      {
-        id: 1,
-        name: "Eleanor Vance",
-        dob: "1960-05-14",
-        age: 64,
-        gender: "Female",
-        location: "Colombo, Sri Lanka",
-        occupation: "Retired Landscape Architect",
-        tagline: "Looking for a travel companion and garden enthusiast.",
-        bio: "I spent 35 years designing public parks. Now in retirement, I love tending my greenhouse, visiting local farmers markets, and exploring Sri Lankan nature trails.",
-        interests: ["Gardening", "Travel", "Cooking", "Photography"],
-        purpose: "Travel Buddy",
-        createdBy: "Self",
-        image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800",
-        phone: "+94 77 123 4567",
-        email: "eleanor.v@example.com",
-        isVerified: true,
-        isPopular: true
-      },
-      {
-        id: 2,
-        name: "Arthur Pendelton",
-        dob: "1957-10-22",
-        age: 67,
-        gender: "Male",
-        location: "Kandy, Sri Lanka",
-        occupation: "Former History Teacher",
-        tagline: "Book worm, jazz listener, and amateur bread baker.",
-        bio: "After 40 years in education, I enjoy the relaxed pace of life. Hosting weekly book discussions, classical music evenings, and peaceful hill country walks.",
-        interests: ["Reading", "Music", "Cooking", "History"],
-        purpose: "Companionship",
-        createdBy: "Son",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800",
-        phone: "+94 71 987 6543",
-        email: "arthur.p@example.com",
-        isVerified: true,
-        isPopular: false
-      },
-      {
-        id: 3,
-        name: "Margaret Miller",
-        dob: "1966-03-11",
-        age: 58,
-        gender: "Female",
-        location: "Galle, Sri Lanka",
-        occupation: "Art Gallery Curator",
-        tagline: "Art lover, beach walker, and coffee connoisseur.",
-        bio: "Passionate about classical art, music concerts, and weekend beach walks in Galle Fort. Life is better when shared with a kind, intelligent soul.",
-        interests: ["Music", "Art", "Hiking", "Travel"],
-        purpose: "Romance",
-        createdBy: "Self",
-        image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&q=80&w=800",
-        phone: "+94 76 555 1212",
-        email: "margaret.m@example.com",
-        isVerified: true,
-        isPopular: true
-      },
-      {
-        id: 4,
-        name: "Dr. Robert Chen",
-        dob: "1953-08-30",
-        age: 71,
-        gender: "Male",
-        location: "Negombo, Sri Lanka",
-        occupation: "Retired Physician",
-        tagline: "Always curious. Passionate about acoustic guitar & stargazing.",
-        bio: "Retired from medicine, now spending time learning blues guitar and stargazing. I value active listening, sincerity, and quiet seaside dinners.",
-        interests: ["Guitar", "Gardening", "Reading", "Astronomy"],
-        purpose: "Companionship",
-        createdBy: "Daughter",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800",
-        phone: "+94 70 888 9900",
-        email: "dr.robert@example.com",
-        isVerified: true,
-        isPopular: false
-      }
-    ];
-
-    function App() {
-      const [fontSize, setFontSize] = useState('normal'); 
-      const [highContrast, setHighContrast] = useState(false);
-      const [profiles, setProfiles] = useState(INITIAL_PROFILES);
-      const [searchQuery, setSearchQuery] = useState("");
-      const [genderFilter, setGenderFilter] = useState("all");
-      const [selectedAgeRange, setSelectedAgeRange] = useState("all");
-      const [purposeFilter, setPurposeFilter] = useState("all");
-      const [hasPaid, setHasPaid] = useState(false);
-      const [showPaymentModal, setShowPaymentModal] = useState(false);
-      const [showRegisterModal, setShowRegisterModal] = useState(false);
-
-      const [formData, setFormData] = useState({
-        name: '',
-        dob: '1970-01-01',
-        gender: 'Female',
-        location: 'Colombo, Sri Lanka',
-        occupation: '',
-        tagline: '',
-        bio: '',
-        interests: 'Gardening, Reading',
-        purpose: 'Companionship',
-        createdBy: 'Self',
-        image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800',
-        phone: '',
-        email: ''
-      });
-
-      const calculatedAge = useMemo(() => calculateAge(formData.dob), [formData.dob]);
-
-      const getFontSizeClass = () => {
-        if (fontSize === 'large') return 'text-lg';
-        if (fontSize === 'xlarge') return 'text-xl';
-        return 'text-base';
-      };
-
-      const filteredProfiles = useMemo(() => {
-        return profiles.filter(p => {
-          if (genderFilter !== 'all' && p.gender.toLowerCase() !== genderFilter.toLowerCase()) return false;
-          if (selectedAgeRange === '50-60' && (p.age < 50 || p.age > 60)) return false;
-          if (selectedAgeRange === '60-70' && (p.age < 60 || p.age > 70)) return false;
-          if (selectedAgeRange === '70+' && p.age < 70) return false;
-          if (purposeFilter !== 'all' && p.purpose.toLowerCase() !== purposeFilter.toLowerCase()) return false;
-          if (searchQuery.trim() !== "") {
-            const q = searchQuery.toLowerCase();
-            return p.name.toLowerCase().includes(q) || 
-                   p.location.toLowerCase().includes(q) || 
-                   p.occupation.toLowerCase().includes(q);
-          }
-          return true;
-        });
-      }, [profiles, genderFilter, selectedAgeRange, purposeFilter, searchQuery]);
-
-      const handleImageUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            setFormData({...formData, image: reader.result});
-          };
-          reader.readAsDataURL(file);
-        }
-      };
-
-      const openWhatsAppVerification = () => {
-        const message = `Hello GoldenConnect Admin,\n\nI have completed the bank transfer of 3,000 LKR for 3 Months Full Access.\n\nBank: ${BANK_DETAILS.bankName} (${BANK_DETAILS.branch})\nAccount Name: ${BANK_DETAILS.accountName}\nAccount No: ${BANK_DETAILS.accountNumber}\n\nAttached is my payment slip photo. Please activate my account access.`;
-        window.open(`https://wa.me/${BANK_DETAILS.whatsappRaw}?text=${encodeURIComponent(message)}`, '_blank');
-      };
-
-      const openDirectWhatsAppChat = (phone, name) => {
-        const cleanPhone = phone.replace(/[^0-9]/g, '');
-        const message = encodeURIComponent(`Hello ${name}, I saw your profile on GoldenConnect and would love to connect with you.`);
-        window.open(`https://wa.me/${cleanPhone}?text=${message}`, '_blank');
-      };
-
-      const handleFormSubmit = (e) => {
-        e.preventDefault();
-        const exactAge = calculateAge(formData.dob);
-        if (exactAge < 50) {
-          alert(`Age Verification Gate: You are ${exactAge} years old. GoldenConnect is exclusively for seniors aged 50 and above.`);
-          return;
-        }
-
-        const newProfile = {
-          id: Date.now(),
-          name: formData.name,
-          dob: formData.dob,
-          age: exactAge,
-          gender: formData.gender,
-          location: formData.location,
-          occupation: formData.occupation,
-          tagline: formData.tagline,
-          bio: formData.bio,
-          interests: formData.interests.split(',').map(i => i.trim()),
-          purpose: formData.purpose,
-          createdBy: formData.createdBy,
-          image: formData.image || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800",
-          phone: formData.phone,
-          email: formData.email,
-          isVerified: true,
-          isPopular: false
-        };
-
-        setProfiles([newProfile, ...profiles]);
-        setShowRegisterModal(false);
-        alert(`Congratulations ${formData.name}! Your age (${exactAge}) has been verified and your profile is now live.`);
-      };
-
-      return (
-        <div className={`min-h-screen flex flex-col justify-between ${highContrast ? 'bg-black text-yellow-300 font-sans' : 'bg-amber-50/40 text-stone-800 font-sans'}`}>
-          <div>
-            {/* SENIOR ACCESSIBILITY BAR */}
-            <div className={`${highContrast ? 'bg-yellow-400 text-black' : 'bg-amber-900 text-amber-50'} px-3 py-2 text-xs font-semibold shadow-inner`}>
-              <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
-                <span className="flex items-center justify-center gap-1.5">
-                  <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  Verified Senior Community (50+)
-                </span>
-                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
-                  <div className="flex items-center gap-1 bg-black/20 rounded-lg px-2 py-1">
-                    <span className="text-[11px]">Text:</span>
-                    <button onClick={() => setFontSize('normal')} className={`px-1.5 py-0.5 rounded font-bold ${fontSize === 'normal' ? 'bg-white/30' : ''}`}>A</button>
-                    <button onClick={() => setFontSize('large')} className={`px-1.5 py-0.5 rounded font-bold ${fontSize === 'large' ? 'bg-white/30' : ''}`}>A+</button>
-                    <button onClick={() => setFontSize('xlarge')} className={`px-1.5 py-0.5 rounded font-extrabold ${fontSize === 'xlarge' ? 'bg-white/30' : ''}`}>A++</button>
-                  </div>
-                  <button onClick={() => setHighContrast(!highContrast)} className="bg-black/20 hover:bg-black/30 px-2.5 py-1 rounded-lg border border-white/20 transition font-bold text-[11px]">
-                    {highContrast ? '☀️ Normal' : '🌙 Contrast'}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* HEADER */}
-            <header className={`sticky top-0 z-30 shadow-sm ${highContrast ? 'bg-black border-b border-yellow-400' : 'bg-white border-b border-amber-100'}`}>
-              <div className="max-w-6xl mx-auto px-4 py-3 sm:h-20 flex flex-col sm:flex-row justify-between items-center gap-3">
-                <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2.5 rounded-2xl font-black text-xl shadow-md ${highContrast ? 'bg-yellow-400 text-black' : 'bg-amber-800 text-white'}`}>
-                      GC
-                    </div>
-                    <div>
-                      <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight">GoldenConnect</h1>
-                      <p className="text-[10px] text-amber-800 font-extrabold tracking-wider uppercase">SRI LANKA SENIOR MATCHMAKING (50+)</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-                  <button onClick={() => setShowRegisterModal(true)} className="bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm">
-                    + Add Profile
-                  </button>
-
-                  {hasPaid ? (
-                    <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-2 rounded-xl border border-emerald-300">
-                      ✓ Active
-                    </span>
-                  ) : (
-                    <button onClick={() => setShowPaymentModal(true)} className="bg-amber-800 hover:bg-amber-900 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition flex items-center gap-1">
-                      <span>Unlock</span>
-                      <span className="bg-amber-700 text-amber-100 text-[10px] px-1 py-0.5 rounded">3k LKR</span>
-                    </button>
-                  )}
-                </div>
-              </div>
-            </header>
-
-            {/* MAIN CONTAINER */}
-            <main className={`max-w-6xl mx-auto px-4 py-6 ${getFontSizeClass()}`}>
-              
-              {/* HERO BANNER */}
-              <div className={`p-6 sm:p-8 rounded-3xl mb-8 ${highContrast ? 'bg-yellow-400 text-black' : 'bg-gradient-to-r from-amber-800 via-amber-900 to-stone-900 text-white'} shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-amber-900/20`}>
-                <div className="space-y-2">
-                  <div className="inline-block bg-amber-700/50 text-amber-100 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">
-                    Sri Lanka's #1 Dedicated Senior Matchmaker
-                  </div>
-                  <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">Find Genuine Companionship</h2>
-                  <p className="text-amber-100 text-xs sm:text-base max-w-2xl leading-relaxed">
-                    Browse verified senior profiles freely. Deposit 3,000 LKR directly to Sampath Bank to unlock unlimited direct phone and WhatsApp contact details for 3 full months.
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                  <button onClick={() => setShowRegisterModal(true)} className="bg-white text-amber-900 hover:bg-amber-50 font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl shadow transition text-center">
-                    + Create My Profile
-                  </button>
-                  {!hasPaid && (
-                    <button onClick={() => setShowPaymentModal(true)} className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl shadow transition text-center">
-                      💬 WhatsApp Slip Unlock
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {/* CEO / FOUNDER SECTION */}
-              <div className={`my-8 p-6 sm:p-8 rounded-3xl border shadow-sm flex flex-col md:flex-row items-center gap-6 ${highContrast ? 'bg-black border-yellow-400 text-yellow-300' : 'bg-white border-amber-200 text-stone-800'}`}>
-                <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden bg-stone-200 shrink-0 border-4 border-amber-800 shadow-md">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" alt="Sugath Wijesinghe - Founder" className="w-full h-full object-cover" />
-                </div>
-                <div className="space-y-2 text-center md:text-left">
-                  <span className="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-                    Founder & CEO Message
-                  </span>
-                  <h3 className="text-2xl font-black">Sugath Wijesinghe</h3>
-                  <p className="text-xs font-bold text-amber-800 uppercase">Founder & Director, GoldenConnect Sri Lanka</p>
-                  <p className="text-sm leading-relaxed opacity-90">
-                    "GoldenConnect was built with a sincere mission: to provide a safe, respectful, and verified community where seniors across Sri Lanka can find genuine companionship, share experiences, and enjoy their golden years with peace of mind."
-                  </p>
-                </div>
-              </div>
-
-              {/* SEARCH & FILTER TOOLBAR */}
-              <div className={`p-5 rounded-2xl mb-8 space-y-4 ${highContrast ? 'bg-black border border-yellow-400' : 'bg-white border border-stone-200 shadow-sm'}`}>
-                <div className="flex justify-between items-center">
-                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
-                    <span>🔍</span> Search Senior Profiles
-                  </h3>
-                  <span className="text-xs font-bold text-stone-500">
-                    Showing {filteredProfiles.length} of {profiles.length}
-                  </span>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-                  <div>
-                    <label className="block text-[11px] font-bold text-stone-500 mb-1">Keywords</label>
-                    <input 
-                      type="text" 
-                      placeholder="City, name, occupation..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className={`w-full px-3 py-2 rounded-xl border text-sm focus:outline-none ${highContrast ? 'bg-black text-yellow-300 border-yellow-400' : 'bg-stone-50 border-stone-200'}`}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-bold text-stone-500 mb-1">Gender</label>
-                    <select 
-                      value={genderFilter}
-                      onChange={(e) => setGenderFilter(e.target.value)}
-                      className={`w-full px-3 py-2 rounded-xl border text-sm font-semibold ${highContrast ? 'bg-black text-yellow-300 border-yellow-400' : 'bg-stone-50 border-stone-200'}`}
-                    >
-                      <option value="all">All Genders</option>
-                      <option value="female">Women Only</option>
-                      <option value="male">Men Only</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-bold text-stone-500 mb-1">Age Bracket</label>
-                    <select 
-                      value={selectedAgeRange}
-                      onChange={(e) => setSelectedAgeRange(e.target.value)}
-                      className={`w-full px-3 py-2 rounded-xl border text-sm font-semibold ${highContrast ? 'bg-black text-yellow-300 border-yellow-400' : 'bg-stone-50 border-stone-200'}`}
-                    >
-                      <option value="all">All Ages (50+)</option>
-                      <option value="50-60">50 – 60 Years</option>
-                      <option value="60-70">60 – 70 Years</option>
-                      <option value="70+">70+ Years</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-bold text-stone-500 mb-1">Relationship Goal</label>
-                    <select 
-                      value={purposeFilter}
-                      onChange={(e) => setPurposeFilter(e.target.value)}
-                      className={`w-full px-3 py-2 rounded-xl border text-sm font-semibold ${highContrast ? 'bg-black text-yellow-300 border-yellow-400' : 'bg-stone-50 border-stone-200'}`}
-                    >
-                      <option value="all">Any Goal</option>
-                      <option value="companionship">Companionship</option>
-                      <option value="travel buddy">Travel Buddy</option>
-                      <option value="romance">Romance</option>
-                      <option value="marriage">Marriage</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              {/* PROFILES GRID */}
-              {filteredProfiles.length === 0 ? (
-                <div className="bg-white p-12 rounded-3xl text-center border border-dashed border-stone-300 space-y-3">
-                  <p className="text-4xl">🔎</p>
-                  <h3 className="text-lg font-bold text-stone-800">No matching profiles found</h3>
-                  <button onClick={() => { setSearchQuery(''); setGenderFilter('all'); setSelectedAgeRange('all'); setPurposeFilter('all'); }} className="mt-2 text-xs font-bold text-amber-900 underline">
-                    Reset All Filters
-                  </button>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {filteredProfiles.map(profile => (
-                    <div key={profile.id} className={`rounded-3xl overflow-hidden shadow-md border flex flex-col justify-between transition hover:shadow-lg ${highContrast ? 'bg-black border-yellow-400' : 'bg-white border-stone-200'}`}>
-                      <div>
-                        <div className="relative h-72 sm:h-80 w-full bg-stone-200">
-                          <img src={profile.image} alt={profile.name} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                          
-                          <div className="absolute bottom-4 left-5 right-5 text-white flex justify-between items-end">
-                            <div>
-                              <div className="flex items-center gap-2">
-                                <h3 className="text-xl sm:text-2xl font-black">{profile.name}, {profile.age}</h3>
-                                {profile.isVerified && (
-                                  <span className="bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow">
-                                    ✓ Verified
-                                  </span>
-                                )}
-                              </div>
-                              <p className="text-xs text-amber-200 font-semibold mt-0.5">
-                                📍 {profile.location} • {profile.gender}
-                              </p>
-                            </div>
-                            
-                            <span className="bg-amber-800/90 text-amber-100 text-xs font-bold px-2.5 py-1 rounded-xl shadow">
-                              {profile.purpose}
-                            </span>
-                          </div>
-
-                          <div className="absolute top-4 left-4 flex gap-2">
-                            {profile.isPopular && (
-                              <span className="bg-amber-500 text-white text-[10px] font-extrabold px-2.5 py-1 rounded
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('Your profile details and photo have been submitted successfully!');
+      toggleModal('registerModal');
+    }
+  </script>
+</body>
+</html>
