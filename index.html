@@ -5,22 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GoldenConnect - Senior Companionship & Matchmaking Sri Lanka (50+)</title>
   
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Sri Lanka's dedicated matrimonial and companionship portal designed specifically for seniors aged 50 and above.">
-  <meta name="keywords" content="Golden Connect Hub, Sri Lanka, senior dating, elderly companionship, matchmaking 50+">
-  <meta name="author" content="Sugath Wijesinghe">
-
-  <!-- Canonical Tag -->
-  <link rel="canonical" href="https://goldenconnecthub.lk/">
-
-  <!-- Social Media Open Graph Tags -->
-  <meta property="og:title" content="Golden Connect Hub - Senior Companionship Sri Lanka">
-  <meta property="og:description" content="Connecting senior services and genuine companionship opportunities in Sri Lanka.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://goldenconnecthub.lk/">
-
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Supabase JS Client Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
   <!-- Font Integration -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,9 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
   </style>
 </head>
 <body class="bg-amber-50/40 text-stone-800 antialiased min-h-screen flex flex-col justify-between">
@@ -51,9 +37,7 @@
     <div class="max-w-6xl mx-auto px-4 py-3 sm:h-20 flex flex-col sm:flex-row justify-between items-center gap-3">
       <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
         <div class="flex items-center gap-3">
-          <div class="p-2.5 rounded-2xl font-black text-xl shadow-md bg-amber-800 text-white">
-            GC
-          </div>
+          <div class="p-2.5 rounded-2xl font-black text-xl shadow-md bg-amber-800 text-white">GC</div>
           <div>
             <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">GoldenConnect</h1>
             <p class="text-[10px] text-amber-800 font-extrabold tracking-wider uppercase">SRI LANKA SENIOR MATCHMAKING (50+)</p>
@@ -74,10 +58,10 @@
   </header>
 
   <!-- MAIN CONTENT -->
-  <main class="max-w-6xl mx-auto px-4 py-6 w-full">
+  <main class="max-w-6xl mx-auto px-4 py-6 w-full space-y-8">
     
     <!-- HERO BANNER -->
-    <div class="p-6 sm:p-8 rounded-3xl mb-8 bg-gradient-to-r from-amber-800 via-amber-900 to-stone-900 text-white shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-amber-900/20">
+    <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-800 via-amber-900 to-stone-900 text-white shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-amber-900/20">
       <div class="space-y-2">
         <div class="inline-block bg-amber-700/50 text-amber-100 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">
           Sri Lanka's #1 Dedicated Senior Matchmaker
@@ -98,14 +82,12 @@
     </div>
 
     <!-- FOUNDER & CEO SECTION -->
-    <div class="my-8 p-6 sm:p-8 rounded-3xl border shadow-sm flex flex-col md:flex-row items-center gap-6 bg-white border-amber-200 text-stone-800">
+    <div class="p-6 sm:p-8 rounded-3xl border shadow-sm flex flex-col md:flex-row items-center gap-6 bg-white border-amber-200 text-stone-800">
       <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden bg-stone-200 shrink-0 border-4 border-amber-800 shadow-md">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" alt="Sugath Wijesinghe - Founder" class="w-full h-full object-cover">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" alt="Sugath Wijesinghe" class="w-full h-full object-cover">
       </div>
       <div class="space-y-2 text-center md:text-left">
-        <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-          Founder & CEO Message
-        </span>
+        <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Founder & CEO Message</span>
         <h3 class="text-2xl font-black">Sugath Wijesinghe</h3>
         <p class="text-xs font-bold text-amber-800 uppercase">Founder & Director, GoldenConnect Sri Lanka</p>
         <p class="text-sm leading-relaxed opacity-90">
@@ -114,101 +96,14 @@
       </div>
     </div>
 
-    <!-- PROFILES GRID -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      
-      <!-- PROFILE 1 -->
-      <div class="rounded-3xl overflow-hidden shadow-md border flex flex-col justify-between transition hover:shadow-lg bg-white border-stone-200">
-        <div>
-          <div class="relative h-72 sm:h-80 w-full bg-stone-200">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800" alt="Eleanor Vance" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
-            <div class="absolute bottom-4 left-5 right-5 text-white flex justify-between items-end">
-              <div>
-                <div class="flex items-center gap-2">
-                  <h3 class="text-xl sm:text-2xl font-black">Eleanor Vance, 64</h3>
-                  <span class="bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow">✓ Verified</span>
-                </div>
-                <p class="text-xs text-amber-200 font-semibold mt-0.5">📍 Colombo, Sri Lanka • Female</p>
-              </div>
-              <span class="bg-amber-800/90 text-amber-100 text-xs font-bold px-2.5 py-1 rounded-xl shadow">Travel Buddy</span>
-            </div>
-            <div class="absolute top-4 left-4 flex gap-2">
-              <span class="bg-amber-500 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg shadow">⭐ Popular Match</span>
-              <span class="bg-black/50 backdrop-blur-md text-stone-200 text-[10px] font-bold px-2.5 py-1 rounded-lg">By: Self</span>
-            </div>
-          </div>
-          <div class="p-5 sm:p-6 space-y-4">
-            <p class="italic text-stone-600 font-medium text-sm border-l-2 border-amber-800 pl-3">"Looking for a travel companion and garden enthusiast."</p>
-            <div>
-              <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-900 block">Profession</span>
-              <p class="font-semibold text-stone-800 text-sm">Retired Landscape Architect</p>
-            </div>
-            <p class="text-stone-700 text-sm leading-relaxed">I spent 35 years designing public parks. Now in retirement, I love tending my greenhouse, visiting local farmers markets, and exploring Sri Lankan nature trails.</p>
-            <div class="flex flex-wrap gap-1.5 pt-2">
-              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#Gardening</span>
-              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#Travel</span>
-              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#Cooking</span>
-            </div>
-          </div>
-        </div>
-        <div class="p-4 sm:p-5 bg-amber-50/70 border-t border-amber-100 space-y-2">
-          <div class="bg-white border border-stone-200 p-3.5 rounded-2xl flex items-center justify-between gap-3 shadow-sm">
-            <div>
-              <p class="text-xs font-bold text-stone-800">Contacts Locked</p>
-              <p class="text-[11px] text-stone-500">Pay 3,000 LKR for 3 months</p>
-            </div>
-            <button onclick="toggleModal('paymentModal')" class="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow whitespace-nowrap">Unlock</button>
-          </div>
-        </div>
+    <!-- LIVE PROFILES CONTAINER FROM SUPABASE -->
+    <div>
+      <h3 class="text-lg font-black text-stone-900 mb-4">Featured Senior Profiles</h3>
+      <div id="profiles-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <p class="text-stone-500 text-sm">Loading profiles from database...</p>
       </div>
-
-      <!-- PROFILE 2 -->
-      <div class="rounded-3xl overflow-hidden shadow-md border flex flex-col justify-between transition hover:shadow-lg bg-white border-stone-200">
-        <div>
-          <div class="relative h-72 sm:h-80 w-full bg-stone-200">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" alt="Arthur Pendelton" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
-            <div class="absolute bottom-4 left-5 right-5 text-white flex justify-between items-end">
-              <div>
-                <div class="flex items-center gap-2">
-                  <h3 class="text-xl sm:text-2xl font-black">Arthur Pendelton, 67</h3>
-                  <span class="bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow">✓ Verified</span>
-                </div>
-                <p class="text-xs text-amber-200 font-semibold mt-0.5">📍 Kandy, Sri Lanka • Male</p>
-              </div>
-              <span class="bg-amber-800/90 text-amber-100 text-xs font-bold px-2.5 py-1 rounded-xl shadow">Companionship</span>
-            </div>
-            <div class="absolute top-4 left-4 flex gap-2">
-              <span class="bg-black/50 backdrop-blur-md text-stone-200 text-[10px] font-bold px-2.5 py-1 rounded-lg">By: Son</span>
-            </div>
-          </div>
-          <div class="p-5 sm:p-6 space-y-4">
-            <p class="italic text-stone-600 font-medium text-sm border-l-2 border-amber-800 pl-3">"Book worm, jazz listener, and amateur bread baker."</p>
-            <div>
-              <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-900 block">Profession</span>
-              <p class="font-semibold text-stone-800 text-sm">Former History Teacher</p>
-            </div>
-            <p class="text-stone-700 text-sm leading-relaxed">After 40 years in education, I enjoy the relaxed pace of life. Hosting weekly book discussions, classical music evenings, and peaceful hill country walks.</p>
-            <div class="flex flex-wrap gap-1.5 pt-2">
-              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#Reading</span>
-              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#Music</span>
-              <span class="text-xs px-2.5 py-1 rounded-lg font-semibold bg-amber-100/80 text-amber-900">#History</span>
-            </div>
-          </div>
-        </div>
-        <div class="p-4 sm:p-5 bg-amber-50/70 border-t border-amber-100 space-y-2">
-          <div class="bg-white border border-stone-200 p-3.5 rounded-2xl flex items-center justify-between gap-3 shadow-sm">
-            <div>
-              <p class="text-xs font-bold text-stone-800">Contacts Locked</p>
-              <p class="text-[11px] text-stone-500">Pay 3,000 LKR for 3 months</p>
-            </div>
-            <button onclick="toggleModal('paymentModal')" class="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow whitespace-nowrap">Unlock</button>
-          </div>
-        </div>
-      </div>
-
     </div>
+
   </main>
 
   <!-- FOOTER -->
@@ -222,16 +117,14 @@
         <p>Sri Lanka's dedicated senior matrimonial and companionship portal (50+).</p>
         <p class="text-[10px] text-stone-400">© 2026 GoldenConnect. All Rights Reserved.</p>
       </div>
-
       <div class="space-y-1.5">
         <h4 class="font-bold text-stone-900 uppercase tracking-wider text-[11px]">Bank Deposit Details</h4>
         <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200 space-y-0.5 font-mono text-[11px] text-stone-800">
-          <p><strong>Bank:</strong> Sampath Bank PLC (Kaduwela Branch)</p>
+          <p><strong>Bank:</strong> Sampath Bank PLC (Kaduwela)</p>
           <p><strong>Name:</strong> S. P. Wijesinghe</p>
           <p><strong>Acc No:</strong> 116254863677</p>
         </div>
       </div>
-
       <div class="space-y-2">
         <h4 class="font-bold text-stone-900 uppercase tracking-wider text-[11px]">WhatsApp Verification</h4>
         <p>Send transfer slips to activate instant access:</p>
@@ -251,30 +144,66 @@
         <button onclick="toggleModal('registerModal')" class="text-stone-400 font-bold text-xl">✕</button>
       </div>
 
-      <form onsubmit="handleFormSubmit(event)" class="space-y-3 text-sm">
+      <form id="profileForm" onsubmit="handleProfileSubmit(event)" class="space-y-3 text-sm">
         <div>
           <label class="block text-xs font-bold text-stone-700 mb-1">Full Name</label>
-          <input required type="text" placeholder="e.g. Sunil Perera" class="w-full px-3 py-2 border rounded-xl" />
+          <input id="p_name" required type="text" placeholder="e.g. Sunil Perera" class="w-full px-3 py-2 border rounded-xl" />
         </div>
-
-        <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200 space-y-2">
-          <label class="block text-xs font-bold text-amber-900">📷 Profile Picture Upload</label>
-          <input type="file" accept="image/*" class="w-full text-xs text-stone-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-800 file:text-white hover:file:bg-amber-900 cursor-pointer" />
-        </div>
-
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Date of Birth</label>
-            <input required type="date" class="w-full px-3 py-2 border rounded-xl" />
+            <label class="block text-xs font-bold text-stone-700 mb-1">Age (50+)</label>
+            <input id="p_age" required type="number" min="50" placeholder="60" class="w-full px-3 py-2 border rounded-xl" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">City</label>
-            <input required type="text" placeholder="e.g. Kandy" class="w-full px-3 py-2 border rounded-xl" />
+            <label class="block text-xs font-bold text-stone-700 mb-1">Gender</label>
+            <select id="p_gender" class="w-full px-3 py-2 border rounded-xl bg-white">
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+            </select>
           </div>
         </div>
-
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">City / Location</label>
+            <input id="p_location" required type="text" placeholder="Kandy" class="w-full px-3 py-2 border rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Occupation</label>
+            <input id="p_occupation" required type="text" placeholder="Teacher" class="w-full px-3 py-2 border rounded-xl" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Relationship Goal</label>
+          <select id="p_purpose" class="w-full px-3 py-2 border rounded-xl bg-white">
+            <option value="Companionship">Companionship</option>
+            <option value="Travel Buddy">Travel Buddy</option>
+            <option value="Romance">Romance</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Tagline</label>
+          <input id="p_tagline" required type="text" placeholder="Short intro..." class="w-full px-3 py-2 border rounded-xl" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Bio</label>
+          <textarea id="p_bio" required rows="2" placeholder="Tell us about yourself..." class="w-full px-3 py-2 border rounded-xl text-xs"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Phone</label>
+            <input id="p_phone" required type="text" placeholder="+94 77..." class="w-full px-3 py-2 border rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Email</label>
+            <input id="p_email" required type="email" placeholder="name@ex.com" class="w-full px-3 py-2 border rounded-xl" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Profile Picture URL</label>
+          <input id="p_image" type="url" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-2 border rounded-xl text-xs" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800" />
+        </div>
         <button type="submit" class="w-full py-3 bg-amber-800 hover:bg-amber-900 text-white font-bold rounded-xl text-sm mt-2">
-          Confirm & Publish Profile
+          Publish Profile to Database
         </button>
       </form>
     </div>
@@ -290,7 +219,6 @@
         </div>
         <button onclick="toggleModal('paymentModal')" class="text-stone-400 font-bold text-lg">✕</button>
       </div>
-
       <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl flex justify-between items-center">
         <div>
           <span class="text-xs text-stone-500 font-bold uppercase block">Fee</span>
@@ -301,30 +229,120 @@
           <span class="text-xs font-extrabold text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-lg">3 Months</span>
         </div>
       </div>
-
       <div class="bg-stone-50 p-3.5 rounded-2xl space-y-1 text-xs font-mono text-stone-800 border border-stone-200">
-        <p><strong>Bank:</strong> Sampath Bank PLC (Kaduwela Branch)</p>
+        <p><strong>Bank:</strong> Sampath Bank PLC (Kaduwela)</p>
         <p><strong>Name:</strong> S. P. Wijesinghe</p>
         <p><strong>Acc No:</strong> 116254863677</p>
       </div>
-
       <button onclick="window.open('https://wa.me/94775569178', '_blank')" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow">
         💬 Send Bank Slip via WhatsApp (+94 77 556 9178)
       </button>
     </div>
   </div>
 
+  <!-- SUPABASE INTEGRATION SCRIPT -->
   <script>
+    // AUTOMATICALLY CONFIGURED CREDENTIALS
+    const SUPABASE_URL = 'https://zghijxmsvmsxksytmswq.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnaGlqeG1zdm1zeGtzeXRtc3dxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3NzcxOTQsImV4cCI6MjA3NjM1MzE5NH0.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnaGlqeG1zdm1zeGtzeXRtc3dxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3NzcxOTQsImV4cCI6MjA3NjM1MzE5NH0';
+
+    const { createClient } = supabase;
+    const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     function toggleModal(modalId) {
-      const modal = document.getElementById(modalId);
-      modal.classList.toggle('hidden');
+      document.getElementById(modalId).classList.toggle('hidden');
     }
 
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      alert('Your profile details and photo have been submitted successfully!');
-      toggleModal('registerModal');
+    // FETCH PROFILES FROM DATABASE ON PAGE LOAD
+    async function loadProfiles() {
+      const container = document.getElementById('profiles-container');
+      const { data: profiles, error } = await _supabase.from('profiles').select('*').order('created_at', { ascending: false });
+
+      if (error) {
+        container.innerHTML = `<p class="text-red-600 text-sm">Error loading database profiles: ${error.message}</p>`;
+        return;
+      }
+
+      if (!profiles || profiles.length === 0) {
+        container.innerHTML = `<p class="text-stone-500 text-sm">No profiles found in database.</p>`;
+        return;
+      }
+
+      container.innerHTML = profiles.map(p => `
+        <div class="rounded-3xl overflow-hidden shadow-md border flex flex-col justify-between bg-white border-stone-200">
+          <div>
+            <div class="relative h-72 sm:h-80 w-full bg-stone-200">
+              <img src="${p.image_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800'}" alt="${p.full_name}" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+              <div class="absolute bottom-4 left-5 right-5 text-white flex justify-between items-end">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-xl sm:text-2xl font-black">${p.full_name}, ${p.age}</h3>
+                    <span class="bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow">✓ Verified</span>
+                  </div>
+                  <p class="text-xs text-amber-200 font-semibold mt-0.5">📍 ${p.location} • ${p.gender}</p>
+                </div>
+                <span class="bg-amber-800/90 text-amber-100 text-xs font-bold px-2.5 py-1 rounded-xl shadow">${p.purpose}</span>
+              </div>
+              <div class="absolute top-4 left-4 flex gap-2">
+                ${p.is_popular ? '<span class="bg-amber-500 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg shadow">⭐ Popular Match</span>' : ''}
+              </div>
+            </div>
+            <div class="p-5 sm:p-6 space-y-4">
+              <p class="italic text-stone-600 font-medium text-sm border-l-2 border-amber-800 pl-3">"${p.tagline || ''}"</p>
+              <div>
+                <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-900 block">Profession</span>
+                <p class="font-semibold text-stone-800 text-sm">${p.occupation}</p>
+              </div>
+              <p class="text-stone-700 text-sm leading-relaxed">${p.bio}</p>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 bg-amber-50/70 border-t border-amber-100">
+            <div class="bg-white border border-stone-200 p-3.5 rounded-2xl flex items-center justify-between gap-3 shadow-sm">
+              <div>
+                <p class="text-xs font-bold text-stone-800">Contacts Locked</p>
+                <p class="text-[11px] text-stone-500">Pay 3,000 LKR to unlock</p>
+              </div>
+              <button onclick="toggleModal('paymentModal')" class="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow whitespace-nowrap">Unlock</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
     }
+
+    // SUBMIT NEW PROFILE TO SUPABASE DATABASE
+    async function handleProfileSubmit(e) {
+      e.preventDefault();
+      const newProfile = {
+        full_name: document.getElementById('p_name').value,
+        age: parseInt(document.getElementById('p_age').value),
+        gender: document.getElementById('p_gender').value,
+        location: document.getElementById('p_location').value,
+        occupation: document.getElementById('p_occupation').value,
+        purpose: document.getElementById('p_purpose').value,
+        tagline: document.getElementById('p_tagline').value,
+        bio: document.getElementById('p_bio').value,
+        phone: document.getElementById('p_phone').value,
+        email: document.getElementById('p_email').value,
+        image_url: document.getElementById('p_image').value,
+        created_by: 'Self',
+        is_verified: true
+      };
+
+      const { error } = await _supabase.from('profiles').insert([newProfile]);
+
+      if (error) {
+        alert('Error saving profile: ' + error.message);
+      } else {
+        alert('Profile successfully saved to your database!');
+        toggleModal('registerModal');
+        document.getElementById('profileForm').reset();
+        loadProfiles();
+      }
+    }
+
+    // Run on page load
+    loadProfiles();
   </script>
 </body>
 </html>
