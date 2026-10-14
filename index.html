@@ -199,7 +199,7 @@
           </div>
         </div>
         
-        <!-- REAL FILE UPLOAD INPUT -->
+        <!-- FILE UPLOAD FIELD -->
         <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200 space-y-1">
           <label class="block text-xs font-bold text-amber-900">📷 Upload Profile Picture</label>
           <input id="p_image_file" type="file" accept="image/*" class="w-full text-xs text-stone-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-800 file:text-white hover:file:bg-amber-900 cursor-pointer" />
@@ -319,7 +319,7 @@
       submitBtn.innerText = 'Uploading Image & Saving...';
       submitBtn.disabled = true;
 
-      let imageUrl = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800'; // Default fallback
+      let imageUrl = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800';
 
       const fileInput = document.getElementById('p_image_file');
       if (fileInput.files && fileInput.files[0]) {
@@ -328,7 +328,7 @@
         const fileName = `${Date.now()}.${fileExt}`;
         const filePath = `${fileName}`;
 
-        // 1. Upload file to Supabase bucket 'profile-pictures'
+        // Upload file to Supabase bucket 'profile-pictures'
         const { error: uploadError } = await _supabase.storage
           .from('profile-pictures')
           .upload(filePath, file);
@@ -340,7 +340,7 @@
           return;
         }
 
-        // 2. Get public URL of the uploaded image
+        // Get public URL of the uploaded image
         const { data: publicUrlData } = _supabase.storage
           .from('profile-pictures')
           .getPublicUrl(filePath);
@@ -348,7 +348,7 @@
         imageUrl = publicUrlData.publicUrl;
       }
 
-      // 3. Save profile data including the image URL into database
+      // Save profile data into database
       const newProfile = {
         full_name: document.getElementById('p_name').value,
         age: parseInt(document.getElementById('p_age').value),
