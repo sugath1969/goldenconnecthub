@@ -3,438 +3,431 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoldenConnect - Companionship & Matchmaking Sri Lanka (40+)</title>
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Supabase JS Client Library -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
-  <!-- Font Integration -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <title>Golden Connect Hub | Matchmaking Platform for 40+</title>
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #1e3a8a;
+      --primary-hover: #1e40af;
+      --accent: #d97706;
+      --accent-hover: #b45309;
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: #fef3c7;
+      color: var(--accent-hover);
+      font-size: 0.875rem;
+      font-weight: 700;
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero p {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: #eff6ff;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+    }
+
+    .checker-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow);
+      max-width: 550px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .checker-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+
+    .checker-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .input-field {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      outline: none;
+      text-transform: uppercase;
+      font-family: inherit;
+    }
+
+    .status-output {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .status-output.success {
+      display: block;
+      background-color: #dcfce7;
+      color: #166534;
+    }
+
+    .status-output.error {
+      display: block;
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .step-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: #eff6ff;
+      color: var(--primary);
+      font-weight: 700;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    .pricing-card {
+      background-color: var(--bg-card);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 3rem 2rem;
+      max-width: 450px;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--accent);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 1rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+    }
+
+    .price {
+      font-size: 3rem;
+      font-weight: 800;
+      margin: 1rem 0 0.25rem;
+    }
+
+    .price-period {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      background-color: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 4rem;
+    }
+
+    .wa-widget {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+    }
+
+    .wa-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      color: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease;
+      text-decoration: none;
+    }
+
+    .wa-button:hover {
+      transform: scale(1.08);
+    }
+
+    .wa-icon {
+      width: 34px;
+      height: 34px;
+      fill: currentColor;
+    }
   </style>
 </head>
-<body class="bg-amber-50/40 text-stone-800 antialiased min-h-screen flex flex-col justify-between">
+<body>
 
-  <!-- TOP ANNOUNCEMENT BAR -->
-  <div class="bg-amber-900 text-amber-50 px-3 py-2 text-xs font-semibold shadow-inner">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
-      <span class="flex items-center justify-center gap-1.5">
-        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Verified Community (Ages 40 & Above)
-      </span>
-      <span class="text-[11px] opacity-90">📞 Direct Support: +94 77 556 9178</span>
-    </div>
-  </div>
-
-  <!-- HEADER -->
-  <header class="sticky top-0 z-30 bg-white border-b border-amber-100 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 py-3 sm:h-20 flex flex-col sm:flex-row justify-between items-center gap-3">
-      <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
-        <div class="flex items-center gap-3">
-          <div class="p-2.5 rounded-2xl font-black text-xl shadow-md bg-amber-800 text-white">GC</div>
-          <div>
-            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">GoldenConnect</h1>
-            <p class="text-[10px] text-amber-800 font-extrabold tracking-wider uppercase">SRI LANKA MATCHMAKING (40+)</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-        <button onclick="toggleModal('registerModal')" class="bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm">
-          + Add Profile
-        </button>
-        <button onclick="toggleModal('paymentModal')" class="bg-amber-800 hover:bg-amber-900 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition flex items-center gap-1">
-          <span>Unlock Contacts</span>
-          <span class="bg-amber-700 text-amber-100 text-[10px] px-1 py-0.5 rounded">3k LKR</span>
-        </button>
-      </div>
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">GoldenConnect<span>Hub</span></a>
+      <ul class="nav-links">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#pricing">Access Pass</a></li>
+        <li><a href="#verify">Check Status</a></li>
+      </ul>
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main class="max-w-6xl mx-auto px-4 py-6 w-full space-y-8">
-    
-    <!-- HERO BANNER -->
-    <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-800 via-amber-900 to-stone-900 text-white shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-amber-900/20">
-      <div class="space-y-2">
-        <div class="inline-block bg-amber-700/50 text-amber-100 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">
-          Sri Lanka's #1 Dedicated Matchmaker (40+)
-        </div>
-        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">Find Genuine Companionship</h2>
-        <p class="text-amber-100 text-xs sm:text-base max-w-2xl leading-relaxed">
-          Unlock full access to browse and connect with verified profiles. Deposit 3,000 LKR directly to Sampath Bank to unlock unlimited direct phone and WhatsApp contact details for 60 days.
-        </p>
+  <section class="hero">
+    <div class="badge">Exclusive Matchmaking Platform for 40+</div>
+    <h1>Connect Real Profiles with Verified Security</h1>
+    <p>Automated profile activation, instant email passkeys, and secure access built for Sri Lanka.</p>
+    <div class="cta-group">
+      <a href="#pricing" class="btn btn-primary">Get 60-Day Pass (3,000 LKR)</a>
+      <a href="#verify" class="btn btn-outline">Check Passkey Status</a>
+    </div>
+  </section>
+
+  <section id="verify">
+    <div class="checker-card">
+      <h2>Passkey Verification Desk</h2>
+      <p>Enter your 10-character passkey (e.g. <code>GC-00000001</code>) to check your membership status.</p>
+      <div class="input-group">
+        <input type="text" id="passkeyInput" class="input-field" placeholder="GC-XXXXXXXX" maxlength="11">
+        <button type="button" class="btn btn-primary" onclick="verifyPasskey()">Verify</button>
       </div>
-      <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-        <button onclick="toggleModal('registerModal')" class="bg-white text-amber-900 hover:bg-amber-50 font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl shadow transition text-center">
-          + Create My Profile
-        </button>
-        <button onclick="toggleModal('paymentModal')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl shadow transition text-center">
-          💬 WhatsApp Slip Unlock
-        </button>
+      <div id="statusResult" class="status-output"></div>
+    </div>
+  </section>
+
+  <section id="how-it-works">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Register Your Profile</h3>
+        <p>Complete your registration details securely on Golden Connect Hub.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Activate Membership</h3>
+        <p>Complete the 3,000 LKR fee to unlock full 60-day access.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Instant Email Passkey</h3>
+        <p>Your unique passkey is automatically dispatched to your email.</p>
       </div>
     </div>
+  </section>
 
-    <!-- FOUNDER & CEO SECTION -->
-    <div class="p-6 sm:p-8 rounded-3xl border shadow-sm flex flex-col md:flex-row items-center gap-6 bg-white border-amber-200 text-stone-800">
-      <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden bg-stone-200 shrink-0 border-4 border-amber-800 shadow-md">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" alt="Sugath Wijesinghe" class="w-full h-full object-cover">
-      </div>
-      <div class="space-y-2 text-center md:text-left">
-        <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Founder & CEO Message</span>
-        <h3 class="text-2xl font-black">Sugath Wijesinghe</h3>
-        <p class="text-xs font-bold text-amber-800 uppercase">Founder & Director, GoldenConnect Sri Lanka</p>
-        <p class="text-sm leading-relaxed opacity-90">
-          "GoldenConnect was built with a sincere mission: to provide a safe, respectful, and verified community where adults across Sri Lanka can find genuine companionship, share experiences, and enjoy life with peace of mind."
-        </p>
-      </div>
+  <section id="pricing">
+    <h2 class="section-title">Simple Transparent Access</h2>
+    <div class="pricing-card">
+      <div class="pricing-badge">All-Inclusive Pass</div>
+      <div class="price">3,000 LKR</div>
+      <div class="price-period">Full access for 60 Days</div>
+      <a href="https://wa.me/94775569178?text=Hello%20Golden%20Connect%20Hub,%20I%20would%20like%20to%20activate%20my%20membership." class="btn btn-primary" style="width: 100%;">Request Activation</a>
     </div>
+  </section>
 
-    <!-- LIVE PROFILES CONTAINER FROM SUPABASE -->
-    <div>
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-black text-stone-900">Featured Profiles (40+)</h3>
-        <div id="unlocked-badge" class="hidden bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full flex items-center gap-1.5">
-          <span>🔓 VIP Access Active (60 Days)</span>
-        </div>
-      </div>
-      <div id="profiles-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <p class="text-stone-500 text-sm">Loading profiles from database...</p>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="mt-16 border-t bg-white border-amber-200 text-stone-600 py-10 px-4">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed">
-      <div class="space-y-2">
-        <div class="flex items-center gap-2">
-          <div class="bg-amber-800 text-white font-bold px-2 py-1 rounded text-xs">GC</div>
-          <h4 class="font-bold text-sm text-stone-900">GoldenConnect Sri Lanka</h4>
-        </div>
-        <p>Sri Lanka's dedicated companionship and matchmaking portal (40+).</p>
-        <p class="text-[10px] text-stone-400">© 2026 GoldenConnect. All Rights Reserved.</p>
-      </div>
-      <div class="space-y-1.5">
-        <h4 class="font-bold text-stone-900 uppercase tracking-wider text-[11px]">Bank Deposit Details</h4>
-        <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200 space-y-0.5 font-mono text-[11px] text-stone-800">
-          <p><strong>Bank:</strong> Sampath Bank PLC (Kaduwela)</p>
-          <p><strong>Name:</strong> S. P. Wijesinghe</p>
-          <p><strong>Acc No:</strong> 116254863677</p>
-        </div>
-      </div>
-      <div class="space-y-2">
-        <h4 class="font-bold text-stone-900 uppercase tracking-wider text-[11px]">WhatsApp Verification</h4>
-        <p>Send transfer slips to activate instant access:</p>
-        <p class="font-bold text-amber-900 font-mono">💬 +94 77 556 9178</p>
-      </div>
-    </div>
+  <footer>
+    <p>&copy; 2026 Golden Connect Hub. All rights reserved. | Official Support Desk: +94 77 55 69 178</p>
   </footer>
 
-  <!-- REGISTER MODAL -->
-  <div id="registerModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 border border-amber-200 my-8">
-      <div class="flex justify-between items-center border-b pb-3">
-        <div>
-          <h3 class="text-xl font-extrabold text-stone-900">Add Profile</h3>
-          <p class="text-xs text-stone-500">Exclusive for ages 40 and above</p>
-        </div>
-        <button onclick="toggleModal('registerModal')" class="text-stone-400 font-bold text-xl">✕</button>
-      </div>
-
-      <form id="profileForm" onsubmit="handleProfileSubmit(event)" class="space-y-3 text-sm">
-        <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1">Full Name</label>
-          <input id="p_name" required type="text" placeholder="e.g. Sunil Perera" class="w-full px-3 py-2 border rounded-xl" />
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Age (40+)</label>
-            <input id="p_age" required type="number" min="40" placeholder="45" class="w-full px-3 py-2 border rounded-xl" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Gender</label>
-            <select id="p_gender" class="w-full px-3 py-2 border rounded-xl bg-white">
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-            </select>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">City / Location</label>
-            <input id="p_location" required type="text" placeholder="Colombo" class="w-full px-3 py-2 border rounded-xl" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Occupation</label>
-            <input id="p_occupation" required type="text" placeholder="Business Owner" class="w-full px-3 py-2 border rounded-xl" />
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1">Relationship Goal</label>
-          <select id="p_purpose" class="w-full px-3 py-2 border rounded-xl bg-white">
-            <option value="Companionship">Companionship</option>
-            <option value="Travel Buddy">Travel Buddy</option>
-            <option value="Romance">Romance</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1">Tagline</label>
-          <input id="p_tagline" required type="text" placeholder="Short intro..." class="w-full px-3 py-2 border rounded-xl" />
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1">Bio</label>
-          <textarea id="p_bio" required rows="2" placeholder="Tell us about yourself..." class="w-full px-3 py-2 border rounded-xl text-xs"></textarea>
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Phone</label>
-            <input id="p_phone" required type="text" placeholder="+94 77..." class="w-full px-3 py-2 border rounded-xl" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Email</label>
-            <input id="p_email" required type="email" placeholder="name@ex.com" class="w-full px-3 py-2 border rounded-xl" />
-          </div>
-        </div>
-        
-        <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200 space-y-1">
-          <label class="block text-xs font-bold text-amber-900">📷 Upload Profile Picture</label>
-          <input id="p_image_file" type="file" accept="image/*" class="w-full text-xs text-stone-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-800 file:text-white hover:file:bg-amber-900 cursor-pointer" />
-        </div>
-
-        <button type="submit" id="submitBtn" class="w-full py-3 bg-amber-800 hover:bg-amber-900 text-white font-bold rounded-xl text-sm mt-2">
-          Publish Profile to Database
-        </button>
-      </form>
-    </div>
+  <div class="wa-widget">
+    <a href="https://wa.me/94775569178?text=Hello%20Golden%20Connect%20Hub,%20I%20need%20assistance." 
+       class="wa-button" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+      <svg class="wa-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.35-1.4c1.42.77 3.03 1.18 4.69 1.18 5.46 0 9.9-4.44 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2m5.73 14.05c-.24.67-1.39 1.28-1.92 1.35-.49.07-1.12.1-3.66-.93-1.42-.58-2.33-2.03-2.4-2.13-.07-.1-1.01-1.35-1.01-2.58 0-1.23.64-1.83.87-2.08.23-.25.5-.31.67-.31.17 0 .33 0 .47.01.15.01.35-.06.55.43.2.48.68 1.66.74 1.78.06.12.1.27.02.43-.08.16-.12.26-.24.4-.12.14-.26.31-.37.42-.12.12-.25.25-.11.49.14.24.62 1.02 1.33 1.65.91.81 1.68 1.07 1.92 1.19.24.12.38.1.52-.06.14-.16.61-.71.77-.95.16-.24.32-.2.53-.12.21.08 1.34.63 1.57.74.23.11.38.17.44.27.06.1.06.58-.18 1.25z"/></svg>
+    </a>
   </div>
 
-  <!-- PAYMENT & PASSKEY MODAL -->
-  <div id="paymentModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 border border-amber-200">
-      <div class="flex justify-between items-center border-b pb-3">
-        <div>
-          <h3 class="text-xl font-extrabold text-stone-900">Unlock Full Access</h3>
-          <p class="text-xs text-stone-500">3,000 LKR for 60 Days Unlimited Access</p>
-        </div>
-        <button onclick="toggleModal('paymentModal')" class="text-stone-400 font-bold text-lg">✕</button>
-      </div>
-
-      <!-- ENTER PASSKEY SECTION -->
-      <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200 space-y-2">
-        <label class="block text-xs font-extrabold text-amber-900">Already have a Passkey?</label>
-        <div class="flex gap-2">
-          <input id="passkeyInput" type="text" placeholder="e.g. GOLD1234" class="w-full px-3 py-2 border rounded-xl font-mono uppercase text-xs font-bold" />
-          <button onclick="verifyPasskey()" class="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs px-4 rounded-xl shadow whitespace-nowrap">
-            Verify & Unlock
-          </button>
-        </div>
-      </div>
-
-      <div class="text-center text-xs font-bold text-stone-400 uppercase tracking-widest my-1">OR GET A PASSKEY BELOW</div>
-
-      <div class="bg-stone-50 p-3.5 rounded-2xl space-y-1 text-xs font-mono text-stone-800 border border-stone-200">
-        <p><strong>Bank:</strong> Sampath Bank PLC (Kaduwela)</p>
-        <p><strong>Name:</strong> S. P. Wijesinghe</p>
-        <p><strong>Acc No:</strong> 116254863677</p>
-      </div>
-
-      <button onclick="window.open('https://wa.me/94775569178', '_blank')" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow">
-        💬 Send Bank Slip to WhatsApp (+94 77 556 9178)
-      </button>
-    </div>
-  </div>
-
-  <!-- SUPABASE INTEGRATION SCRIPT -->
   <script>
-    const SUPABASE_URL = 'https://hawqxgggoclhbkdvbkah.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhhd3F4Z2dnb2NsaGJrZHZia2FoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4ODgyNzIsImV4cCI6MjEwNzQ2NDI3Mn0.FQ2wDoYHq8B4uaGNaaTEBLqNrm4hy9fMS8O7D6Ku5II';
+    function verifyPasskey() {
+      const input = document.getElementById('passkeyInput').value.trim().toUpperCase();
+      const output = document.getElementById('statusResult');
+      const gcRegex = /^GC-\d{8}$/;
 
-    const { createClient } = supabase;
-    const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    let isUnlocked = localStorage.getItem('gc_unlocked') === 'true';
-
-    function toggleModal(modalId) {
-      document.getElementById(modalId).classList.toggle('hidden');
-    }
-
-    // PASSKEY VERIFICATION LOGIC
-    async function verifyPasskey() {
-      const code = document.getElementById('passkeyInput').value.trim().toUpperCase();
-      if (!code) {
-        alert('Please enter your passkey.');
+      if (!input) {
+        output.className = 'status-output error';
+        output.innerText = 'Please enter a valid passkey.';
         return;
       }
 
-      const { data, error } = await _supabase
-        .from('profiles')
-        .select('*')
-        .eq('access_passkey', code)
-        .limit(1);
-
-      if (error || !data || data.length === 0) {
-        alert('Invalid passkey. Please check your key or send your deposit slip to WhatsApp (+94 77 556 9178).');
-        return;
-      }
-
-      localStorage.setItem('gc_unlocked', 'true');
-      isUnlocked = true;
-      alert('Passkey verified! All profile contact details are now unlocked for 60 days.');
-      toggleModal('paymentModal');
-      document.getElementById('unlocked-badge').classList.remove('hidden');
-      loadProfiles();
-    }
-
-    // FETCH PROFILES FROM DATABASE ON PAGE LOAD
-    async function loadProfiles() {
-      const container = document.getElementById('profiles-container');
-      if (isUnlocked) {
-        document.getElementById('unlocked-badge').classList.remove('hidden');
-      }
-
-      const { data: profiles, error } = await _supabase.from('profiles').select('*').order('created_at', { ascending: false });
-
-      if (error) {
-        container.innerHTML = `<p class="text-red-600 text-sm">Error loading database profiles: ${error.message}</p>`;
-        return;
-      }
-
-      if (!profiles || profiles.length === 0) {
-        container.innerHTML = `<p class="text-stone-500 text-sm">No profiles found in database.</p>`;
-        return;
-      }
-
-      container.innerHTML = profiles.map(p => `
-        <div class="rounded-3xl overflow-hidden shadow-md border flex flex-col justify-between bg-white border-stone-200">
-          <div>
-            <div class="relative h-72 sm:h-80 w-full bg-stone-200">
-              <img src="${p.image_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800'}" alt="${p.full_name}" class="w-full h-full object-cover" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
-              <div class="absolute bottom-4 left-5 right-5 text-white flex justify-between items-end">
-                <div>
-                  <div class="flex items-center gap-2">
-                    <h3 class="text-xl sm:text-2xl font-black">${p.full_name}, ${p.age}</h3>
-                    <span class="bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow">✓ Verified</span>
-                  </div>
-                  <p class="text-xs text-amber-200 font-semibold mt-0.5">📍 ${p.location} • ${p.gender}</p>
-                </div>
-                <span class="bg-amber-800/90 text-amber-100 text-xs font-bold px-2.5 py-1 rounded-xl shadow">${p.purpose}</span>
-              </div>
-            </div>
-            <div class="p-5 sm:p-6 space-y-4">
-              <p class="italic text-stone-600 font-medium text-sm border-l-2 border-amber-800 pl-3">"${p.tagline || ''}"</p>
-              <div>
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-900 block">Profession</span>
-                <p class="font-semibold text-stone-800 text-sm">${p.occupation}</p>
-              </div>
-              <p class="text-stone-700 text-sm leading-relaxed">${p.bio}</p>
-            </div>
-          </div>
-          
-          <!-- LOCKED OR UNLOCKED CONTACT CARD -->
-          <div class="p-4 sm:p-5 bg-amber-50/70 border-t border-amber-100">
-            ${isUnlocked ? `
-              <div class="bg-emerald-50 border border-emerald-300 p-4 rounded-2xl space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-black text-emerald-900 uppercase">Direct Contact Details</span>
-                  <span class="text-[10px] bg-emerald-200 text-emerald-800 font-bold px-2 py-0.5 rounded">Unlocked</span>
-                </div>
-                <div class="text-xs font-mono font-bold text-stone-800 space-y-1">
-                  <p>📞 Phone: ${p.phone || 'N/A'}</p>
-                  <p>✉️ Email: ${p.email || 'N/A'}</p>
-                </div>
-                <button onclick="window.open('https://wa.me/${(p.phone || '').replace(/[^0-9]/g, '')}', '_blank')" class="w-full mt-2 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow flex items-center justify-center gap-1.5">
-                  💬 Chat on WhatsApp
-                </button>
-              </div>
-            ` : `
-              <div class="bg-white border border-stone-200 p-3.5 rounded-2xl flex items-center justify-between gap-3 shadow-sm">
-                <div>
-                  <p class="text-xs font-bold text-stone-800">Contacts Locked</p>
-                  <p class="text-[11px] text-stone-500">Pay 3,000 LKR to unlock (60 Days)</p>
-                </div>
-                <button onclick="toggleModal('paymentModal')" class="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow whitespace-nowrap">Unlock</button>
-              </div>
-            `}
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // HANDLE PROFILE SUBMISSION & IMAGE UPLOAD
-    async function handleProfileSubmit(e) {
-      e.preventDefault();
-      const submitBtn = document.getElementById('submitBtn');
-      submitBtn.innerText = 'Uploading Image & Saving...';
-      submitBtn.disabled = true;
-
-      let imageUrl = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800';
-
-      const fileInput = document.getElementById('p_image_file');
-      if (fileInput.files && fileInput.files[0]) {
-        const file = fileInput.files[0];
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}.${fileExt}`;
-        const filePath = `${fileName}`;
-
-        const { error: uploadError } = await _supabase.storage
-          .from('profile-pictures')
-          .upload(filePath, file);
-
-        if (uploadError) {
-          alert('Error uploading image: ' + uploadError.message);
-          submitBtn.innerText = 'Publish Profile to Database';
-          submitBtn.disabled = false;
-          return;
-        }
-
-        const { data: publicUrlData } = _supabase.storage
-          .from('profile-pictures')
-          .getPublicUrl(filePath);
-
-        imageUrl = publicUrlData.publicUrl;
-      }
-
-      const newProfile = {
-        full_name: document.getElementById('p_name').value,
-        age: parseInt(document.getElementById('p_age').value),
-        gender: document.getElementById('p_gender').value,
-        location: document.getElementById('p_location').value,
-        occupation: document.getElementById('p_occupation').value,
-        purpose: document.getElementById('p_purpose').value,
-        tagline: document.getElementById('p_tagline').value,
-        bio: document.getElementById('p_bio').value,
-        phone: document.getElementById('p_phone').value,
-        email: document.getElementById('p_email').value,
-        image_url: imageUrl,
-        created_by: 'Self',
-        is_verified: true
-      };
-
-      const { error: insertError } = await _supabase.from('profiles').insert([newProfile]);
-
-      submitBtn.innerText = 'Publish Profile to Database';
-      submitBtn.disabled = false;
-
-      if (insertError) {
-        alert('Error saving profile: ' + insertError.message);
+      if (gcRegex.test(input)) {
+        output.className = 'status-output success';
+        output.innerText = 'Passkey format valid! Access active for ' + input;
       } else {
-        alert('Profile and photo successfully uploaded and published!');
-        toggleModal('registerModal');
-        document.getElementById('profileForm').reset();
-        loadProfiles();
+        output.className = 'status-output error';
+        output.innerText = 'Invalid passkey format. Expected format: GC-XXXXXXXX';
       }
     }
-
-    loadProfiles();
   </script>
 </body>
 </html>
