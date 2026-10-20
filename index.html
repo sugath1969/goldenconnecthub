@@ -205,7 +205,7 @@
     <div class="container passkey-inner">
       <span id="passkeyBadge" class="passkey-badge">🔒 Passkey Inactive</span>
       <div id="passkeyFormContainer" style="display: flex; gap: 6px;">
-        <input type="text" id="passkeyInput" placeholder="Enter Passkey (e.g. GC-00000005)" class="passkey-input" />
+        <input type="text" id="passkeyInput" placeholder="Enter Passkey (e.g. GC-00000006)" class="passkey-input" />
         <button onclick="verifyPasskey()" class="btn-verify">Verify</button>
       </div>
     </div>
@@ -420,7 +420,7 @@
             bio: 'Enjoys peaceful weekend trips, classical music, and meaningful conversations.',
             phone: '+94 77 123 4567',
             photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400',
-            passkey: 'GC-00000005'
+            passkey: 'GC-00000006'
           },
           {
             id: 2,
@@ -496,7 +496,7 @@
 
     function verifyPasskey() {
       var inputKey = (document.getElementById('passkeyInput').value || '').trim().toUpperCase();
-      var isValid = (inputKey === 'GCH-8842-VIP' || inputKey === '8842' || inputKey === 'GC-00000005') ||
+      var isValid = (inputKey === 'GCH-8842-VIP' || inputKey === '8842' || inputKey === 'GC-00000006' || inputKey === 'GC-00000005') ||
                     liveMembers.some(m => m.passkey && m.passkey.toUpperCase() === inputKey);
 
       if (isValid) {
@@ -535,7 +535,7 @@
       var btn = document.getElementById('submitBtn');
       if (btn) btn.innerText = "Saving...";
 
-      // 1. Post record directly to Supabase REST endpoint
+      // Post record matching Supabase columns (full_name, is_active)
       try {
         await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
           method: 'POST',
@@ -560,7 +560,7 @@
         console.log('Insert error:', err);
       }
 
-      // 2. Add to live view locally
+      // Add to local interface dynamically
       liveMembers.unshift({
         id: Date.now(),
         name: name,
@@ -575,7 +575,7 @@
       });
       renderMembers();
 
-      // 3. Open WhatsApp link
+      // Open WhatsApp notification
       var text = encodeURIComponent("*New Profile Registration*\nName: " + name + "\nAge: " + age + "\nGender: " + gender + "\nLocation: " + location + "\nGoal: " + goal + "\nProfession: " + profession);
       window.open("https://wa.me/94775569178?text=" + text, '_blank');
 
