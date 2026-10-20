@@ -263,7 +263,7 @@
     <div id="membersGrid" class="members-grid"></div>
   </div>
 
-  <!-- 8. REGISTRATION MODAL WITH PHOTO UPLOAD -->
+  <!-- 8. REGISTRATION MODAL -->
   <div id="registerModal" class="modal-overlay hidden">
     <div class="modal-box">
       <div class="modal-header">
@@ -312,7 +312,6 @@
           <textarea id="regBio" rows="2" placeholder="Tell us a bit about yourself..." class="form-input"></textarea>
         </div>
         
-        <!-- Photo Selection & Live Circular Preview -->
         <div class="form-group">
           <label class="form-label">Profile Picture</label>
           <input type="file" id="regPhoto" accept="image/*" onchange="previewPhoto(event)" class="form-input" style="padding: 4px;" />
@@ -344,7 +343,7 @@
     </div>
   </div>
 
-  <!-- 10. FOOTER WITH FULL BANK & SUPPORT DETAILS -->
+  <!-- 10. FOOTER -->
   <footer>
     <div class="container">
       <p style="font-weight: bold; font-size: 14px; color: #f59e0b;">GoldenConnectHub (goldenconnecthub.lk)</p>
@@ -354,7 +353,7 @@
     </div>
   </footer>
 
-  <!-- 11. JAVASCRIPT SYSTEM ENGINE (SUPABASE INSERT FIXED) -->
+  <!-- 11. SUPABASE REST ENGINE -->
   <script>
     const SUPABASE_URL = 'https://hawqxgggoclhbkdvbkah.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhhd3F4Z2dnaG9saGJrZHZia2FoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0MjcxMzUsImV4cCI6MjA0NTA0MzEzNX0.2fS4aYlY8G1S0I0dG3vC5z0Q8J8J8J8J8J8J8J8J8J8';
@@ -363,7 +362,6 @@
     var liveMembers = [];
     var uploadedPhotoData = '';
 
-    // Live preview for profile photo upload
     function previewPhoto(event) {
       var file = event.target.files[0];
       if (file) {
@@ -378,7 +376,6 @@
       }
     }
 
-    // Query Supabase REST API for active profiles
     async function fetchLiveProfiles() {
       try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=*`, {
@@ -391,8 +388,7 @@
         if (response.ok) {
           const data = await response.json();
           if (data && data.length > 0) {
-            // Include profiles where is_active is true OR newly registered entries
-            liveMembers = data.filter(p => p.is_active === true || p.is_active === 'TRUE').map(p => ({
+            liveMembers = data.map(p => ({
               id: p.id,
               name: p.full_name || p.name || 'Verified Member',
               age: p.age || 45,
@@ -408,19 +404,18 @@
           }
         }
       } catch (err) {
-        console.log('Using local fallback dataset.');
+        console.log('Using local dataset.');
       }
 
-      // Default fallback dataset if Supabase has no active profiles yet
       if (liveMembers.length === 0) {
         liveMembers = [
           {
             id: 1,
-            name: 'Nalini M.',
-            age: 48,
+            name: 'Eleanor Vance',
+            age: 64,
             gender: 'Female',
-            location: 'Colombo',
-            profession: 'Senior Accountant',
+            location: 'Colombo, Sri Lanka',
+            profession: 'Retired',
             goal: 'Companionship',
             bio: 'Enjoys peaceful weekend trips, classical music, and meaningful conversations.',
             phone: '+94 77 123 4567',
@@ -429,11 +424,11 @@
           },
           {
             id: 2,
-            name: 'Kamal P.',
-            age: 52,
+            name: 'Arthur Pendelton',
+            age: 67,
             gender: 'Male',
-            location: 'Kandy',
-            profession: 'Civil Engineer',
+            location: 'Kandy, Sri Lanka',
+            profession: 'Former Architect',
             goal: 'Marriage',
             bio: 'Family-oriented, enjoys nature walks, photography, and community service.',
             phone: '+94 71 987 6543',
@@ -517,7 +512,6 @@
       }
     }
 
-    // DIRECT SUPABASE POST ON REGISTRATION
     async function handleRegisterSubmit(e) {
       e.preventDefault();
       var dob = document.getElementById('regDob').value;
@@ -539,9 +533,9 @@
       var bio = document.getElementById('regBio').value || 'New member profile.';
 
       var btn = document.getElementById('submitBtn');
-      if (btn) btn.innerText = "Saving Profile...";
+      if (btn) btn.innerText = "Saving...";
 
-      // 1. Direct POST insert request into Supabase public.profiles table
+      // 1. Post record directly to Supabase REST endpoint
       try {
         await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
           method: 'POST',
@@ -559,15 +553,14 @@
             goal: goal,
             profession: profession,
             bio: bio,
-            photo_url: uploadedPhotoData || null,
             is_active: true
           })
         });
       } catch (err) {
-        console.log('Supabase API post attempt:', err);
+        console.log('Insert error:', err);
       }
 
-      // 2. Add to local interface dynamically
+      // 2. Add to live view locally
       liveMembers.unshift({
         id: Date.now(),
         name: name,
@@ -582,10 +575,10 @@
       });
       renderMembers();
 
-      // 3. Open WhatsApp submission link
+      // 3. Open WhatsApp link
       var text = encodeURIComponent("*New Profile Registration*\nName: " + name + "\nAge: " + age + "\nGender: " + gender + "\nLocation: " + location + "\nGoal: " + goal + "\nProfession: " + profession);
       window.open("https://wa.me/94775569178?text=" + text, '_blank');
-      
+
       if (btn) btn.innerText = "Submit Profile via WhatsApp";
       closeModal('registerModal');
     }
