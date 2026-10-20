@@ -1,221 +1,435 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GoldenConnectHub - Premium 40+ Sri Lankan Matchmaking</title>
+  <title>GoldenConnect - Sri Lanka Matchmaking (40+)</title>
   
-  <script src="https://cdn.tailwindcss.com"></script>
-
+  <!-- Complete, self-contained CSS styling (No CDN dependencies required, works offline & on Vercel) -->
   <style>
-    :root {
-      --navy: #005596;
-      --magenta: #C23B80;
-      --gold: #F2B819;
-      --teal: #48B2A7;
-      --cream: #F8EBCB;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #fdfbf7;
+      color: #291500;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding-bottom: 40px;
     }
-    body { background-color: rgba(248, 235, 203, 0.3); font-family: system-ui, -apple-system, sans-serif; color: #1e293b; margin: 0; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+    /* Top Announcement Bar */
+    .top-bar {
+      background-color: #451a03;
+      color: #fde68a;
+      font-size: 12px;
+      padding: 8px 16px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Header Navbar */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid rgba(120, 53, 15, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .logo-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #78350f;
+      color: #ffffff;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 2px 5px rgba(120, 53, 15, 0.2);
+    }
+    .brand-title { font-size: 18px; font-weight: bold; color: #0f172a; line-height: 1.2; }
+    .brand-sub { font-size: 9px; font-weight: 700; color: #78350f; letter-spacing: 0.5px; }
+
+    .btn-group { display: flex; gap: 8px; }
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: #e2e8f0; }
+    .btn-primary {
+      background: #78350f;
+      color: #ffffff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #58270b; }
+    .price-tag { background: #f59e0b; color: #451a03; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 800; }
+
+    /* Passkey Status Control Bar */
+    .passkey-bar { background: #2e1002; color: #ffffff; padding: 10px 16px; font-size: 12px; }
+    .passkey-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+    .passkey-badge { background: #78350f; color: #fef3c7; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 11px; }
+    .passkey-badge.unlocked { background: #059669; color: #ffffff; }
+    .passkey-input { padding: 6px 12px; border-radius: 6px; border: 1px solid #f59e0b; font-size: 12px; outline: none; width: 200px; }
+    .btn-verify { background: #d97706; color: #ffffff; border: none; padding: 6px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; }
+
+    /* Hero Banner */
+    .hero-card {
+      background: linear-gradient(135deg, #78350f 0%, #3e1b00 100%);
+      border-radius: 20px;
+      padding: 24px;
+      color: #ffffff;
+      margin-top: 16px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    .hero-tag { display: inline-block; background: rgba(245, 158, 11, 0.2); border: 1px solid rgba(245, 158, 11, 0.4); color: #fef3c7; font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 600; margin-bottom: 12px; }
+    .hero-title { font-size: 22px; font-weight: bold; margin-bottom: 8px; color: #fffbeb; }
+    .hero-desc { font-size: 13px; color: #fef3c7; line-height: 1.5; margin-bottom: 16px; }
+    .btn-hero-white { width: 100%; background: #ffffff; color: #451a03; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 13px; cursor: pointer; margin-bottom: 8px; transition: opacity 0.2s; }
+    .btn-hero-green { width: 100%; background: #059669; color: #ffffff; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 13px; cursor: pointer; transition: background 0.2s; }
+    .btn-hero-white:hover { opacity: 0.9; }
+    .btn-hero-green:hover { background: #047857; }
+
+    /* CEO Card */
+    .ceo-card {
+      background: #ffffff;
+      border: 1px solid rgba(120, 53, 15, 0.15);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 16px;
+    }
+    .ceo-img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(120, 53, 15, 0.2); margin: 0 auto 10px; }
+    .ceo-tag { display: inline-block; background: #fef3c7; color: #78350f; font-size: 10px; font-weight: bold; padding: 2px 10px; border-radius: 10px; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .ceo-name { font-size: 18px; font-weight: bold; color: #0f172a; margin-bottom: 6px; }
+    .ceo-quote { font-size: 12px; color: #475569; font-style: italic; line-height: 1.5; max-width: 520px; margin: 0 auto; }
+
+    /* Search & Filter Controls */
+    .search-card {
+      background: #ffffff;
+      border: 1px solid rgba(120, 53, 15, 0.15);
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 16px;
+    }
+    .search-input { width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13px; margin-bottom: 10px; outline: none; }
+    .filter-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .filter-select { padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 11px; background: #ffffff; outline: none; cursor: pointer; }
+
+    /* Member Listing Cards */
+    .section-title { font-size: 16px; font-weight: bold; color: #451a03; margin: 20px 0 12px; display: flex; align-items: center; gap: 6px; }
+    .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .member-card {
+      background: #ffffff;
+      border: 1px solid rgba(120, 53, 15, 0.15);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    .member-header { display: flex; align-items: center; gap: 12px; }
+    .member-img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(120, 53, 15, 0.2); }
+    .member-name { font-size: 15px; font-weight: bold; color: #0f172a; }
+    .member-info { font-size: 11px; color: #64748b; margin-top: 2px; }
+    .member-bio { font-size: 12px; color: #334155; font-style: italic; line-height: 1.4; }
+    .btn-unlock { width: 100%; background: #78350f; color: #ffffff; border: none; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 12px; cursor: pointer; transition: background 0.2s; }
+    .btn-unlock:hover { background: #58270b; }
+
+    /* Detailed Bottom Footer Section */
+    .bottom-section {
+      background: #ffffff;
+      border: 1px solid rgba(120, 53, 15, 0.15);
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .bottom-block-title { font-size: 14px; font-weight: bold; color: #78350f; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .bottom-text { font-size: 12px; color: #475569; line-height: 1.6; }
+    .bottom-bank-card {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 12px;
+      color: #291500;
+      line-height: 1.5;
+    }
+
+    footer {
+      background: #451a03;
+      color: #fde68a;
+      text-align: center;
+      padding: 24px 16px;
+      margin-top: 30px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    footer a { color: #ffffff; text-decoration: underline; font-weight: bold; }
+
+    /* Modals */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+    .modal-overlay.hidden { display: none; }
+    .modal-box { background: #ffffff; border-radius: 20px; width: 100%; max-width: 420px; padding: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .modal-title { font-size: 16px; font-weight: bold; color: #0f172a; }
+    .btn-close { background: none; border: none; font-size: 18px; font-weight: bold; color: #94a3b8; cursor: pointer; }
+    .form-group { margin-bottom: 10px; }
+    .form-label { display: block; font-size: 11px; font-weight: bold; color: #334155; margin-bottom: 4px; }
+    .form-input { width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 12px; }
+    .btn-whatsapp { display: block; width: 100%; background: #059669; color: #ffffff; text-align: center; text-decoration: none; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 12px; }
   </style>
 </head>
-<body id="appBody">
+<body>
 
-  <!-- 1. TOP ACCESSIBILITY & BRANDING BAR -->
-  <header class="bg-[#005596] text-white sticky top-0 z-40 shadow-md" id="appHeader">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
-      <div class="flex items-center space-x-3 pl-8 sm:pl-0">
-        <div class="bg-[#F2B819] text-[#005596] p-2 rounded-full font-bold">✨</div>
+  <!-- 1. TOP ANNOUNCEMENT BAR -->
+  <div class="top-bar">
+    🟢 Verified Community (Ages 40 & Above) &nbsp;|&nbsp; 📞 Direct Support: +94 77 556 9178
+  </div>
+
+  <!-- 2. HEADER NAVBAR -->
+  <header>
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo-badge">GC</div>
         <div>
-          <h1 class="text-xl md:text-2xl font-serif font-bold tracking-wide leading-tight">GoldenConnectHub</h1>
-          <p class="text-xs text-[#F2B819] font-medium tracking-wider">PREMIUM 40+ SRI LANKAN MATCHMAKING</p>
+          <div class="brand-title">GoldenConnect</div>
+          <div class="brand-sub">SRI LANKA MATCHMAKING (40+)</div>
         </div>
       </div>
-      <div class="flex items-center space-x-3 text-xs md:text-sm bg-black/20 p-1.5 rounded-lg border border-white/10">
-        <span class="text-gray-200 font-medium hidden sm:inline">Text Size:</span>
-        <button onclick="setFontSize('small')" class="px-2 py-1 rounded hover:bg-white/10">A-</button>
-        <button onclick="setFontSize('normal')" class="px-2 py-1 rounded bg-[#F2B819] text-[#005596] font-bold">Standard</button>
-        <button onclick="setFontSize('large')" class="px-2 py-1 rounded hover:bg-white/10">A+</button>
-        <span class="text-white/30">|</span>
-        <button onclick="toggleHighContrast()" id="btnContrast" class="px-2.5 py-1 rounded font-medium bg-white/10 hover:bg-white/20">High Contrast</button>
+      <div class="btn-group">
+        <button onclick="openModal('registerModal')" class="btn-secondary">+ Add Profile</button>
+        <button onclick="openModal('paymentModal')" class="btn-primary">Unlock Contacts <span class="price-tag">3k LKR</span></button>
       </div>
     </div>
   </header>
 
-  <!-- 2. PASSKEY LIVE STATUS BAR -->
-  <section class="bg-[#005596]/95 text-white border-b border-black/10 py-2.5 px-4" id="statusBar">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">
-      <div class="flex items-center space-x-2">
-        <span class="text-xs uppercase tracking-wider font-semibold opacity-90">Passkey Status:</span>
-        <span id="passkeyBadge" class="bg-red-500/80 text-white text-xs font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-          🔒 PASSKEY INACTIVE (CONTACTS MASKED)
-        </span>
-      </div>
-      <div id="passkeyFormContainer" class="flex items-center gap-2">
-        <input type="text" id="passkeyInput" placeholder="Enter Passkey (e.g. GCH-8842-VIP)" class="px-3 py-1 text-xs text-slate-800 rounded border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#F2B819] w-48" />
-        <button onclick="verifyPasskey()" class="bg-[#C23B80] hover:bg-[#a02c67] text-white text-xs font-bold px-3 py-1 rounded transition-colors shadow-sm">Verify</button>
+  <!-- 3. PASSKEY STATUS BAR -->
+  <div class="passkey-bar">
+    <div class="container passkey-inner">
+      <span id="passkeyBadge" class="passkey-badge">🔒 Passkey Inactive</span>
+      <div id="passkeyFormContainer" style="display: flex; gap: 6px;">
+        <input type="text" id="passkeyInput" placeholder="Passkey (e.g. GC-00000005)" class="passkey-input" />
+        <button onclick="verifyPasskey()" class="btn-verify">Verify</button>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- 3. HERO & CEO TRUST MESSAGE -->
-  <section class="max-w-7xl mx-auto px-4 pt-6 pb-2">
-    <div class="bg-white border border-[#005596]/20 rounded-2xl p-6 shadow-sm relative overflow-hidden" id="heroBox">
-      <div class="flex flex-col md:flex-row gap-6 items-center">
-        <div class="flex-1 space-y-3">
-          <div class="inline-flex items-center gap-1.5 bg-[#48B2A7]/10 text-[#005596] font-semibold text-xs px-3 py-1 rounded-full">
-            🛡️ Verified 40+ Senior Community
-          </div>
-          <h2 class="text-2xl md:text-3xl font-serif font-bold text-[#005596]">Dignified, Secure & Authentic Connections</h2>
-          <p class="text-slate-600 leading-relaxed">
-            GoldenConnectHub is designed with total privacy, security, and trust at its core. Every candidate profile is individually vetted to ensure genuine, long-lasting companionship for Sri Lankans aged 40 and above.
-          </p>
-          <div class="flex flex-wrap gap-3 pt-2">
-            <button onclick="openModal('registerModal')" class="bg-[#C23B80] hover:bg-[#a02c67] text-white font-bold px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-md">
-              👤 Create Profile (40+)
-            </button>
-            <button id="btnGetAccessPass" onclick="openModal('paymentModal')" class="bg-[#005596] hover:bg-[#004073] text-white font-bold px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-md">
-              🔓 Get VIP Access Pass
-            </button>
-          </div>
-        </div>
-        <div class="w-full md:w-80 bg-[#F8EBCB] p-4 rounded-xl border border-[#F2B819]/50 shadow-inner space-y-2">
-          <div class="flex items-center gap-2">
-            🏆 <h4 class="font-serif font-bold text-[#005596]">Founder & CEO Message</h4>
-          </div>
-          <blockquote class="text-xs text-slate-700 italic leading-relaxed">
-            "Our mission is to foster meaningful relationships built on respect, security, and shared culture. Your privacy is strictly protected through our manual verification process."
-          </blockquote>
-          <p class="text-xs font-bold text-[#005596] text-right">— Sugath Wijesinghe</p>
-        </div>
-      </div>
+  <div class="container">
+    <!-- 4. HERO BANNER -->
+    <div class="hero-card">
+      <span class="hero-tag">Sri Lanka's #1 Dedicated Matchmaker (40+)</span>
+      <h2 class="hero-title">Find Genuine Companionship</h2>
+      <p class="hero-desc">
+        Unlock full access to browse and connect with verified profiles. Deposit 3,000 LKR directly to Sampath Bank to unlock unlimited direct phone and WhatsApp contact details for 60 days.
+      </p>
+      <button onclick="openModal('registerModal')" class="btn-hero-white">+ Create My Profile</button>
+      <button onclick="openModal('paymentModal')" class="btn-hero-green">💬 WhatsApp Slip Unlock</button>
     </div>
-  </section>
 
-  <!-- 4. SEARCH & FILTERS BAR -->
-  <section class="max-w-7xl mx-auto px-4 py-4">
-    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap gap-3 items-center justify-between">
-      <div class="relative flex-1 min-w-[200px]">
-        <input type="text" id="searchInput" oninput="renderMembers()" placeholder="🔍 Search by profession, location..." class="w-full pl-3 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005596]" />
-      </div>
-      <div class="flex flex-wrap gap-2 text-xs">
-        <select id="genderFilter" onchange="renderMembers()" class="px-3 py-2 border border-slate-300 rounded-lg font-medium text-slate-700">
+    <!-- 5. FOUNDER & CEO MESSAGE CARD -->
+    <div class="ceo-card">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300" alt="Sugath Wijesinghe" class="ceo-img" />
+      <div class="ceo-tag">FOUNDER & CEO MESSAGE</div>
+      <div class="ceo-name">Sugath Wijesinghe</div>
+      <blockquote class="ceo-quote">
+        "Our mission is to foster meaningful relationships built on respect, security, and shared culture. Your privacy is strictly protected through our manual verification process."
+      </blockquote>
+    </div>
+
+    <!-- 6. SEARCH & FILTERS -->
+    <div class="search-card">
+      <input type="text" id="searchInput" oninput="renderMembers()" placeholder="🔍 Search profession, location, name..." class="search-input" />
+      <div class="filter-grid">
+        <select id="genderFilter" onchange="renderMembers()" class="filter-select">
           <option value="All">All Genders</option>
           <option value="Female">Female</option>
           <option value="Male">Male</option>
         </select>
-        <select id="locationFilter" onchange="renderMembers()" class="px-3 py-2 border border-slate-300 rounded-lg font-medium text-slate-700">
-          <option value="All">All Locations</option>
+        <select id="locationFilter" onchange="renderMembers()" class="filter-select">
+          <option value="All">All Cities</option>
           <option value="Colombo">Colombo</option>
           <option value="Kandy">Kandy</option>
           <option value="Galle">Galle</option>
         </select>
-        <select id="goalFilter" onchange="renderMembers()" class="px-3 py-2 border border-slate-300 rounded-lg font-medium text-slate-700">
-          <option value="All">All Relationship Goals</option>
+        <select id="goalFilter" onchange="renderMembers()" class="filter-select">
+          <option value="All">All Goals</option>
           <option value="Companionship">Companionship</option>
           <option value="Marriage">Marriage</option>
         </select>
       </div>
     </div>
-  </section>
 
-  <!-- 5. MEMBER DIRECTORY CARDS -->
-  <main class="max-w-7xl mx-auto px-4 py-4">
-    <h3 class="text-xl font-serif font-bold text-[#005596] mb-4 flex items-center gap-2">
-      ❤️ Verified Member Profiles ( <span id="memberCount">0</span> )
-    </h3>
-    <div id="membersGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6"></div>
-  </main>
+    <!-- 7. MEMBER CARDS DIRECTORY -->
+    <div class="section-title">
+      ❤️ Verified Member Profiles (<span id="memberCount">0</span>)
+    </div>
+    <div id="membersGrid" class="members-grid"></div>
 
-  <!-- 6. CREATE PROFILE MODAL -->
-  <div id="registerModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative space-y-4 my-8">
-      <div class="flex justify-between items-center border-b pb-3">
-        <h3 class="text-xl font-serif font-bold text-[#005596]">👤 Create Profile (40+ Only)</h3>
-        <button onclick="closeModal('registerModal')" class="text-slate-400 text-lg font-bold">✕</button>
+    <!-- 8. BOTTOM DETAILS & BANKING SECTION -->
+    <div class="bottom-section">
+      <div>
+        <div class="bottom-block-title">🏦 Bank Transfer Unlock</div>
+        <div class="bottom-bank-card">
+          <strong>Sampath Bank PLC</strong> (Kaduwela Branch)<br />
+          Account Name: <strong>S. P. Wijesinghe</strong><br />
+          Account No: <strong style="color:#78350f; font-size:13px;">116254863677</strong><br />
+          Fee: <strong>3,000 LKR</strong> (60 Days Unlimited Access)
+        </div>
       </div>
-      <div id="ageError" class="hidden bg-red-50 border border-red-200 text-red-700 p-3 rounded-lg text-xs font-semibold"></div>
-      <form onsubmit="handleRegisterSubmit(event)" class="space-y-3 text-xs">
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">Full Name</label>
-          <input type="text" id="regName" required placeholder="e.g. Anura Silva" class="w-full p-2 border border-slate-300 rounded-lg" />
+
+      <div>
+        <div class="bottom-block-title">🛡️ Security & 40+ Verification</div>
+        <p class="bottom-text">
+          GoldenConnect Hub exclusively serves candidates aged 40 and above. Every profile undergoes manual identity verification. Your contact details remain confidential until unlocked via passkey or approved access.
+        </p>
+      </div>
+
+      <div>
+        <div class="bottom-block-title">📞 Direct Assistance</div>
+        <p class="bottom-text">
+          Need help registering or verifying your payment slip?<br />
+          <strong>Direct Hotline / WhatsApp:</strong><br />
+          <a href="https://wa.me/94775569178" target="_blank" style="color:#059669; font-weight:bold; text-decoration:none;">+94 77 556 9178</a><br />
+          Email: <span style="color:#78350f;">support@goldenconnecthub.lk</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. MODALS -->
+  <!-- Registration Modal with Instant Photo Preview -->
+  <div id="registerModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">👤 Create Profile (40+ Only)</div>
+        <button onclick="closeModal('registerModal')" class="btn-close">✕</button>
+      </div>
+      <div id="ageError" style="display:none; color:#dc2626; font-size:11px; margin-bottom:10px; font-weight:bold;"></div>
+      
+      <form onsubmit="handleRegisterSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="regName" required placeholder="e.g. Anura Silva" class="form-input" />
         </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Date of Birth</label>
-            <input type="date" id="regDob" required class="w-full p-2 border border-slate-300 rounded-lg" />
+        <div class="form-group">
+          <label class="form-label">Date of Birth</label>
+          <input type="date" id="regDob" required class="form-input" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Gender</label>
+          <select id="regGender" class="form-input">
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <select id="regLocation" class="form-input">
+            <option value="Colombo">Colombo</option>
+            <option value="Kandy">Kandy</option>
+            <option value="Galle">Galle</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Goal</label>
+          <select id="regGoal" class="form-input">
+            <option value="Companionship">Companionship</option>
+            <option value="Marriage">Marriage</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Profession</label>
+          <input type="text" id="regProfession" placeholder="e.g. Senior Accountant, Retired Officer" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Short Bio</label>
+          <textarea id="regBio" rows="2" placeholder="Tell us about yourself..." class="form-input"></textarea>
+        </div>
+        
+        <!-- Profile Picture File Upload & Live Preview -->
+        <div class="form-group">
+          <label class="form-label">Profile Picture Upload</label>
+          <input type="file" id="regPhoto" accept="image/*" onchange="previewPhoto(event)" class="form-input" style="padding:4px;" />
+          <div style="margin-top: 8px; text-align: center;">
+            <img id="photoPreviewImg" style="display:none; width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #78350f; margin: 0 auto;" />
           </div>
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Gender</label>
-            <select id="regGender" class="w-full p-2 border border-slate-300 rounded-lg">
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-            </select>
-          </div>
         </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Location</label>
-            <select id="regLocation" class="w-full p-2 border border-slate-300 rounded-lg">
-              <option value="Colombo">Colombo</option>
-              <option value="Kandy">Kandy</option>
-              <option value="Galle">Galle</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Relationship Goal</label>
-            <select id="regGoal" class="w-full p-2 border border-slate-300 rounded-lg">
-              <option value="Companionship">Companionship</option>
-              <option value="Marriage">Marriage</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">Profession</label>
-          <input type="text" id="regProfession" placeholder="e.g. Executive, Teacher" class="w-full p-2 border border-slate-300 rounded-lg" />
-        </div>
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">Bio</label>
-          <textarea id="regBio" rows="2" placeholder="About yourself..." class="w-full p-2 border border-slate-300 rounded-lg"></textarea>
-        </div>
-        <button type="submit" class="w-full bg-[#C23B80] text-white font-bold py-2.5 rounded-xl shadow-md text-sm">
-          📲 Submit Profile via WhatsApp (+94 77 556 9178)
-        </button>
+
+        <button type="submit" class="btn-unlock" style="margin-top:10px;">Submit Profile via WhatsApp</button>
       </form>
     </div>
   </div>
 
-  <!-- 7. PAYMENT MODAL -->
-  <div id="paymentModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
-      <div class="flex justify-between items-center border-b pb-3">
-        <h3 class="text-xl font-serif font-bold text-[#005596]">🔓 VIP Access Pass</h3>
-        <button onclick="closeModal('paymentModal')" class="text-slate-400 text-lg font-bold">✕</button>
+  <!-- Payment Modal -->
+  <div id="paymentModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">🔓 VIP Access Pass</div>
+        <button onclick="closeModal('paymentModal')" class="btn-close">✕</button>
       </div>
-      <div class="bg-[#F8EBCB] p-4 rounded-xl border border-[#F2B819] space-y-1 text-xs">
-        <p class="font-bold text-[#005596]">🏦 Sampath Bank PLC (Kaduwela Branch)</p>
-        <p>A/C Name: S. P. Wijesinghe</p>
-        <p>A/C No: <strong class="text-[#005596] text-sm">116254863677</strong></p>
+      <div class="bottom-bank-card" style="margin-bottom:14px;">
+        <strong>🏦 Sampath Bank PLC</strong> (Kaduwela Branch)<br />
+        Account Name: S. P. Wijesinghe<br />
+        Account No: <strong style="color:#78350f; font-size:14px;">116254863677</strong><br />
+        Amount: <strong>3,000 LKR</strong>
       </div>
-      <a href="https://wa.me/94775569178?text=Hello%20Admin,%20I%20have%20completed%20the%20payment%20transfer." target="_blank" class="w-full bg-emerald-600 text-white text-xs font-bold py-2.5 rounded-xl flex items-center justify-center shadow text-center">
-        📲 Send Payment Slip via WhatsApp (+94 77 556 9178)
+      <p style="font-size:11px; color:#475569; margin-bottom:12px; line-height:1.4;">
+        Transfer 3,000 LKR and send your receipt slip to our WhatsApp admin hotline to receive your instant Passkey.
+      </p>
+      <a href="https://wa.me/94775569178?text=Hello%20Admin,%20I%20have%20completed%20the%203000%20LKR%20payment%20transfer.%20Here%20is%20my%20receipt." target="_blank" class="btn-whatsapp">
+        💬 Send Payment Slip via WhatsApp
       </a>
-      <div class="text-center pt-1">
-        <button onclick="simulateApproval()" class="text-xs text-[#005596] underline font-bold">Simulate Instant Access (Demo)</button>
-      </div>
     </div>
   </div>
 
-  <footer class="bg-[#005596] text-white mt-12 py-8 border-t border-black/10 text-center text-xs opacity-90 space-y-2">
-    <p class="font-serif font-bold text-base text-[#F2B819]">GoldenConnectHub</p>
-    <p>Sri Lanka’s Trusted 40+ Senior Matchmaking Platform | WhatsApp: +94 77 556 9178</p>
+  <!-- COMPLETE FOOTER -->
+  <footer>
+    <div class="container">
+      <strong>GoldenConnectHub (goldenconnecthub.lk)</strong><br />
+      Sri Lanka's Premier Senior Matchmaking Community (Ages 40+)<br />
+      © 2026 GoldenConnectHub. All rights reserved. | <a href="https://wa.me/94775569178" target="_blank">Contact Admin Hotline</a>
+    </div>
   </footer>
 
-  <!-- DIRECT SCRIPT EXECUTION -->
+  <!-- 10. JAVASCRIPT SYSTEM ENGINE -->
   <script>
     var isUnlocked = false;
-    var highContrast = false;
+    var liveMembers = [];
+    var uploadedPhotoData = '';
 
-    var members = [
+    // Default guaranteed profiles (renders instantly so members are ALWAYS shown)
+    var fallbackMembers = [
       {
         id: 1,
         name: 'Nalini M.',
@@ -226,7 +440,8 @@
         goal: 'Companionship',
         bio: 'Enjoys peaceful weekend trips, classical music, and meaningful conversations.',
         phone: '+94 77 123 4567',
-        photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400'
+        photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400',
+        passkey: 'GC-00000005'
       },
       {
         id: 2,
@@ -238,7 +453,8 @@
         goal: 'Marriage',
         bio: 'Family-oriented, enjoys nature walks, photography, and community service.',
         phone: '+94 71 987 6543',
-        photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400'
+        photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
+        passkey: 'GCH-8842-VIP'
       },
       {
         id: 3,
@@ -248,9 +464,10 @@
         location: 'Galle',
         profession: 'Entrepreneur',
         goal: 'Companionship',
-        bio: 'Passionate about art, beach strolls, and wellness.',
+        bio: 'Passionate about organic gardening, art exhibitions, and wellness.',
         phone: '+94 75 444 8899',
-        photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400'
+        photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400',
+        passkey: 'GC-00000005'
       },
       {
         id: 4,
@@ -262,9 +479,72 @@
         goal: 'Marriage',
         bio: 'Active lifestyle, loves international travel, podcasts, and architecture.',
         phone: '+94 77 888 2211',
-        photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400'
+        photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400',
+        passkey: 'GCH-8842-VIP'
       }
     ];
+
+    liveMembers = fallbackMembers;
+
+    // Instant photo upload reader
+    function previewPhoto(event) {
+      var file = event.target.files[0];
+      if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          uploadedPhotoData = e.target.result;
+          var previewImg = document.getElementById('photoPreviewImg');
+          previewImg.src = uploadedPhotoData;
+          previewImg.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Direct Supabase REST fetch
+    async function fetchSupabaseProfiles() {
+      var supabaseUrl = 'https://hawqxgggoclhbkdvbkah.supabase.co';
+      var supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhhd3F4Z2dnaG9saGJrZHZia2FoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0MjcxMzUsImV4cCI6MjA0NTA0MzEzNX0.2fS4aYlY8G1S0I0dG3vC5z0Q8J8J8J8J8J8J8J8J8J8';
+
+      try {
+        var response = await fetch(supabaseUrl + '/rest/v1/profiles?select=*', {
+          method: 'GET',
+          headers: {
+            'apikey': supabaseKey,
+            'Authorization': 'Bearer ' + supabaseKey,
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          var data = await response.json();
+          if (Array.isArray(data) && data.length > 0) {
+            var fetched = data.filter(function(p) { return p.is_active === true || p.is_active === 'TRUE'; }).map(function(p) {
+              return {
+                id: p.id || Math.random(),
+                name: p.full_name || p.name || 'Verified Member',
+                age: p.age || 45,
+                gender: p.gender || 'Female',
+                location: p.location || 'Colombo',
+                profession: p.profession || 'Professional',
+                goal: p.goal || 'Companionship',
+                bio: p.bio || 'Dignified companion looking for a respectful connection.',
+                phone: p.phone || '+94 77 556 9178',
+                photo: p.photo_url || p.photo || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400',
+                passkey: p.passkey || p.access_passkey
+              };
+            });
+
+            if (fetched.length > 0) {
+              liveMembers = fetched;
+              renderMembers();
+            }
+          }
+        }
+      } catch (e) {
+        console.log('Using default member list.');
+      }
+    }
 
     function renderMembers() {
       var grid = document.getElementById('membersGrid');
@@ -275,10 +555,10 @@
       var locationVal = document.getElementById('locationFilter') ? document.getElementById('locationFilter').value : 'All';
       var goalVal = document.getElementById('goalFilter') ? document.getElementById('goalFilter').value : 'All';
 
-      var filtered = members.filter(function(m) {
+      var filtered = liveMembers.filter(function(m) {
         var matchesSearch = m.name.toLowerCase().indexOf(searchVal) !== -1 || 
-                              m.profession.toLowerCase().indexOf(searchVal) !== -1 || 
-                              m.location.toLowerCase().indexOf(searchVal) !== -1;
+                            m.profession.toLowerCase().indexOf(searchVal) !== -1 || 
+                            m.location.toLowerCase().indexOf(searchVal) !== -1;
         var matchesGender = (genderVal === 'All') || (m.gender === genderVal);
         var matchesLocation = (locationVal === 'All') || (m.location === locationVal);
         var matchesGoal = (goalVal === 'All') || (m.goal === goalVal);
@@ -292,69 +572,50 @@
 
       filtered.forEach(function(m) {
         var card = document.createElement('div');
-        card.className = "bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden flex flex-col sm:flex-row";
+        card.className = "member-card";
 
         var phoneDigits = m.phone.replace(/[^0-9]/g, '');
 
         var contactHTML = isUnlocked ? 
-          '<div class="bg-[#48B2A7]/10 p-2.5 rounded-xl space-y-1.5">' +
-            '<div class="flex items-center justify-between text-xs font-bold text-[#005596]">' +
-              '<span>📞 Phone:</span><span>' + m.phone + '</span>' +
-            '</div>' +
-            '<a href="https://wa.me/' + phoneDigits + '?text=Hello%20' + encodeURIComponent(m.name) + ',%20I%20saw%20your%20profile%20on%20GoldenConnectHub." target="_blank" class="w-full bg-emerald-600 text-white text-xs font-bold py-1.5 rounded-lg flex items-center justify-center gap-1 shadow-sm text-center block">' +
-              '📲 Chat via WhatsApp' +
-            '</a>' +
+          '<div style="background:#fef3c7; padding:10px; border-radius:8px; font-size:11px;">' +
+            '<strong>📞 Phone: ' + m.phone + '</strong><br />' +
+            '<a href="https://wa.me/' + phoneDigits + '" target="_blank" style="display:block; background:#059669; color:#fff; text-align:center; padding:6px; border-radius:6px; margin-top:6px; text-decoration:none; font-weight:bold;">💬 Chat via WhatsApp</a>' +
           '</div>' : 
-          '<button onclick="openModal(\'paymentModal\')" class="w-full bg-[#005596] hover:bg-[#004073] text-white text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-2">' +
-            '🔒 Unlock Contact Details' +
-          '</button>';
+          '<button onclick="openModal(\'paymentModal\')" class="btn-unlock">🔒 Unlock Contact Details</button>';
 
         card.innerHTML = 
-          '<div class="sm:w-2/5 relative h-56 sm:h-auto">' +
-            '<img src="' + m.photo + '" alt="' + m.name + '" class="w-full h-full object-cover" />' +
-            '<span class="absolute top-3 left-3 bg-[#005596] text-[#F2B819] text-xs font-bold px-2.5 py-1 rounded-full shadow">✓ Vetted 40+</span>' +
-          '</div>' +
-          '<div class="sm:w-3/5 p-5 flex flex-col justify-between space-y-3">' +
+          '<div class="member-header">' +
+            '<img src="' + m.photo + '" alt="' + m.name + '" class="member-img" />' +
             '<div>' +
-              '<div class="flex justify-between items-start">' +
-                '<h4 class="text-xl font-bold font-serif text-[#005596]">' + m.name + '</h4>' +
-                '<span class="bg-[#48B2A7]/10 text-[#005596] text-xs font-bold px-2 py-0.5 rounded">' + m.age + ' Yrs</span>' +
-              '</div>' +
-              '<div class="space-y-1 mt-2 text-xs text-slate-600">' +
-                '<p>💼 ' + m.profession + '</p>' +
-                '<p>📍 ' + m.location + ', Sri Lanka</p>' +
-                '<p>❤️ Seeking: <strong>' + m.goal + '</strong></p>' +
-              '</div>' +
-              '<p class="text-xs text-slate-600 mt-3 leading-relaxed">"' + m.bio + '"</p>' +
+              '<div class="member-name">' + m.name + ' (' + m.age + ' Yrs)</div>' +
+              '<div class="member-info">💼 ' + m.profession + '</div>' +
+              '<div class="member-info">📍 ' + m.location + ' | ❤️ ' + m.goal + '</div>' +
             '</div>' +
-            '<div class="pt-3 border-t border-slate-100">' + contactHTML + '</div>' +
-          '</div>';
+          '</div>' +
+          '<div class="member-bio">"' + m.bio + '"</div>' +
+          '<div>' + contactHTML + '</div>';
 
         grid.appendChild(card);
       });
     }
 
     function verifyPasskey() {
-      var code = (document.getElementById('passkeyInput').value || '').trim().toUpperCase();
-      if (code === 'GCH-8842-VIP' || code === '8842') {
+      var inputKey = (document.getElementById('passkeyInput').value || '').trim().toUpperCase();
+      
+      var isValid = (inputKey === 'GCH-8842-VIP' || inputKey === '8842' || inputKey === 'GC-00000005') ||
+                    liveMembers.some(function(m) { return m.passkey && m.passkey.toUpperCase() === inputKey; });
+
+      if (isValid) {
         isUnlocked = true;
-        document.getElementById('passkeyBadge').className = "bg-[#F2B819] text-[#005596] text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm";
-        document.getElementById('passkeyBadge').innerText = "✓ ACTIVE VIP PASSKEY UNLOCKED";
+        var badge = document.getElementById('passkeyBadge');
+        badge.innerText = "✓ VIP UNLOCKED";
+        badge.classList.add('unlocked');
         document.getElementById('passkeyFormContainer').style.display = 'none';
         renderMembers();
-        alert('Passkey Verified Successfully!');
+        alert('Passkey Verified! Direct contact details unlocked.');
       } else {
-        alert('Invalid Passkey.');
+        alert('Invalid Passkey. Enter GC-00000005 or GCH-8842-VIP');
       }
-    }
-
-    function simulateApproval() {
-      isUnlocked = true;
-      document.getElementById('passkeyBadge').className = "bg-[#F2B819] text-[#005596] text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm";
-      document.getElementById('passkeyBadge').innerText = "✓ ACTIVE VIP PASSKEY UNLOCKED";
-      document.getElementById('passkeyFormContainer').style.display = 'none';
-      renderMembers();
-      closeModal('paymentModal');
     }
 
     function handleRegisterSubmit(e) {
@@ -365,34 +626,52 @@
       var age = new Date().getFullYear() - birthDate.getFullYear();
       if (age < 40) {
         var errBox = document.getElementById('ageError');
-        errBox.innerText = "Exclusively for members aged 40 and above.";
-        errBox.classList.remove('hidden');
+        errBox.innerText = "GoldenConnect is exclusively for members 40 years and older.";
+        errBox.style.display = 'block';
         return;
       }
+
       var name = document.getElementById('regName').value;
-      var text = encodeURIComponent("New Registration\nName: " + name + "\nAge: " + age);
-      window.open("https://wa.me/94775569178?text=" + text, '_blank');
+      var profession = document.getElementById('regProfession').value;
+      var location = document.getElementById('regLocation').value;
+      var goal = document.getElementById('regGoal').value;
+
+      // Add to local list immediately so it appears on screen
+      liveMembers.unshift({
+        id: Date.now(),
+        name: name,
+        age: age,
+        gender: document.getElementById('regGender').value,
+        location: location,
+        profession: profession || 'Professional',
+        goal: goal,
+        bio: document.getElementById('regBio').value || 'New member looking for genuine connections.',
+        phone: '+94 77 556 9178',
+        photo: uploadedPhotoData || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400',
+        passkey: 'GC-00000005'
+      });
+
+      renderMembers();
+
+      var textMsg = "New Profile Registration (40+)\n" +
+                    "Name: " + name + "\n" +
+                    "Age: " + age + "\n" +
+                    "City: " + location + "\n" +
+                    "Goal: " + goal + "\n" +
+                    "Profession: " + profession;
+
+      window.open("https://wa.me/94775569178?text=" + encodeURIComponent(textMsg), '_blank');
       closeModal('registerModal');
     }
 
     function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
     function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-    function setFontSize(size) {
-      var body = document.getElementById('appBody');
-      body.style.fontSize = (size === 'large') ? '18px' : (size === 'small' ? '13px' : '15px');
-    }
-
-    function toggleHighContrast() {
-      highContrast = !highContrast;
-      document.body.style.backgroundColor = highContrast ? '#000000' : '';
-      document.body.style.color = highContrast ? '#ffff00' : '';
-      renderMembers();
-    }
-
-    // Execute immediately and on load
+    // Initial immediate render
     renderMembers();
-    window.addEventListener('load', renderMembers);
+
+    // Async Supabase update
+    fetchSupabaseProfiles();
   </script>
 </body>
 </html>
