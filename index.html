@@ -1,433 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Golden Connect Hub | Matchmaking Platform for 40+</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoldenConnectHub - Premium 40+ Sri Lankan Matchmaking</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     :root {
-      --primary: #1e3a8a;
-      --primary-hover: #1e40af;
-      --accent: #d97706;
-      --accent-hover: #b45309;
-      --bg-main: #f8fafc;
-      --bg-card: #ffffff;
-      --text-dark: #0f172a;
-      --text-muted: #475569;
-      --border: #e2e8f0;
-      --radius: 12px;
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --navy: #005596;
+      --magenta: #C23B80;
+      --gold: #F2B819;
+      --teal: #48B2A7;
+      --cream: #F8EBCB;
     }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg-main);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-
-    header {
-      background-color: #ffffff;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .hero {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem 3rem;
-      text-align: center;
-    }
-
-    .badge {
-      display: inline-block;
-      background-color: #fef3c7;
-      color: var(--accent-hover);
-      font-size: 0.875rem;
-      font-weight: 700;
-      padding: 0.35rem 1rem;
-      border-radius: 9999px;
-      margin-bottom: 1.25rem;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero p {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      color: var(--text-muted);
-      max-width: 680px;
-      margin: 0 auto 2rem;
-    }
-
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.875rem 2rem;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background-color: var(--primary);
-      color: #ffffff;
-    }
-
-    .btn-primary:hover {
-      background-color: var(--primary-hover);
-    }
-
-    .btn-outline {
-      background-color: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-
-    .btn-outline:hover {
-      background-color: #eff6ff;
-    }
-
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 2.5rem;
-    }
-
-    .checker-card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.5rem 2rem;
-      box-shadow: var(--shadow);
-      max-width: 550px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .checker-card h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.75rem;
-      color: var(--primary);
-    }
-
-    .checker-card p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .input-group {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .input-field {
-      flex: 1;
-      padding: 0.75rem 1rem;
-      font-size: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      outline: none;
-      text-transform: uppercase;
-      font-family: inherit;
-    }
-
-    .status-output {
-      margin-top: 1rem;
-      padding: 0.75rem;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      display: none;
-    }
-
-    .status-output.success {
-      display: block;
-      background-color: #dcfce7;
-      color: #166534;
-    }
-
-    .status-output.error {
-      display: block;
-      background-color: #fee2e2;
-      color: #991b1b;
-    }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .step-card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      box-shadow: var(--shadow);
-    }
-
-    .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background-color: #eff6ff;
-      color: var(--primary);
-      font-weight: 700;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-    }
-
-    .pricing-card {
-      background-color: var(--bg-card);
-      border: 2px solid var(--accent);
-      border-radius: var(--radius);
-      padding: 3rem 2rem;
-      max-width: 450px;
-      margin: 0 auto;
-      text-align: center;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-
-    .pricing-badge {
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: var(--accent);
-      color: #ffffff;
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 0.25rem 1rem;
-      border-radius: 9999px;
-      text-transform: uppercase;
-    }
-
-    .price {
-      font-size: 3rem;
-      font-weight: 800;
-      margin: 1rem 0 0.25rem;
-    }
-
-    .price-period {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
-    }
-
-    footer {
-      background-color: #ffffff;
-      border-top: 1px solid var(--border);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 4rem;
-    }
-
-    .wa-widget {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 9999;
-    }
-
-    .wa-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 60px;
-      height: 60px;
-      background-color: #25D366;
-      color: #ffffff;
-      border-radius: 50%;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s ease;
-      text-decoration: none;
-    }
-
-    .wa-button:hover {
-      transform: scale(1.08);
-    }
-
-    .wa-icon {
-      width: 34px;
-      height: 34px;
-      fill: currentColor;
-    }
+    body { background-color: rgba(248, 235, 203, 0.3); font-family: system-ui, -apple-system, sans-serif; color: #1e293b; margin: 0; }
   </style>
 </head>
-<body>
+<body id="appBody">
 
-  <header>
-    <div class="nav-container">
-      <a href="#" class="logo">GoldenConnect<span>Hub</span></a>
-      <ul class="nav-links">
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#pricing">Access Pass</a></li>
-        <li><a href="#verify">Check Status</a></li>
-      </ul>
+  <!-- 1. TOP ACCESSIBILITY & BRANDING BAR -->
+  <header class="bg-[#005596] text-white sticky top-0 z-40 shadow-md" id="appHeader">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center space-x-3 pl-8 sm:pl-0">
+        <div class="bg-[#F2B819] text-[#005596] p-2 rounded-full font-bold">✨</div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-serif font-bold tracking-wide leading-tight">GoldenConnectHub</h1>
+          <p class="text-xs text-[#F2B819] font-medium tracking-wider">PREMIUM 40+ SRI LANKAN MATCHMAKING</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-3 text-xs md:text-sm bg-black/20 p-1.5 rounded-lg border border-white/10">
+        <span class="text-gray-200 font-medium hidden sm:inline">Text Size:</span>
+        <button onclick="setFontSize('small')" class="px-2 py-1 rounded hover:bg-white/10">A-</button>
+        <button onclick="setFontSize('normal')" class="px-2 py-1 rounded bg-[#F2B819] text-[#005596] font-bold">Standard</button>
+        <button onclick="setFontSize('large')" class="px-2 py-1 rounded hover:bg-white/10">A+</button>
+        <span class="text-white/30">|</span>
+        <button onclick="toggleHighContrast()" id="btnContrast" class="px-2.5 py-1 rounded font-medium bg-white/10 hover:bg-white/20">High Contrast</button>
+      </div>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="badge">Exclusive Matchmaking Platform for 40+</div>
-    <h1>Connect Real Profiles with Verified Security</h1>
-    <p>Automated profile activation, instant email passkeys, and secure access built for Sri Lanka.</p>
-    <div class="cta-group">
-      <a href="#pricing" class="btn btn-primary">Get 60-Day Pass (3,000 LKR)</a>
-      <a href="#verify" class="btn btn-outline">Check Passkey Status</a>
-    </div>
-  </section>
-
-  <section id="verify">
-    <div class="checker-card">
-      <h2>Passkey Verification Desk</h2>
-      <p>Enter your 10-character passkey (e.g. <code>GC-00000001</code>) to check your membership status.</p>
-      <div class="input-group">
-        <input type="text" id="passkeyInput" class="input-field" placeholder="GC-XXXXXXXX" maxlength="11">
-        <button type="button" class="btn btn-primary" onclick="verifyPasskey()">Verify</button>
+  <!-- 2. PASSKEY LIVE STATUS BAR -->
+  <section class="bg-[#005596]/95 text-white border-b border-black/10 py-2.5 px-4" id="statusBar">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center space-x-2">
+        <span class="text-xs uppercase tracking-wider font-semibold opacity-90">Passkey Status:</span>
+        <span id="passkeyBadge" class="bg-red-500/80 text-white text-xs font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+          🔒 PASSKEY INACTIVE (CONTACTS MASKED)
+        </span>
       </div>
-      <div id="statusResult" class="status-output"></div>
-    </div>
-  </section>
-
-  <section id="how-it-works">
-    <h2 class="section-title">How It Works</h2>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <h3>Register Your Profile</h3>
-        <p>Complete your registration details securely on Golden Connect Hub.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <h3>Activate Membership</h3>
-        <p>Complete the 3,000 LKR fee to unlock full 60-day access.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <h3>Instant Email Passkey</h3>
-        <p>Your unique passkey is automatically dispatched to your email.</p>
+      <div id="passkeyFormContainer" class="flex items-center gap-2">
+        <input type="text" id="passkeyInput" placeholder="Enter Passkey (e.g. GCH-8842-VIP)" class="px-3 py-1 text-xs text-slate-800 rounded border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#F2B819] w-48" />
+        <button onclick="verifyPasskey()" class="bg-[#C23B80] hover:bg-[#a02c67] text-white text-xs font-bold px-3 py-1 rounded transition-colors shadow-sm">Verify</button>
       </div>
     </div>
   </section>
 
-  <section id="pricing">
-    <h2 class="section-title">Simple Transparent Access</h2>
-    <div class="pricing-card">
-      <div class="pricing-badge">All-Inclusive Pass</div>
-      <div class="price">3,000 LKR</div>
-      <div class="price-period">Full access for 60 Days</div>
-      <a href="https://wa.me/94775569178?text=Hello%20Golden%20Connect%20Hub,%20I%20would%20like%20to%20activate%20my%20membership." class="btn btn-primary" style="width: 100%;">Request Activation</a>
+  <!-- 3. HERO & CEO TRUST MESSAGE -->
+  <section class="max-w-7xl mx-auto px-4 pt-6 pb-2">
+    <div class="bg-white border border-[#005596]/20 rounded-2xl p-6 shadow-sm relative overflow-hidden" id="heroBox">
+      <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1 space-y-3">
+          <div class="inline-flex items-center gap-1.5 bg-[#48B2A7]/10 text-[#005596] font-semibold text-xs px-3 py-1 rounded-full">
+            🛡️ Verified 40+ Senior Community
+          </div>
+          <h2 class="text-2xl md:text-3xl font-serif font-bold text-[#005596]">Dignified, Secure & Authentic Connections</h2>
+          <p class="text-slate-600 leading-relaxed">
+            GoldenConnectHub is designed with total privacy, security, and trust at its core. Every candidate profile is individually vetted to ensure genuine, long-lasting companionship for Sri Lankans aged 40 and above.
+          </p>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button onclick="openModal('registerModal')" class="bg-[#C23B80] hover:bg-[#a02c67] text-white font-bold px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-md">
+              👤 Create Profile (40+)
+            </button>
+            <button id="btnGetAccessPass" onclick="openModal('paymentModal')" class="bg-[#005596] hover:bg-[#004073] text-white font-bold px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-md">
+              🔓 Get VIP Access Pass
+            </button>
+          </div>
+        </div>
+        <div class="w-full md:w-80 bg-[#F8EBCB] p-4 rounded-xl border border-[#F2B819]/50 shadow-inner space-y-2">
+          <div class="flex items-center gap-2">
+            🏆 <h4 class="font-serif font-bold text-[#005596]">Founder & CEO Message</h4>
+          </div>
+          <blockquote class="text-xs text-slate-700 italic leading-relaxed">
+            "Our mission is to foster meaningful relationships built on respect, security, and shared culture. Your privacy is strictly protected through our manual verification process."
+          </blockquote>
+          <p class="text-xs font-bold text-[#005596] text-right">— Sugath Wijesinghe</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <footer>
-    <p>&copy; 2026 Golden Connect Hub. All rights reserved. | Official Support Desk: +94 77 55 69 178</p>
-  </footer>
+  <!-- 4. SEARCH & FILTERS BAR -->
+  <section class="max-w-7xl mx-auto px-4 py-4">
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap gap-3 items-center justify-between">
+      <div class="relative flex-1 min-w-[200px]">
+        <input type="text" id="searchInput" oninput="renderMembers()" placeholder="🔍 Search by profession, location..." class="w-full pl-3 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005596]" />
+      </div>
+      <div class="flex flex-wrap gap-2 text-xs">
+        <select id="genderFilter" onchange="renderMembers()" class="px-3 py-2 border border-slate-300 rounded-lg font-medium text-slate-700">
+          <option value="All">All Genders</option>
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+        </select>
+        <select id="locationFilter" onchange="renderMembers()" class="px-3 py-2 border border-slate-300 rounded-lg font-medium text-slate-700">
+          <option value="All">All Locations</option>
+          <option value="Colombo">Colombo</option>
+          <option value="Kandy">Kandy</option>
+          <option value="Galle">Galle</option>
+        </select>
+        <select id="goalFilter" onchange="renderMembers()" class="px-3 py-2 border border-slate-300 rounded-lg font-medium text-slate-700">
+          <option value="All">All Relationship Goals</option>
+          <option value="Companionship">Companionship</option>
+          <option value="Marriage">Marriage</option>
+        </select>
+      </div>
+    </div>
+  </section>
 
-  <div class="wa-widget">
-    <a href="https://wa.me/94775569178?text=Hello%20Golden%20Connect%20Hub,%20I%20need%20assistance." 
-       class="wa-button" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-      <svg class="wa-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.35-1.4c1.42.77 3.03 1.18 4.69 1.18 5.46 0 9.9-4.44 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2m5.73 14.05c-.24.67-1.39 1.28-1.92 1.35-.49.07-1.12.1-3.66-.93-1.42-.58-2.33-2.03-2.4-2.13-.07-.1-1.01-1.35-1.01-2.58 0-1.23.64-1.83.87-2.08.23-.25.5-.31.67-.31.17 0 .33 0 .47.01.15.01.35-.06.55.43.2.48.68 1.66.74 1.78.06.12.1.27.02.43-.08.16-.12.26-.24.4-.12.14-.26.31-.37.42-.12.12-.25.25-.11.49.14.24.62 1.02 1.33 1.65.91.81 1.68 1.07 1.92 1.19.24.12.38.1.52-.06.14-.16.61-.71.77-.95.16-.24.32-.2.53-.12.21.08 1.34.63 1.57.74.23.11.38.17.44.27.06.1.06.58-.18 1.25z"/></svg>
-    </a>
+  <!-- 5. MEMBER DIRECTORY CARDS -->
+  <main class="max-w-7xl mx-auto px-4 py-4">
+    <h3 class="text-xl font-serif font-bold text-[#005596] mb-4 flex items-center gap-2">
+      ❤️ Verified Member Profiles ( <span id="memberCount">0</span> )
+    </h3>
+    <div id="membersGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6"></div>
+  </main>
+
+  <!-- 6. CREATE PROFILE MODAL -->
+  <div id="registerModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative space-y-4 my-8">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="text-xl font-serif font-bold text-[#005596]">👤 Create Profile (40+ Only)</h3>
+        <button onclick="closeModal('registerModal')" class="text-slate-400 text-lg font-bold">✕</button>
+      </div>
+      <div id="ageError" class="hidden bg-red-50 border border-red-200 text-red-700 p-3 rounded-lg text-xs font-semibold"></div>
+      <form onsubmit="handleRegisterSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Full Name</label>
+          <input type="text" id="regName" required placeholder="e.g. Anura Silva" class="w-full p-2 border border-slate-300 rounded-lg" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Date of Birth</label>
+            <input type="date" id="regDob" required class="w-full p-2 border border-slate-300 rounded-lg" />
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Gender</label>
+            <select id="regGender" class="w-full p-2 border border-slate-300 rounded-lg">
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Location</label>
+            <select id="regLocation" class="w-full p-2 border border-slate-300 rounded-lg">
+              <option value="Colombo">Colombo</option>
+              <option value="Kandy">Kandy</option>
+              <option value="Galle">Galle</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Relationship Goal</label>
+            <select id="regGoal" class="w-full p-2 border border-slate-300 rounded-lg">
+              <option value="Companionship">Companionship</option>
+              <option value="Marriage">Marriage</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Profession</label>
+          <input type="text" id="regProfession" placeholder="e.g. Executive, Teacher" class="w-full p-2 border border-slate-300 rounded-lg" />
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Bio</label>
+          <textarea id="regBio" rows="2" placeholder="About yourself..." class="w-full p-2 border border-slate-300 rounded-lg"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-[#C23B80] text-white font-bold py-2.5 rounded-xl shadow-md text-sm">
+          📲 Submit Profile via WhatsApp (+94 77 556 9178)
+        </button>
+      </form>
+    </div>
   </div>
 
+  <!-- 7. PAYMENT MODAL -->
+  <div id="paymentModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="text-xl font-serif font-bold text-[#005596]">🔓 VIP Access Pass</h3>
+        <button onclick="closeModal('paymentModal')" class="text-slate-400 text-lg font-bold">✕</button>
+      </div>
+      <div class="bg-[#F8EBCB] p-4 rounded-xl border border-[#F2B819] space-y-1 text-xs">
+        <p class="font-bold text-[#005596]">🏦 Sampath Bank PLC (Kaduwela Branch)</p>
+        <p>A/C Name: S. P. Wijesinghe</p>
+        <p>A/C No: <strong class="text-[#005596] text-sm">116254863677</strong></p>
+      </div>
+      <a href="https://wa.me/94775569178?text=Hello%20Admin,%20I%20have%20completed%20the%20payment%20transfer." target="_blank" class="w-full bg-emerald-600 text-white text-xs font-bold py-2.5 rounded-xl flex items-center justify-center shadow text-center">
+        📲 Send Payment Slip via WhatsApp (+94 77 556 9178)
+      </a>
+      <div class="text-center pt-1">
+        <button onclick="simulateApproval()" class="text-xs text-[#005596] underline font-bold">Simulate Instant Access (Demo)</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-[#005596] text-white mt-12 py-8 border-t border-black/10 text-center text-xs opacity-90 space-y-2">
+    <p class="font-serif font-bold text-base text-[#F2B819]">GoldenConnectHub</p>
+    <p>Sri Lanka’s Trusted 40+ Senior Matchmaking Platform | WhatsApp: +94 77 556 9178</p>
+  </footer>
+
+  <!-- DIRECT SCRIPT EXECUTION -->
   <script>
-    function verifyPasskey() {
-      const input = document.getElementById('passkeyInput').value.trim().toUpperCase();
-      const output = document.getElementById('statusResult');
-      const gcRegex = /^GC-\d{8}$/;
+    var isUnlocked = false;
+    var highContrast = false;
 
-      if (!input) {
-        output.className = 'status-output error';
-        output.innerText = 'Please enter a valid passkey.';
-        return;
+    var members = [
+      {
+        id: 1,
+        name: 'Nalini M.',
+        age: 48,
+        gender: 'Female',
+        location: 'Colombo',
+        profession: 'Senior Accountant',
+        goal: 'Companionship',
+        bio: 'Enjoys peaceful weekend trips, classical music, and meaningful conversations.',
+        phone: '+94 77 123 4567',
+        photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400'
+      },
+      {
+        id: 2,
+        name: 'Kamal P.',
+        age: 52,
+        gender: 'Male',
+        location: 'Kandy',
+        profession: 'Civil Engineer',
+        goal: 'Marriage',
+        bio: 'Family-oriented, enjoys nature walks, photography, and community service.',
+        phone: '+94 71 987 6543',
+        photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400'
+      },
+      {
+        id: 3,
+        name: 'Sunethra D.',
+        age: 45,
+        gender: 'Female',
+        location: 'Galle',
+        profession: 'Entrepreneur',
+        goal: 'Companionship',
+        bio: 'Passionate about art, beach strolls, and wellness.',
+        phone: '+94 75 444 8899',
+        photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400'
+      },
+      {
+        id: 4,
+        name: 'Rohan F.',
+        age: 56,
+        gender: 'Male',
+        location: 'Colombo',
+        profession: 'Business Consultant',
+        goal: 'Marriage',
+        bio: 'Active lifestyle, loves international travel, podcasts, and architecture.',
+        phone: '+94 77 888 2211',
+        photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400'
       }
+    ];
 
-      if (gcRegex.test(input)) {
-        output.className = 'status-output success';
-        output.innerText = 'Passkey format valid! Access active for ' + input;
+    function renderMembers() {
+      var grid = document.getElementById('membersGrid');
+      if (!grid) return;
+
+      var searchVal = (document.getElementById('searchInput') ? document.getElementById('searchInput').value : '').toLowerCase();
+      var genderVal = document.getElementById('genderFilter') ? document.getElementById('genderFilter').value : 'All';
+      var locationVal = document.getElementById('locationFilter') ? document.getElementById('locationFilter').value : 'All';
+      var goalVal = document.getElementById('goalFilter') ? document.getElementById('goalFilter').value : 'All';
+
+      var filtered = members.filter(function(m) {
+        var matchesSearch = m.name.toLowerCase().indexOf(searchVal) !== -1 || 
+                              m.profession.toLowerCase().indexOf(searchVal) !== -1 || 
+                              m.location.toLowerCase().indexOf(searchVal) !== -1;
+        var matchesGender = (genderVal === 'All') || (m.gender === genderVal);
+        var matchesLocation = (locationVal === 'All') || (m.location === locationVal);
+        var matchesGoal = (goalVal === 'All') || (m.goal === goalVal);
+        return matchesSearch && matchesGender && matchesLocation && matchesGoal;
+      });
+
+      var countElem = document.getElementById('memberCount');
+      if (countElem) countElem.innerText = filtered.length;
+
+      grid.innerHTML = '';
+
+      filtered.forEach(function(m) {
+        var card = document.createElement('div');
+        card.className = "bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden flex flex-col sm:flex-row";
+
+        var phoneDigits = m.phone.replace(/[^0-9]/g, '');
+
+        var contactHTML = isUnlocked ? 
+          '<div class="bg-[#48B2A7]/10 p-2.5 rounded-xl space-y-1.5">' +
+            '<div class="flex items-center justify-between text-xs font-bold text-[#005596]">' +
+              '<span>📞 Phone:</span><span>' + m.phone + '</span>' +
+            '</div>' +
+            '<a href="https://wa.me/' + phoneDigits + '?text=Hello%20' + encodeURIComponent(m.name) + ',%20I%20saw%20your%20profile%20on%20GoldenConnectHub." target="_blank" class="w-full bg-emerald-600 text-white text-xs font-bold py-1.5 rounded-lg flex items-center justify-center gap-1 shadow-sm text-center block">' +
+              '📲 Chat via WhatsApp' +
+            '</a>' +
+          '</div>' : 
+          '<button onclick="openModal(\'paymentModal\')" class="w-full bg-[#005596] hover:bg-[#004073] text-white text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-2">' +
+            '🔒 Unlock Contact Details' +
+          '</button>';
+
+        card.innerHTML = 
+          '<div class="sm:w-2/5 relative h-56 sm:h-auto">' +
+            '<img src="' + m.photo + '" alt="' + m.name + '" class="w-full h-full object-cover" />' +
+            '<span class="absolute top-3 left-3 bg-[#005596] text-[#F2B819] text-xs font-bold px-2.5 py-1 rounded-full shadow">✓ Vetted 40+</span>' +
+          '</div>' +
+          '<div class="sm:w-3/5 p-5 flex flex-col justify-between space-y-3">' +
+            '<div>' +
+              '<div class="flex justify-between items-start">' +
+                '<h4 class="text-xl font-bold font-serif text-[#005596]">' + m.name + '</h4>' +
+                '<span class="bg-[#48B2A7]/10 text-[#005596] text-xs font-bold px-2 py-0.5 rounded">' + m.age + ' Yrs</span>' +
+              '</div>' +
+              '<div class="space-y-1 mt-2 text-xs text-slate-600">' +
+                '<p>💼 ' + m.profession + '</p>' +
+                '<p>📍 ' + m.location + ', Sri Lanka</p>' +
+                '<p>❤️ Seeking: <strong>' + m.goal + '</strong></p>' +
+              '</div>' +
+              '<p class="text-xs text-slate-600 mt-3 leading-relaxed">"' + m.bio + '"</p>' +
+            '</div>' +
+            '<div class="pt-3 border-t border-slate-100">' + contactHTML + '</div>' +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+    }
+
+    function verifyPasskey() {
+      var code = (document.getElementById('passkeyInput').value || '').trim().toUpperCase();
+      if (code === 'GCH-8842-VIP' || code === '8842') {
+        isUnlocked = true;
+        document.getElementById('passkeyBadge').className = "bg-[#F2B819] text-[#005596] text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm";
+        document.getElementById('passkeyBadge').innerText = "✓ ACTIVE VIP PASSKEY UNLOCKED";
+        document.getElementById('passkeyFormContainer').style.display = 'none';
+        renderMembers();
+        alert('Passkey Verified Successfully!');
       } else {
-        output.className = 'status-output error';
-        output.innerText = 'Invalid passkey format. Expected format: GC-XXXXXXXX';
+        alert('Invalid Passkey.');
       }
     }
+
+    function simulateApproval() {
+      isUnlocked = true;
+      document.getElementById('passkeyBadge').className = "bg-[#F2B819] text-[#005596] text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm";
+      document.getElementById('passkeyBadge').innerText = "✓ ACTIVE VIP PASSKEY UNLOCKED";
+      document.getElementById('passkeyFormContainer').style.display = 'none';
+      renderMembers();
+      closeModal('paymentModal');
+    }
+
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+      var dob = document.getElementById('regDob').value;
+      if (!dob) return;
+      var birthDate = new Date(dob);
+      var age = new Date().getFullYear() - birthDate.getFullYear();
+      if (age < 40) {
+        var errBox = document.getElementById('ageError');
+        errBox.innerText = "Exclusively for members aged 40 and above.";
+        errBox.classList.remove('hidden');
+        return;
+      }
+      var name = document.getElementById('regName').value;
+      var text = encodeURIComponent("New Registration\nName: " + name + "\nAge: " + age);
+      window.open("https://wa.me/94775569178?text=" + text, '_blank');
+      closeModal('registerModal');
+    }
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+    function setFontSize(size) {
+      var body = document.getElementById('appBody');
+      body.style.fontSize = (size === 'large') ? '18px' : (size === 'small' ? '13px' : '15px');
+    }
+
+    function toggleHighContrast() {
+      highContrast = !highContrast;
+      document.body.style.backgroundColor = highContrast ? '#000000' : '';
+      document.body.style.color = highContrast ? '#ffff00' : '';
+      renderMembers();
+    }
+
+    // Execute immediately and on load
+    renderMembers();
+    window.addEventListener('load', renderMembers);
   </script>
 </body>
 </html>
