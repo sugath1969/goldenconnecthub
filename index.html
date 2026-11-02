@@ -15,13 +15,15 @@
     }
     .container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
 
-    /* Top Announcement Bar */
+    /* Top Announcement Bar - Fixed phone number wrapping */
     .top-bar {
       background-color: #451a03;
       color: #fde68a;
-      font-size: 12px;
-      padding: 8px 16px;
+      font-size: 11px;
+      padding: 8px 12px;
       text-align: center;
+      white-space: nowrap;
+      overflow-x: auto;
     }
 
     /* Header */
@@ -100,8 +102,8 @@
     .hero-tag { display: inline-block; background: rgba(245, 158, 11, 0.2); border: 1px solid rgba(245, 158, 11, 0.4); color: #fef3c7; font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 600; margin-bottom: 12px; }
     .hero-title { font-size: 22px; font-weight: bold; margin-bottom: 8px; color: #fffbeb; }
     .hero-desc { font-size: 13px; color: #fef3c7; line-height: 1.5; margin-bottom: 16px; }
-    .btn-hero-white { width: 100%; background: #ffffff; color: #451a03; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 13px; cursor: pointer; margin-bottom: 8px; }
-    .btn-hero-green { width: 100%; background: #059669; color: #ffffff; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 13px; cursor: pointer; }
+    .btn-hero-white { width: 100%; background: #ffffff; color: #451a03; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 13px; cursor: pointer; margin-bottom: 8px; text-align: center; }
+    .btn-hero-green { width: 100%; background: #059669; color: #ffffff; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 13px; cursor: pointer; text-align: center; }
 
     /* CEO Card */
     .ceo-card {
@@ -180,7 +182,7 @@
 
   <!-- 1. TOP ANNOUNCEMENT BAR -->
   <div class="top-bar">
-    🟢 Verified Community (Ages 40 & Above) &nbsp;|&nbsp; 📞 Direct Support: +94 77 556 9178
+    🟢 Verified Community (40+) &nbsp;|&nbsp; 📞 Support: +94 77 556 9178
   </div>
 
   <!-- 2. BRAND HEADER -->
@@ -195,7 +197,7 @@
       </div>
       <div class="btn-group">
         <button onclick="openModal('registerModal')" class="btn-secondary">+ Add Profile</button>
-        <button onclick="openModal('paymentModal')" class="btn-primary">Unlock Contacts <span class="price-tag">3k LKR</span></button>
+        <button onclick="openModal('paymentModal')" class="btn-primary">Unlock <span class="price-tag">3k LKR</span></button>
       </div>
     </div>
   </header>
@@ -212,7 +214,7 @@
   </div>
 
   <div class="container">
-    <!-- 4. HERO BANNER -->
+    <!-- 4. HERO BANNER (Fixed Create Profile Button) -->
     <div class="hero-card">
       <span class="hero-tag">Sri Lanka's #1 Dedicated Matchmaker (40+)</span>
       <h2 class="hero-title">Find Genuine Companionship</h2>
@@ -376,7 +378,6 @@
       }
     }
 
-    // UPDATED FETCH FUNCTION: Maps all rows from Supabase directly without hiding them
     async function fetchLiveProfiles() {
       try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=*`, {
@@ -496,4 +497,95 @@
     }
 
     function verifyPasskey() {
-      var inputKey = (document.getElementById('passkey
+      var inputKey = (document.getElementById('passkeyInput').value || '').trim().toUpperCase();
+      var isValid = (inputKey === 'GCH-8842-VIP' || inputKey === '8842' || inputKey === 'GC-00000006' || inputKey === 'GC-00000005') ||
+                    liveMembers.some(m => m.passkey && m.passkey.toUpperCase() === inputKey);
+
+      if (isValid) {
+        isUnlocked = true;
+        var badge = document.getElementById('passkeyBadge');
+        badge.innerText = "✓ VIP UNLOCKED";
+        badge.classList.add('unlocked');
+        document.getElementById('passkeyFormContainer').style.display = 'none';
+        renderMembers();
+        alert('Passkey Verified! Direct contacts unlocked.');
+      } else {
+        alert('Invalid Passkey.');
+      }
+    }
+
+    async function handleRegisterSubmit(e) {
+      e.preventDefault();
+      var dob = document.getElementById('regDob').value;
+      if (!dob) return;
+      var birthDate = new Date(dob);
+      var age = new Date().getFullYear() - birthDate.getFullYear();
+      if (age < 40) {
+        var errBox = document.getElementById('ageError');
+        errBox.innerText = "Registration blocked: Exclusively for members aged 40 and above.";
+        errBox.style.display = 'block';
+        return;
+      }
+
+      var name = document.getElementById('regName').value;
+      var gender = document.getElementById('regGender').value;
+      var location = document.getElementById('regLocation').value;
+      var goal = document.getElementById('regGoal').value;
+      var profession = document.getElementById('regProfession').value || 'Professional';
+      var bio = document.getElementById('regBio').value || 'New member profile.';
+
+      var btn = document.getElementById('submitBtn');
+      if (btn) btn.innerText = "Saving...";
+
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            full_name: name,
+            age: age,
+            gender: gender,
+            location: location,
+            goal: goal,
+            profession: profession,
+            bio: bio,
+            is_active: true
+          })
+        });
+      } catch (err) {
+        console.log('Insert error:', err);
+      }
+
+      liveMembers.unshift({
+        id: Date.now(),
+        name: name,
+        age: age,
+        gender: gender,
+        location: location,
+        profession: profession,
+        goal: goal,
+        bio: bio,
+        phone: '+94 77 556 9178',
+        photo: uploadedPhotoData || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400'
+      });
+      renderMembers();
+
+      var text = encodeURIComponent("*New Profile Registration*\nName: " + name + "\nAge: " + age + "\nGender: " + gender + "\nLocation: " + location + "\nGoal: " + goal + "\nProfession: " + profession);
+      window.open("https://wa.me/94775569178?text=" + text, '_blank');
+
+      if (btn) btn.innerText = "Submit Profile via WhatsApp";
+      closeModal('registerModal');
+    }
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+    fetchLiveProfiles();
+  </script>
+</body>
+</html>
