@@ -376,6 +376,7 @@
       }
     }
 
+    // UPDATED FETCH FUNCTION: Maps all rows from Supabase directly without hiding them
     async function fetchLiveProfiles() {
       try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=*`, {
@@ -393,8 +394,8 @@
               name: p.full_name || p.name || 'Verified Member',
               age: p.age || 45,
               gender: p.gender || 'Female',
-              location: p.location || 'Colombo',
-              profession: p.profession || 'Professional',
+              location: p.location || 'Colombo, Sri Lanka',
+              profession: p.profession || p.occupation || 'Professional',
               goal: p.goal || 'Companionship',
               bio: p.bio || 'Dignified companion looking for a respectful connection.',
               phone: p.phone || '+94 77 556 9178',
@@ -495,98 +496,4 @@
     }
 
     function verifyPasskey() {
-      var inputKey = (document.getElementById('passkeyInput').value || '').trim().toUpperCase();
-      var isValid = (inputKey === 'GCH-8842-VIP' || inputKey === '8842' || inputKey === 'GC-00000006' || inputKey === 'GC-00000005') ||
-                    liveMembers.some(m => m.passkey && m.passkey.toUpperCase() === inputKey);
-
-      if (isValid) {
-        isUnlocked = true;
-        var badge = document.getElementById('passkeyBadge');
-        badge.innerText = "✓ VIP UNLOCKED";
-        badge.classList.add('unlocked');
-        document.getElementById('passkeyFormContainer').style.display = 'none';
-        renderMembers();
-        alert('Passkey Verified! Direct contacts unlocked.');
-      } else {
-        alert('Invalid Passkey.');
-      }
-    }
-
-    async function handleRegisterSubmit(e) {
-      e.preventDefault();
-      var dob = document.getElementById('regDob').value;
-      if (!dob) return;
-      var birthDate = new Date(dob);
-      var age = new Date().getFullYear() - birthDate.getFullYear();
-      if (age < 40) {
-        var errBox = document.getElementById('ageError');
-        errBox.innerText = "Registration blocked: Exclusively for members aged 40 and above.";
-        errBox.style.display = 'block';
-        return;
-      }
-
-      var name = document.getElementById('regName').value;
-      var gender = document.getElementById('regGender').value;
-      var location = document.getElementById('regLocation').value;
-      var goal = document.getElementById('regGoal').value;
-      var profession = document.getElementById('regProfession').value || 'Professional';
-      var bio = document.getElementById('regBio').value || 'New member profile.';
-
-      var btn = document.getElementById('submitBtn');
-      if (btn) btn.innerText = "Saving...";
-
-      // Post record matching Supabase columns (full_name, is_active)
-      try {
-        await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
-          method: 'POST',
-          headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify({
-            full_name: name,
-            age: age,
-            gender: gender,
-            location: location,
-            goal: goal,
-            profession: profession,
-            bio: bio,
-            is_active: true
-          })
-        });
-      } catch (err) {
-        console.log('Insert error:', err);
-      }
-
-      // Add to local interface dynamically
-      liveMembers.unshift({
-        id: Date.now(),
-        name: name,
-        age: age,
-        gender: gender,
-        location: location,
-        profession: profession,
-        goal: goal,
-        bio: bio,
-        phone: '+94 77 556 9178',
-        photo: uploadedPhotoData || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400'
-      });
-      renderMembers();
-
-      // Open WhatsApp notification
-      var text = encodeURIComponent("*New Profile Registration*\nName: " + name + "\nAge: " + age + "\nGender: " + gender + "\nLocation: " + location + "\nGoal: " + goal + "\nProfession: " + profession);
-      window.open("https://wa.me/94775569178?text=" + text, '_blank');
-
-      if (btn) btn.innerText = "Submit Profile via WhatsApp";
-      closeModal('registerModal');
-    }
-
-    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
-    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
-
-    fetchLiveProfiles();
-  </script>
-</body>
-</html>
+      var inputKey = (document.getElementById('passkey
