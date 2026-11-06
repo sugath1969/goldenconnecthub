@@ -61,7 +61,7 @@ $('profile-form').addEventListener('submit',async event=>{
  }catch(error){status.textContent='Profile was not confirmed as saved: '+(error.message||'Unknown error. Please send this message for checking.');}
  finally{savingProfile=false;$('save-profile').disabled=!client||!signedIn;$('logout').disabled=false;}
 });
-async function initialize(){try{if(!window.supabase)throw new Error('The account library could not load. Check your connection and refresh.');client=window.supabase.createClient('https://hawqxgggoclhbkdvbkah.supabase.co','sb_publishable_o2iFhFs4vdYyBk972xoK-g_srB7a0JB');client.auth.onAuthStateChange((_event,session)=>showSession(session));const {data,error}=await client.auth.getSession();if(error)throw error;showSession(data.session);lock(false);}catch(error){client=null;$('session-status').textContent=error.message;$('auth-status').textContent=error.message;$('save-profile').disabled=true;lock(false);}}
+async function initialize(){try{if(!window.supabase)throw new Error('The account library could not load. Check your connection and refresh.');client=window.supabase.createClient('https://hawqxgggoclhbkdvbkah.supabase.co','sb_publishable_Phk-fYJl4fxueBk8xKEVRg_P79wzm_3');client.auth.onAuthStateChange((_event,session)=>showSession(session));const {data,error}=await client.auth.getSession();if(error)throw error;showSession(data.session);lock(false);}catch(error){client=null;$('session-status').textContent=error.message;$('auth-status').textContent=error.message;$('save-profile').disabled=true;lock(false);}}
 initialize();
 </script>
 </body>
