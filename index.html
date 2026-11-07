@@ -5,64 +5,118 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GoldenConnect | A Meaningful New Chapter</title>
 <meta name="description" content="Companionship and meaningful connections for people aged 40 and above in Sri Lanka.">
+
 <style>
-:root{--bg:#faf7f1;--ink:#352a23;--brown:#603d2b;--gold:#b99557;--line:#e7ded1}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,sans-serif}button,input{font:inherit}button,.button{background:var(--brown);color:white;border:1px solid transparent;border-radius:10px;padding:12px 20px;cursor:pointer;text-decoration:none;display:inline-block}button:disabled{opacity:.55;cursor:wait}.secondary{background:white;color:var(--brown);border-color:var(--line)}.wrap{max-width:1120px;margin:auto;padding:0 24px}.notice{text-align:center;background:#eee4d1;padding:9px 16px;font-size:13px}header{background:white;border-bottom:1px solid var(--line)}nav{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:88px}.brand{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}.mark{background:var(--brown);color:#f4dcac;font:25px Georgia;padding:11px;border-radius:12px}.brand strong{display:block;font-size:21px}.brand small{font-size:10px;letter-spacing:1.7px}.links,.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.links a{color:inherit;text-decoration:none;font-size:14px}h1,h2,h3{font-family:Georgia,serif;font-weight:400;line-height:1.2}h1{font-size:clamp(42px,5.7vw,65px);margin:18px 0}h1 em{color:#957042}h2{font-size:32px}.eyebrow{text-transform:uppercase;font-size:12px;letter-spacing:2px;color:#886832}.muted{color:#75695e}.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:50px;align-items:center;padding:65px 0}.actions{margin:24px 0}.art{background:#e9dfce;border-radius:90px 90px 22px 22px;padding:40px;min-height:350px}.art blockquote{font:30px/1.45 Georgia;margin:18px 0}.steps,.grid,.fields{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.fields{grid-template-columns:1fr 1fr;gap:0 24px}.steps{border-top:1px solid var(--line);padding:30px 0}.founder{text-align:center;max-width:800px;margin:35px auto 55px}.founder blockquote{font:20px/1.85 Georgia}.section{padding:25px 0 40px}.card{background:white;border:1px solid var(--line);border-radius:18px;padding:25px}.tag{font-size:12px;background:#f0e8da;padding:5px 10px;border-radius:20px}.offer{background:#352c25;color:#fff7e8;border-radius:22px;padding:32px}footer{border-top:1px solid var(--line);padding:30px 0;font-size:13px}footer a{color:inherit}dialog{width:min(94vw,530px);max-height:90vh;overflow:auto;border:1px solid var(--line);border-radius:18px;padding:28px;color:var(--ink)}dialog::backdrop{background:#241b16a6}.close{float:right;background:#efe9df;color:#534335;padding:4px 12px}label{display:block;margin:16px 0 6px}input{width:100%;border:1px solid #d8cebf;border-radius:9px;padding:12px}.status{white-space:pre-wrap;overflow-wrap:anywhere}.help{font-size:13px;color:#75695e}:focus-visible{outline:3px solid var(--gold);outline-offset:3px}[hidden]{display:none!important}@media(max-width:760px){.hero,.steps,.grid,.fields{grid-template-columns:1fr}.hero{padding:35px 0}.links a{display:none}.art{min-height:230px;padding:28px}.brand strong{font-size:17px}.wrap{padding:0 18px}}
-</style>
-</head>
-<body>
-<div class="notice">Account and private profile test · Directory samples only · Public publishing and payments are not enabled</div>
-<header><nav class="wrap" aria-label="Main navigation"><a class="brand" href="#"><span class="mark">GC</span><span><strong>GoldenConnect</strong><small>SRI LANKA · COMPANIONSHIP · 40+</small></span></a><div class="links"><a href="#profiles">Browse profiles</a><a href="#how">How it works</a><button id="account-button" class="secondary">Sign in</button><button id="logout" class="secondary" hidden>Sign out</button></div></nav></header>
-<main class="wrap">
-<p id="session-status" class="status" role="status">Loading account connection…</p>
-<section class="hero"><div><span class="eyebrow">A new chapter, at your own pace</span><h1>Life is richer<br>with <em>companionship.</em></h1><p class="muted">A welcoming space for people aged 40 and above in Sri Lanka to explore friendship, companionship, and lasting relationships.</p><div class="actions"><a class="button" href="#profiles">Explore profiles</a><button id="join-button" class="secondary">Create account</button><a id="profile-link" class="button secondary" href="#my-profile" hidden>My private profile</a></div><small class="muted">Take your time. Start with a conversation.</small></div><aside class="art"><span class="eyebrow">Your next chapter</span><blockquote>Someone to share the little things. Something meaningful to look forward to.</blockquote><small>A thoughtful approach to meeting someone new.</small></aside></section>
-<section id="how" class="steps"><article><span class="eyebrow">01</span><h3>Create an account</h3><p>Register with your email and confirm your email address.</p></article><article><span class="eyebrow">02</span><h3>Introduce yourself</h3><p>Sign in and save a private profile. Photograph uploads and public publishing are not enabled.</p></article><article><span class="eyebrow">03</span><h3>Explore at your pace</h3><p>The directory below contains illustrative samples, not real members.</p></article></section>
-<section id="my-profile" class="section"><div class="card"><span class="eyebrow">Private profile-saving test</span><h2>Create your profile.</h2><p>Sign in first, then complete this form. Saving does not publish your profile or activate a membership.</p><form id="profile-form"><div class="fields"><div><label for="profile-name">Full name</label><input id="profile-name" autocomplete="name" maxlength="120" required></div><div><label for="profile-age">Age</label><input id="profile-age" type="number" min="40" max="120" step="1" required></div><div><label for="profile-gender">Gender</label><input id="profile-gender" maxlength="60" required></div><div><label for="profile-location">Town or district</label><input id="profile-location" maxlength="150" required></div></div><p class="help">Use a town or district, not your full home address. This test saves one profile per account; editing is not enabled. Do not enter payment information.</p><div class="actions"><button id="save-profile" type="submit" disabled>Save private profile</button></div><p id="profile-status" class="status" role="status" aria-live="polite">Sign in to save a private profile.</p></form></div></section>
-<section class="founder"><span class="eyebrow">A note from our founder</span><h2>A personal welcome.</h2><blockquote>Finding companionship is about feeling understood, respected, and valued.<br><br>I started GoldenConnect to offer people aged 40 and above in Sri Lanka a welcoming space to explore meaningful connections, at their own pace.</blockquote><p>Sugath Wijesinghe<br><small>Founder, GoldenConnect</small></p></section>
-<section id="profiles" class="section"><span class="eyebrow">Meet the community</span><h2>A connection worth exploring.</h2><p class="tag">Illustrative samples · Not real members</p><div class="grid"><article class="card"><h3>Sample member A</h3><p>48 years · Colombo · Teacher</p><p>Enjoys reading, gardening, and thoughtful conversations.</p></article><article class="card"><h3>Sample member B</h3><p>55 years · Kandy · Business owner</p><p>Enjoys music, travel, and sharing everyday moments.</p></article><article class="card"><h3>Sample member C</h3><p>62 years · Galle · Retired</p><p>Values family, honesty, cooking, and relaxed walks.</p></article></div></section>
-<section class="section offer"><h2>Contact access is not available yet.</h2><p>Payments, access-code activation, and member contact details are not enabled in this testing version. Please do not make a payment.</p></section>
-</main>
-<footer><div class="wrap"><p>GoldenConnect · A meaningful new chapter.</p><a href="tel:+94775569178">Support: +94 77 556 9178</a> · <a href="https://wa.me/94775569178" target="_blank" rel="noopener noreferrer">WhatsApp support</a></div></footer>
-<dialog id="account" aria-labelledby="account-title"><button class="close" type="button" id="close-account" aria-label="Close">×</button><h2 id="account-title">Welcome back.</h2><p id="account-help">Sign in with your confirmed email and password.</p><form id="auth-form"><label for="email">Email</label><input id="email" type="email" autocomplete="email" required><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><div class="actions"><button id="submit-auth" type="submit" disabled>Sign in</button><button class="secondary" id="switch-mode" type="button">Create a new account</button></div><p class="help" id="confirmation-help" hidden>New accounts require email confirmation. Use at least 8 characters for a new password. This service is intended for people aged 40 and above.</p><p id="auth-status" class="status" role="status" aria-live="polite"></p></form></dialog>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-'use strict';
-const $ = id => document.getElementById(id);
-// Retain the previously configured confirmation destination until redirect settings are checked.
-const confirmationURL = 'https://www.goldenconnecthub.lk/';
-let client = null, signup = false, working = false, returnFocus = null;
-let savingProfile = false, signedIn = false;
-function setMode(value){signup=value;$('account-title').textContent=value?'Create your account.':'Welcome back.';$('account-help').textContent=value?'Register using your own email address.':'Sign in with your confirmed email and password.';$('submit-auth').textContent=value?'Create account':'Sign in';$('switch-mode').textContent=value?'I already have an account':'Create a new account';$('password').autocomplete=value?'new-password':'current-password';if(value)$('password').minLength=8;else $('password').removeAttribute('minlength');$('confirmation-help').hidden=!value;$('auth-status').textContent='';}
-function openAccount(value){setMode(value);returnFocus=document.activeElement;if(!$('account').open)$('account').showModal();}
-$('account-button').onclick=()=>openAccount(false);
-$('join-button').onclick=()=>openAccount(true);
-$('close-account').onclick=()=>{if(!working)$('account').close();};
-$('account').addEventListener('cancel',event=>{if(working)event.preventDefault();});
-$('account').addEventListener('close',()=>{$('password').value='';if(returnFocus&&!returnFocus.hidden)returnFocus.focus();});
-$('switch-mode').onclick=()=>{if(!working)setMode(!signup);};
-function showSession(session){const user=session?.user;signedIn=!!user;$('session-status').textContent=user?'Signed in as '+user.email+'. You can save a private profile below. Public publishing is not enabled.':'Not signed in.';$('logout').hidden=!user;$('account-button').hidden=!!user;$('join-button').hidden=!!user;$('profile-link').hidden=!user;$('save-profile').disabled=!client||!user||savingProfile;if(!user){$('profile-form').reset();$('profile-status').textContent='Sign in to save a private profile.';}else if($('profile-status').textContent==='Sign in to save a private profile.'){$('profile-status').textContent='Complete the form to save your private profile.';}}
-function lock(value){working=value;$('submit-auth').disabled=value||!client;$('switch-mode').disabled=value;$('close-account').disabled=value;}
-$('auth-form').addEventListener('submit',async event=>{event.preventDefault();if(!client||working)return;lock(true);$('auth-status').textContent=signup?'Creating account…':'Signing in…';try{const credentials={email:$('email').value.trim(),password:$('password').value};if(signup){const {data,error}=await client.auth.signUp({...credentials,options:{emailRedirectTo:confirmationURL}});if(error)throw error;if(data.session)showSession(data.session);$('auth-status').textContent=data.session?'Account session established. Close this window to save a private profile.':'If registration is accepted, check your inbox and spam folder for a confirmation email from GoldenConnect. Click the confirmation link, then return to www.goldenconnecthub.lk and sign in. If you already have an account, choose Sign in. If you already have an account, use Sign in.';}else{const {data,error}=await client.auth.signInWithPassword(credentials);if(error)throw error;showSession(data.session);$('auth-status').textContent='Signed in successfully. Close this window and use the private profile form.';}$('password').value='';}catch(error){$('auth-status').textContent=error.message||'The request failed. Please try again.';}finally{lock(false);}});
-$('logout').onclick=async()=>{if(!client||savingProfile)return;$('logout').disabled=true;try{const {error}=await client.auth.signOut();if(error)throw error;showSession(null);}catch(error){$('session-status').textContent=error.message;}finally{$('logout').disabled=false;}};
-$('profile-form').addEventListener('submit',async event=>{
- event.preventDefault();if(savingProfile)return;const status=$('profile-status');
- if(!client||!signedIn){status.textContent='Please sign in before saving your profile.';return;}
- const fullName=$('profile-name').value.trim(),age=Number($('profile-age').value),gender=$('profile-gender').value.trim(),location=$('profile-location').value.trim();
- if(!fullName||!gender||!location||!Number.isInteger(age)||age<40||age>120){status.textContent='Complete all fields and enter a whole-number age from 40 to 120.';return;}
- savingProfile=true;$('save-profile').disabled=true;$('logout').disabled=true;status.textContent='Checking your account…';
- try{
-  const {data:userData,error:userError}=await client.auth.getUser();if(userError)throw userError;
-  const user=userData.user;if(!user){status.textContent='Please sign in before saving your profile.';return;}
-  const {data:existing,error:lookupError}=await client.from('profiles').select('id').eq('user_id',user.id).maybeSingle();if(lookupError)throw lookupError;
-  if(existing){status.textContent='Your account already has a saved profile. Editing is not enabled in this test. No changes were made.';return;}
-  status.textContent='Saving your private profile…';
-  const {error:insertError}=await client.from('profiles').insert({user_id:user.id,full_name:fullName,age,gender,location,created_by:'self',is_verified:false,is_popular:false,is_active:false,subscription_ends_at:null,access_passkey:null});
-  if(insertError){if(insertError.code==='23505'){status.textContent='A profile already exists or a unique-value conflict occurred. Do not submit again; send the error for checking.';return;}throw insertError;}
-  status.textContent='Profile saved successfully. It is not publicly published, and membership is not activated.';$('profile-form').reset();
- }catch(error){status.textContent='Profile was not confirmed as saved: '+(error.message||'Unknown error. Please send this message for checking.');}
- finally{savingProfile=false;$('save-profile').disabled=!client||!signedIn;$('logout').disabled=false;}
-});
-async function initialize(){try{if(!window.supabase)throw new Error('The account library could not load. Check your connection and refresh.');client=window.supabase.createClient('https://hawqxgggoclhbkdvbkah.supabase.co','sb_publishable_Phk-fYJl4fxueBk8xKEVRg_P79wzm_3');client.auth.onAuthStateChange((_event,session)=>showSession(session));const {data,error}=await client.auth.getSession();if(error)throw error;showSession(data.session);lock(false);}catch(error){client=null;$('session-status').textContent=error.message;$('auth-status').textContent=error.message;$('save-profile').disabled=true;lock(false);}}
-initialize();
-</script>
-</body>
-</html>
+:root {
+  --bg:#faf7f1;
+  --ink:#352a23;
+  --brown:#603d2b;
+  --gold:#b99557;
+  --line:#e7ded1;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:16px/1.65 system-ui,sans-serif;
+}
+button,input,select,textarea { font:inherit; }
+button,.button {
+  display:inline-block;
+  background:var(--brown);
+  color:white;
+  border:1px solid transparent;
+  border-radius:10px;
+  padding:12px 20px;
+  cursor:pointer;
+  text-decoration:none;
+}
+button:disabled { opacity:.55; cursor:not-allowed; }
+.secondary {
+  background:white;
+  color:var(--brown);
+  border-color:var(--line);
+}
+.wrap { max-width:1120px; margin:auto; padding:0 24px; }
+.notice {
+  text-align:center;
+  background:#eee4d1;
+  padding:9px 16px;
+  font-size:13px;
+}
+header { background:white; border-bottom:1px solid var(--line); }
+nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  min-height:88px;
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:inherit;
+  text-decoration:none;
+}
+.mark {
+  background:var(--brown);
+  color:#f4dcac;
+  font:25px Georgia;
+  padding:11px;
+  border-radius:12px;
+}
+.brand strong { display:block; font-size:21px; }
+.brand small { font-size:10px; letter-spacing:1.7px; }
+.links,.actions {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.links a { color:inherit; text-decoration:none; font-size:14px; }
+h1,h2,h3 {
+  font-family:Georgia,serif;
+  font-weight:400;
+  line-height:1.2;
+}
+h1 { font-size:clamp(42px,5.7vw,65px); margin:18px 0; }
+h1 em { color:#957042; }
+h2 { font-size:32px; }
+.eyebrow {
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:2px;
+  color:#886832;
+}
+.muted,.help { color:#75695e; }
+.help { font-size:13px; }
+.hero {
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:50px;
+  align-items:center;
+  padding:65px 0;
+}
+.actions { margin:24px 0; }
+.art {
+  background:#e9dfce;
+  border-radius:90px 90px 22px 22px;
+  padding:40px;
+  min-height:350px;
+}
+.art blockquote { font:30px/1.45 Georgia; margin:18px 0; }
+.steps,.grid,.fields {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.fields { grid-template-columns:1fr 1fr; gap:0 24px; }
+.steps { border-top:1px solid var(--line); padding:30px 0; }
+.founder { text-align:center; max-width:800px; margin:35px auto 55px; }
+.founder blockquote { font:20px/1.85 Georgia; }
+.section { padding:25px 0 40px; }
+.card {
+  background:white;
+  border:1px solid
