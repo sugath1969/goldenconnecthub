@@ -28,7 +28,7 @@
 'use strict';
 const $ = id => document.getElementById(id);
 // Retain the previously configured confirmation destination until redirect settings are checked.
-const confirmationURL = 'https://golden-connect-2o6w8fv7w-parent-care2.vercel.app/';
+const confirmationURL = 'https://www.goldenconnecthub.lk/';
 let client = null, signup = false, working = false, returnFocus = null;
 let savingProfile = false, signedIn = false;
 function setMode(value){signup=value;$('account-title').textContent=value?'Create your account.':'Welcome back.';$('account-help').textContent=value?'Register using your own email address.':'Sign in with your confirmed email and password.';$('submit-auth').textContent=value?'Create account':'Sign in';$('switch-mode').textContent=value?'I already have an account':'Create a new account';$('password').autocomplete=value?'new-password':'current-password';if(value)$('password').minLength=8;else $('password').removeAttribute('minlength');$('confirmation-help').hidden=!value;$('auth-status').textContent='';}
