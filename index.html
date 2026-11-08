@@ -14,11 +14,11 @@
 <header><nav class="wrap"><a class="brand" href="#"><strong>GoldenConnect</strong><small>SRI LANKA · COMPANIONSHIP · 40+</small></a><div class="actions"><button id="signin" class="secondary">Sign in</button><button id="logout" class="secondary" hidden>Sign out</button></div></nav></header>
 <main class="wrap">
 <p id="session" class="status" role="status">Loading account connection…</p>
-<section class="hero"><div><span class="eyebrow">A new chapter, at your own pace</span><h1>Life is richer<br>with <em>companionship.</em></h1><p class="muted">A welcoming space for people aged 40 and above in Sri Lanka to explore friendship, companionship, and lasting relationships.</p><div class="actions"><a class="button" href="#profiles">Explore profiles</a><button id="join" class="secondary">Create account</button><a class="button secondary" href="#my-profile">My private profile</a></div><small class="muted">Take your time. Start with a conversation.</small></div><aside class="art"><span class="eyebrow">Your next chapter</span><blockquote>Someone to share the little things. Something meaningful to look forward to.</blockquote><small>A thoughtful approach to meeting someone new.</small></aside></section>
+<section class="hero"><div><span class="eyebrow">A new chapter, at your own pace</span><h1>Life is richer
+with <em>companionship.</em></h1><p class="muted">A welcoming space for people aged 40 and above in Sri Lanka to explore friendship, companionship, and lasting relationships.</p><div class="actions"><a class="button" href="#profiles">Explore profiles</a><button id="join" class="secondary">Create account</button><a class="button secondary" href="#my-profile">My private profile</a></div><small class="muted">Take your time. Start with a conversation.</small></div><aside class="art"><span class="eyebrow">Your next chapter</span><blockquote>Someone to share the little things. Something meaningful to look forward to.</blockquote><small>A thoughtful approach to meeting someone new.</small></aside></section>
 <section class="steps"><article><span class="eyebrow">01</span><h3>Create an account</h3><p>Register with your email and confirm your email address.</p></article><article><span class="eyebrow">02</span><h3>Introduce yourself</h3><p>Save a private profile and photograph. Public publishing is not enabled.</p></article><article><span class="eyebrow">03</span><h3>Explore at your pace</h3><p>The directory contains illustrative samples, not real members.</p></article></section>
 <section id="my-profile" class="section"><div class="card"><span class="eyebrow">Your private introduction</span><h2 id="profile-title">Your private profile.</h2><p>Saving does not publish your information or activate membership.</p>
-<p id="profile-access-note" class="status" role="status">Sign in to create or view your private profile.</p>
-<form id="profile-form" hidden><fieldset id="fields" disabled><div class="fields">
+<form id="profile-form"><fieldset id="fields" disabled><div class="fields">
 <div><label for="full_name">Full name</label><input id="full_name" autocomplete="name" maxlength="120" required></div>
 <div><label for="age">Age</label><input id="age" type="number" min="40" max="120" step="1" required></div>
 <div><label for="gender">Gender</label><select id="gender" required><option value="">Choose an option</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>
@@ -27,12 +27,139 @@
 <div><label for="purpose">Connection you are looking for</label><select id="purpose"><option value="">Choose an option (optional)</option><option>Friendship</option><option>Companionship</option><option>Long-term relationship</option><option value="Travel Buddy">Travel companion</option><option>Community</option></select></div>
 </div><label for="tagline">A short introduction</label><input id="tagline" maxlength="160"><label for="bio">About me</label><textarea id="bio" maxlength="2000" placeholder="Share your interests and the companionship you hope to find."></textarea>
 <label for="photo">Profile photograph (optional)</label><input id="photo" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-help"><p id="photo-help" class="help">JPEG, PNG or WebP, up to 5 MB. Choose a photo of yourself that you have permission to use. No identity documents.</p><img id="preview" class="photo" alt="Your private profile photograph" hidden><p id="photo-status" class="help" role="status"></p><p class="help">Use a town or district, not your full home address. Do not include payment details, identity-document numbers or contact information in your introduction.</p><div class="actions"><button type="submit">Save private profile</button></div></fieldset></form>
-<p id="profile-status" class="status" role="status" aria-live="polite" hidden>Sign in to load your private profile.</p><button id="reload" class="secondary" hidden>Reload saved profile</button></div></section>
-<section class="founder"><span class="eyebrow">A note from our founder</span><h2>A personal welcome.</h2><blockquote>Finding companionship is about feeling understood, respected, and valued.<br><br>I started GoldenConnect to offer people aged 40 and above in Sri Lanka a welcoming space to explore meaningful connections, at their own pace.</blockquote><p>Sugath Wijesinghe<br><small>Founder, GoldenConnect</small></p></section>
+<p id="profile-status" class="status" role="status" aria-live="polite">Sign in to load your private profile.</p><button id="reload" class="secondary" hidden>Reload saved profile</button></div></section>
+<section class="founder"><span class="eyebrow">A note from our founder</span><h2>A personal welcome.</h2><blockquote>Finding companionship is about feeling understood, respected, and valued.
+
+I started GoldenConnect to offer people aged 40 and above in Sri Lanka a welcoming space to explore meaningful connections, at their own pace.</blockquote><p>Sugath Wijesinghe
+<small>Founder, GoldenConnect</small></p></section>
 <section id="profiles" class="section"><span class="eyebrow">Meet the community</span><h2>A connection worth exploring.</h2><p class="help">Illustrative samples · Not real members</p><div class="grid"><article class="card"><h3>Sample member A</h3><p>48 years · Colombo · Teacher</p><p>Enjoys reading, gardening, and thoughtful conversations.</p></article><article class="card"><h3>Sample member B</h3><p>55 years · Kandy · Business owner</p><p>Enjoys music, travel, and sharing everyday moments.</p></article><article class="card"><h3>Sample member C</h3><p>62 years · Galle · Retired</p><p>Values family, honesty, cooking, and relaxed walks.</p></article></div></section>
 <section class="section offer"><h2>Contact access is not available yet.</h2><p>Payments, access-code activation, and member contact details are not enabled. Please do not make a payment.</p></section>
 </main><footer><div class="wrap"><p>GoldenConnect · A meaningful new chapter.</p><a href="tel:+94775569178">Support: +94 77 556 9178</a> · <a href="https://wa.me/94775569178" target="_blank" rel="noopener noreferrer">WhatsApp support</a></div></footer>
 <dialog id="account" aria-labelledby="auth-title"><button id="close" class="close" type="button" aria-label="Close">×</button><h2 id="auth-title">Welcome back.</h2><p id="auth-help"></p><form id="auth-form"><div id="email-group"><label for="email">Email</label><input id="email" type="email" autocomplete="email" required></div><div id="password-group"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div><div id="confirm-group" hidden><label for="confirm">Confirm new password</label><input id="confirm" type="password" autocomplete="new-password" disabled></div><div class="actions"><button id="auth-submit" type="submit" disabled>Sign in</button><button id="switch" class="secondary" type="button">Create account</button><button id="forgot" class="secondary" type="button" disabled>Forgot password?</button></div><p id="auth-status" class="status" role="status" aria-live="polite"></p></form></dialog>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-'use str
+'use strict';
+const $=id=>document.getElementById(id);
+const redirectURL='https://www.goldenconnecthub.lk/';
+const bucket='profile-pictures';
+const names=['full_name','age','gender','location','occupation','tagline','bio','purpose'];
+const columns='id,user_id,'+names.join(',')+',image_url';
+let client=null,user=null,row=null,ready=false,loading=false,saving=false,authBusy=false,recovery=false,mode='signin',version=0,objectURL=null,chosen=null,pending=null,uncertain=false,focusBack=null;
+const err=e=>e?.message||'The request failed.';
+function controls(){
+$('fields').disabled=!client||!user||!ready||loading||saving||recovery||uncertain;
+$('reload').hidden=!user;$('reload').disabled=loading||saving||recovery;
+$('logout').disabled=saving||authBusy;
+for(const id of ['auth-submit','forgot'])$(id).disabled=!client||authBusy;
+$('switch').disabled=authBusy;$('close').disabled=authBusy;
+}
+function clearPhoto(){if(objectURL)URL.revokeObjectURL(objectURL);objectURL=null;$('preview').removeAttribute('src');$('preview').hidden=true;}
+function preview(blob){clearPhoto();objectURL=URL.createObjectURL(blob);$('preview').src=objectURL;$('preview').hidden=false;}
+function resetForm(){$('profile-form').reset();row=null;ready=false;chosen=null;pending=null;uncertain=false;clearPhoto();$('photo-status').textContent='';$('profile-title').textContent='Your private profile.';}
+function selectValue(id,value){const s=$(id);for(const o of [...s.options])if(o.dataset.legacy)o.remove();const match=[...s.options].find(o=>o.value.toLowerCase()===String(value||'').toLowerCase());if(match){s.value=match.value;}else{const o=new Option(value,value);o.dataset.legacy='1';s.add(o);s.value=value;}}
+function session(value){
+const old=user?.id;user=value?.user||null;
+$('signin').hidden=!!user;$('join').hidden=!!user;$('logout').hidden=!user;
+$('session').textContent=recovery?'Password recovery is open. Set your new password first.':user?'Signed in as '+user.email+'. Your profile remains private.':'Not signed in.';
+if(old!==user?.id){version++;loading=false;resetForm();$('profile-status').textContent=user?'Loading your private profile…':'Sign in to load your private profile.';if(user&&!recovery)setTimeout(loadProfile,0);}
+controls();
+}
+async function loadProfile(){
+if(!client||!user||saving||recovery)return;
+const uid=user.id,v=++version;loading=true;ready=false;controls();$('profile-status').textContent='Loading your private profile…';
+try{
+const {data,error}=await client.from('profiles').select(columns).eq('user_id',uid).maybeSingle();if(error)throw error;if(v!==version||user?.id!==uid)return;
+resetForm();row=data;
+if(data){for(const key of names){if(key==='gender'||key==='purpose')selectValue(key,data[key]);else $(key).value=data[key]??'';}}
+ready=true;$('profile-title').textContent=data?'Edit your private profile.':'Create your private profile.';
+$('profile-status').textContent=data?'Your saved profile is loaded. You may edit it or choose a photograph.':'No profile is saved for this account yet. Complete the form.';
+const path=data?.image_url;
+if(path&&path.startsWith(uid+'/')){
+const {data:blob,error:photoError}=await client.storage.from(bucket).download(path);if(v!==version||user?.id!==uid)return;
+if(photoError)$('photo-status').textContent='Profile loaded, but photo could not load: '+err(photoError);else{preview(blob);$('photo-status').textContent='Your saved private photograph.';}
+}else if(path){$('photo-status').textContent='An older image reference is preserved but not displayed in this private-photo form.';}
+}catch(e){if(v===version){ready=false;$('profile-status').textContent='Could not load your profile: '+err(e)+' Use Reload saved profile before saving.';}}
+finally{if(v===version){loading=false;controls();}}
+}
+function setMode(next){
+mode=next;const reset=next==='reset',request=next==='request',signup=next==='signup';
+$('auth-title').textContent=reset?'Choose a new password.':request?'Reset your password.':signup?'Create your account.':'Welcome back.';
+$('auth-help').textContent=reset?'Enter your new password twice. Use at least 8 characters.':request?'Enter your account email to request a reset link.':signup?'Use your own email and a password of at least 8 characters. Email confirmation is required. For people aged 40 and above.':'Sign in with your confirmed email and password.';
+$('email-group').hidden=reset;$('email').disabled=reset;$('email').required=!reset;
+$('password-group').hidden=request;$('password').disabled=request;$('password').required=!request;$('password').minLength=reset||signup?8:1;$('password').autocomplete=reset||signup?'new-password':'current-password';$('password').value='';
+$('confirm-group').hidden=!reset;$('confirm').disabled=!reset;$('confirm').required=reset;$('confirm').minLength=8;$('confirm').value='';
+$('auth-submit').textContent=reset?'Save new password':request?'Send reset email':signup?'Create account':'Sign in';
+$('switch').hidden=reset;$('switch').textContent=next==='signin'?'Create account':'Back to sign in';$('forgot').hidden=next!=='signin';$('auth-status').textContent='';
+}
+function openAccount(next){if(authBusy||saving)return;focusBack=document.activeElement;setMode(recovery?'reset':next);if(!$('account').open)$('account').showModal();(mode==='reset'?$('password'):$('email')).focus();}
+$('signin').onclick=()=>openAccount('signin');$('join').onclick=()=>openAccount('signup');
+$('switch').onclick=()=>{if(!authBusy)setMode(mode==='signin'?'signup':'signin');};
+$('forgot').onclick=()=>{if(!authBusy)setMode('request');};
+$('close').onclick=()=>{if(!authBusy)$('account').close();};
+$('account').addEventListener('cancel',e=>{if(authBusy)e.preventDefault();});
+$('account').addEventListener('close',()=>{$('password').value='';$('confirm').value='';if(recovery)$('session').textContent='Recovery is unfinished. Sign out, then request a new recovery email if necessary.';if(focusBack&&!focusBack.hidden)focusBack.focus();});
+$('auth-form').addEventListener('submit',async e=>{
+e.preventDefault();if(!client||authBusy)return;const action=mode,email=$('email').value.trim(),password=$('password').value;
+if(action==='reset'&&password!==$('confirm').value){$('auth-status').textContent='The passwords do not match.';return;}
+authBusy=true;controls();$('auth-status').textContent='Please wait…';
+try{
+if(action==='request'){
+const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:redirectURL});if(error)throw error;
+$('auth-status').textContent='If this address is eligible, a reset email will be sent. Check your inbox and spam folder. Open its link to return here and set a new password.';
+}else if(action==='reset'){
+if(!recovery)throw new Error('Open a new recovery email link first.');
+const {error}=await client.auth.updateUser({password});if(error)throw error;recovery=false;
+const {error:outError}=await client.auth.signOut();
+if(outError){$('auth-status').textContent='Password updated. Close this window and sign out before testing the new password.';}
+else{session(null);setMode('signin');$('auth-status').textContent='Password updated. Sign in with your new password.';}
+}else if(action==='signup'){
+const {data,error}=await client.auth.signUp({email,password,options:{emailRedirectTo:redirectURL}});if(error)throw error;if(data.session)session(data.session);
+$('auth-status').textContent=data.session?'Account session established. Close this window to continue.':'If registration is accepted, check your inbox and spam folder for a confirmation email. Follow its link, then return here and sign in. Existing members should use Sign in.';
+}else{
+const {data,error}=await client.auth.signInWithPassword({email,password});if(error)throw error;session(data.session);$('auth-status').textContent='Signed in successfully. Close this window to view your private profile.';
+} $('password').value='';$('confirm').value='';
+}catch(e){$('auth-status').textContent=err(e);}finally{authBusy=false;controls();}
+});
+$('logout').onclick=async()=>{if(!client||saving||authBusy)return;authBusy=true;controls();try{const {error}=await client.auth.signOut();if(error)throw error;recovery=false;session(null);$('account').close();}catch(e){$('session').textContent=err(e);}finally{authBusy=false;controls();}};
+$('reload').onclick=()=>{if(!loading&&!saving&&(!ready||confirm('Discard unsaved changes and reload the saved profile?')))loadProfile();};
+$('photo').addEventListener('change',()=>{
+chosen=null;pending=null;const file=$('photo').files;clearPhoto();
+if(!file){$('photo-status').textContent='No new photo selected. The saved photo reference will be preserved.';return;}
+if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>510241024){$('photo').value='';$('photo-status').textContent='Choose JPEG, PNG or WebP, no larger than 5 MB.';return;}
+chosen=file;preview(file);$('photo-status').textContent='Preview only. Select Save private profile to upload.';
+});
+$('profile-form').addEventListener('submit',async e=>{
+e.preventDefault();if(!client||!user||!ready||loading||saving||recovery||uncertain)return;
+const uid=user.id,values={};for(const key of names)values[key]=key==='age'?Number($('age').value):$(key).value.trim()||null;
+if(!values.full_name||!values.gender||!values.location||!Number.isInteger(values.age)||values.age<40||values.age>120){$('profile-status').textContent='Complete required fields and enter a whole-number age from 40 to 120.';return;}
+saving=true;controls();let writeStarted=false;
+try{
+$('profile-status').textContent='Checking your account…';const {data:account,error:accountError}=await client.auth.getUser();if(accountError)throw accountError;if(account.user?.id!==uid)throw new Error('Your account changed. Reload and sign in again.');
+const {data:existing,error:lookupError}=await client.from('profiles').select('id').eq('user_id',uid).maybeSingle();if(lookupError)throw lookupError;
+if((row&&existing?.id!==row.id)||(!row&&existing))throw new Error('The saved profile changed. Reload it before saving again.');
+let path=row?.image_url||null;
+if(chosen){
+$('profile-status').textContent='Uploading your private photograph…';
+const ext={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[chosen.type];
+const target=uid+'/'+crypto.randomUUID()+'.'+ext;
+const {error}=await client.storage.from(bucket).upload(target,chosen,{upsert:false,contentType:chosen.type,cacheControl:'0'});if(error)throw error;pending=target;path=target;
+} values.image_url=path;$('profile-status').textContent='Saving your private profile…';writeStarted=true;
+const result=existing?await client.from('profiles').update(values).eq('id',existing.id).eq('user_id',uid).select(columns).single():await client.from('profiles').insert({...values,user_id:uid,created_by:'self',is_verified:false,is_popular:false,is_active:false,subscription_ends_at:null,access_passkey:null}).select(columns).single();
+if(result.error)throw result.error;row=result.data;chosen=null;pending=null;$('photo').value='';$('profile-title').textContent='Edit your private profile.';$('profile-status').textContent='Private profile saved successfully. It is not publicly published, and membership is not activated.';if(path?.startsWith(uid+'/'))$('photo-status').textContent='Private photograph saved.';
+}catch(e){
+uncertain=writeStarted||!!pending;
+$('profile-status').textContent='Save was not confirmed: '+err(e)+(pending?'\nA photo was uploaded, but its profile link was not confirmed.':'')+'\nDo not repeatedly submit. Send this message for checking.';
+}finally{saving=false;controls();}
+});
+async function initialize(){
+try{
+if(!window.supabase)throw new Error('The account library could not load. Check your connection and refresh.');
+client=window.supabase.createClient('https://hawqxgggoclhbkdvbkah.supabase.co','sb_publishable_Phk-fYJl4fxueBk8xKEVRg_P79wzm_3');
+client.auth.onAuthStateChange((event,value)=>{if(event==='PASSWORD_RECOVERY')recovery=true;if(event==='SIGNED_OUT')recovery=false;session(value);if(event==='PASSWORD_RECOVERY')openAccount('reset');});
+const {data,error}=await client.auth.getSession();if(error)throw error;session(data.session);controls();
+}catch(e){client=null;$('session').textContent=err(e);$('auth-status').textContent=err(e);controls();}
+}
+initialize();
+</script>
+</body>
+</html>
