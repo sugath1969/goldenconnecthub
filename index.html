@@ -18,7 +18,7 @@
 with <em>companionship.</em></h1><p class="muted">A welcoming space for people aged 40 and above in Sri Lanka to explore friendship, companionship, and lasting relationships.</p><div class="actions"><a class="button" href="#profiles">Explore profiles</a><button id="join" class="secondary">Create account</button><a class="button secondary" href="#my-profile">My private profile</a></div><small class="muted">Take your time. Start with a conversation.</small></div><aside class="art"><span class="eyebrow">Your next chapter</span><blockquote>Someone to share the little things. Something meaningful to look forward to.</blockquote><small>A thoughtful approach to meeting someone new.</small></aside></section>
 <section class="steps"><article><span class="eyebrow">01</span><h3>Create an account</h3><p>Register with your email and confirm your email address.</p></article><article><span class="eyebrow">02</span><h3>Introduce yourself</h3><p>Save a private profile and photograph. Public publishing is not enabled.</p></article><article><span class="eyebrow">03</span><h3>Explore at your pace</h3><p>The directory contains illustrative samples, not real members.</p></article></section>
 <section id="my-profile" class="section"><div class="card"><span class="eyebrow">Your private introduction</span><h2 id="profile-title">Your private profile.</h2><p>Saving does not publish your information or activate membership.</p>
-<form id="profile-form"><fieldset id="fields" disabled><div class="fields">
+<form id="profile-form" hidden><fieldset id="fields" disabled><div class="fields">
 <div><label for="full_name">Full name</label><input id="full_name" autocomplete="name" maxlength="120" required></div>
 <div><label for="age">Age</label><input id="age" type="number" min="40" max="120" step="1" required></div>
 <div><label for="gender">Gender</label><select id="gender" required><option value="">Choose an option</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>
@@ -47,6 +47,7 @@ const columns='id,user_id,'+names.join(',')+',image_url';
 let client=null,user=null,row=null,ready=false,loading=false,saving=false,authBusy=false,recovery=false,mode='signin',version=0,objectURL=null,chosen=null,pending=null,uncertain=false,focusBack=null;
 const err=e=>e?.message||'The request failed.';
 function controls(){
+   $('profile-form').hidden=!user||recovery;
 $('fields').disabled=!client||!user||!ready||loading||saving||recovery||uncertain;
 $('reload').hidden=!user;$('reload').disabled=loading||saving||recovery;
 $('logout').disabled=saving||authBusy;
