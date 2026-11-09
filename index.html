@@ -124,9 +124,9 @@ const {data,error}=await client.auth.signInWithPassword({email,password});if(err
 $('logout').onclick=async()=>{if(!client||saving||authBusy)return;authBusy=true;controls();try{const {error}=await client.auth.signOut();if(error)throw error;recovery=false;session(null);$('account').close();}catch(e){$('session').textContent=err(e);}finally{authBusy=false;controls();}};
 $('reload').onclick=()=>{if(!loading&&!saving&&(!ready||confirm('Discard unsaved changes and reload the saved profile?')))loadProfile();};
 $('photo').addEventListener('change',()=>{
-chosen=null;pending=null;const file=$('photo').files;clearPhoto();
+chosen=null;pending=null;const file=$('photo').files[0];clearPhoto();
 if(!file){$('photo-status').textContent='No new photo selected. The saved photo reference will be preserved.';return;}
-if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>510241024){$('photo').value='';$('photo-status').textContent='Choose JPEG, PNG or WebP, no larger than 5 MB.';return;}
+if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>5 * 1024 * 1024){$('photo').value='';$('photo-status').textContent='Choose JPEG, PNG or WebP, no larger than 5 MB.';return;}
 chosen=file;preview(file);$('photo-status').textContent='Preview only. Select Save private profile to upload.';
 });
 $('profile-form').addEventListener('submit',async e=>{
