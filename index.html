@@ -33,7 +33,17 @@ with <em>companionship.</em></h1><p class="muted">A welcoming space for people a
 I started GoldenConnect to offer people aged 40 and above in Sri Lanka a welcoming space to explore meaningful connections, at their own pace.</blockquote><p>Sugath Wijesinghe
 <small>Founder, GoldenConnect</small></p></section>
 <section id="profiles" class="section"><span class="eyebrow">Meet the community</span><h2>A connection worth exploring.</h2><p class="help">Illustrative samples · Not real members</p><div class="grid"><article class="card"><h3>Sample member A</h3><p>48 years · Colombo · Teacher</p><p>Enjoys reading, gardening, and thoughtful conversations.</p></article><article class="card"><h3>Sample member B</h3><p>55 years · Kandy · Business owner</p><p>Enjoys music, travel, and sharing everyday moments.</p></article><article class="card"><h3>Sample member C</h3><p>62 years · Galle · Retired</p><p>Values family, honesty, cooking, and relaxed walks.</p></article></div></section>
-<section class="section offer"><h2>Contact access is not available yet.</h2><p>Payments, access-code activation, and member contact details are not enabled. Please do not make a payment.</p></section>
+<section class="section offer" id="membership">
+  <h2>Membership and payment</h2>
+  <p>Membership is LKR 4,000 for one month from payment confirmation. There is no automatic renewal.</p>
+  <p>Please read the <a href="/membership-terms.html" target="_blank" rel="noopener noreferrer">Membership Terms</a> before making a payment.</p>
+  <label for="membership-terms-agree" style="display:flex;align-items:flex-start;gap:12px;text-align:left;">
+    <input type="checkbox" id="membership-terms-agree" style="width:20px;height:20px;flex:0 0 20px;margin-top:4px;">
+    <span>I have read and agree to the GoldenConnect Membership Terms.</span>
+  </label>
+  <p><button type="button" id="membership-pay" disabled>Payment not available yet</button></p>
+  <p class="help">Payments and membership activation are not enabled. Please do not make a payment. Selecting this checkbox does not activate membership.</p>
+</section>
 </main><footer><div class="wrap"><p>GoldenConnect · A meaningful new chapter.</p><a href="tel:+94775569178">Support: +94 77 556 9178</a> · <a href="https://wa.me/94775569178" target="_blank" rel="noopener noreferrer">WhatsApp support</a><p><a href="/membership-terms.html">Membership Terms</a></p></div></footer>
 <dialog id="account" aria-labelledby="auth-title"><button id="close" class="close" type="button" aria-label="Close">×</button><h2 id="auth-title">Welcome back.</h2><p id="auth-help"></p><form id="auth-form"><div id="email-group"><label for="email">Email</label><input id="email" type="email" autocomplete="email" required></div><div id="password-group"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div><div id="confirm-group" hidden><label for="confirm">Confirm new password</label><input id="confirm" type="password" autocomplete="new-password" disabled></div><div class="actions"><button id="auth-submit" type="submit" disabled>Sign in</button><button id="switch" class="secondary" type="button">Create account</button><button id="forgot" class="secondary" type="button" disabled>Forgot password?</button></div><p id="auth-status" class="status" role="status" aria-live="polite"></p></form></dialog>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
